@@ -1,0 +1,214 @@
+/* Renk Paleti Değişkenleri */
+:root {
+  --bg-space-black: #090D16;     /* Uzay Siyahı */
+  --bg-shadow: #0D111E;          /* Gölgeli Kısımlar */
+  --bg-deep-night: #161E35;      /* Koyu Gece Mavisi */
+  --bg-lit-area: #283559;        /* Işık Alan Kısımlar */
+
+  --accent-ice-blue: #A3C6F7;    /* Buz Mavisi */
+  --accent-sky-blue: #4A77B5;    /* Gök Mavisi */
+  --accent-amber: #F2C97D;       /* Sıcak Kehribar / Altın */
+
+  --text-star-white: #E8EEF7;    /* Yıldız Beyazı */
+  --text-silver-gray: #8A99B8;   /* Gümüşi Gri */
+}
+
+/* Genel Arka Plan ve Tipografi */
+body {
+  background-color: var(--bg-space-black);
+  color: var(--text-star-white);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.75;
+}
+
+/* Yardımcı Renk Sınıfları */
+.hd-text-star { color: var(--text-star-white) !important; }
+.hd-text-silver { color: var(--text-silver-gray) !important; }
+.hd-text-ice { color: var(--accent-ice-blue) !important; }
+.hd-text-amber { color: var(--accent-amber) !important; }
+.hd-border { border-color: var(--bg-lit-area) !important; }
+
+/* Breadcrumb */
+.hd-breadcrumb .breadcrumb-item a {
+  color: var(--accent-ice-blue);
+  text-decoration: none;
+}
+
+.hd-breadcrumb .breadcrumb-item.active,
+.hd-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+  color: var(--text-silver-gray);
+}
+
+/* Kartlar (Ana İçerik ve Sidebar) */
+.hd-card {
+  background-color: var(--bg-deep-night);
+  border: 1px solid var(--bg-lit-area);
+}
+
+/* Başlık ve Meta Bar */
+.hd-title {
+  color: var(--text-star-white);
+  line-height: 1.3;
+}
+
+.hd-meta-bar {
+  border-top: 1px solid var(--bg-lit-area);
+  border-bottom: 1px solid var(--bg-lit-area);
+}
+
+.hd-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--bg-lit-area);
+  color: var(--accent-ice-blue);
+  border: 1px solid var(--accent-sky-blue);
+}
+
+/* Rozet ve Butonlar */
+.hd-badge-amber {
+  background-color: var(--accent-amber);
+  color: var(--bg-space-black);
+  font-weight: 600;
+}
+
+.hd-btn-amber {
+  background-color: var(--accent-amber);
+  color: var(--bg-space-black);
+  border: none;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.hd-btn-amber:hover {
+  background-color: var(--accent-amber);
+  color: var(--bg-space-black);
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.hd-btn-sky {
+  background-color: var(--accent-sky-blue);
+  color: var(--text-star-white);
+  border: none;
+}
+
+.hd-btn-sky:hover {
+  background-color: var(--accent-ice-blue);
+  color: var(--bg-space-black);
+}
+
+.hd-btn-icon {
+  background-color: var(--bg-shadow);
+  color: var(--accent-ice-blue);
+  border: 1px solid var(--bg-lit-area);
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.hd-btn-icon:hover {
+  background-color: var(--bg-lit-area);
+  color: var(--text-star-white);
+}
+
+/* Haber Görseli ve Metin */
+.hd-article-img {
+  border: 1px solid var(--bg-lit-area);
+}
+
+.hd-article-body p {
+  color: var(--text-star-white);
+  margin-bottom: 1.25rem;
+}
+
+.hd-quote {
+  background-color: var(--bg-shadow);
+  border-left: 4px solid var(--accent-ice-blue);
+  color: var(--text-star-white);
+}
+
+.hd-list li {
+  margin-bottom: 0.5rem;
+  color: var(--text-star-white);
+}
+
+.hd-list li::marker {
+  color: var(--accent-amber);
+}
+
+/* Etiketler */
+.hd-tag-pill {
+  background-color: var(--bg-shadow);
+  color: var(--accent-ice-blue);
+  border: 1px solid var(--bg-lit-area);
+  padding: 0.3rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.hd-tag-pill:hover {
+  background-color: var(--accent-sky-blue);
+  color: var(--text-star-white);
+  border-color: var(--accent-sky-blue);
+}
+
+/* Yorumlar ve Form Alanları */
+.hd-comment-item {
+  background-color: var(--bg-shadow);
+  border: 1px solid var(--bg-lit-area);
+}
+
+.hd-input {
+  background-color: var(--bg-shadow);
+  border: 1px solid var(--bg-lit-area);
+  color: var(--text-star-white);
+}
+
+.hd-input::placeholder {
+  color: var(--text-silver-gray);
+}
+
+.hd-input:focus {
+  background-color: var(--bg-shadow);
+  border-color: var(--accent-ice-blue);
+  color: var(--text-star-white);
+  box-shadow: 0 0 0 0.2rem rgba(163, 198, 247, 0.2);
+}
+
+/* Sidebar Bileşenleri */
+.hd-related-title {
+  color: var(--text-star-white);
+  transition: color 0.2s ease;
+}
+
+.hd-related-post:hover .hd-related-title {
+  color: var(--accent-ice-blue);
+}
+
+.hd-category-link {
+  color: var(--text-silver-gray);
+  text-decoration: none;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.hd-category-link:hover {
+  background-color: var(--bg-lit-area);
+  color: var(--text-star-white);
+}
+
+.hd-badge-count {
+  background-color: var(--bg-lit-area);
+  color: var(--accent-ice-blue);
+}
+
+.hd-newsletter-card {
+  background: linear-gradient(145deg, var(--bg-deep-night), var(--bg-shadow));
+  border-color: var(--accent-sky-blue);
+}
