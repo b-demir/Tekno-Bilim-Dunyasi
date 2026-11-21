@@ -111,15 +111,8 @@ function yukariCikButonunuHazirla() {
 ============================================================================ */
 document.addEventListener("DOMContentLoaded", function () {
     aramaKutusunuHazirla();
+    yukariCikButonunuHazirla();
 
     let tema_yoneticisi = new TemaYoneticisi();
     tema_yoneticisi.baslat();
-
-    document.addEventListener("DOMContentLoaded", function () {
-        aramaKutusunuHazirla();
-        yukariCikButonunuHazirla();
-
-        let tema_yoneticisi = new TemaYoneticisi();
-        tema_yoneticisi.baslat();
-    });
 });
