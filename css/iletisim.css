@@ -1,0 +1,154 @@
+/* ============================================================================
+   İLETİŞİM SAYFASINA ÖZEL STİLLER (css/iletisim.css)
+   Tüm renkler css/style.css içindeki ortak tema değişkenlerinden alınır.
+============================================================================ */
+
+/* Sayfa üstündeki Ana Sayfa geri dönüş linki */
+.IletisimGeriLink {
+    color: var(--metin-ana);
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+}
+
+.IletisimGeriLink:hover {
+    opacity: 1;
+    color: var(--metin-ana);
+}
+
+/* Form, İletişim Bilgileri ve SSS kartlarının ortak kutu stili */
+.IletisimKarti {
+    background-color: var(--header-alt);
+    color: var(--metin-ana);
+    border: 1px solid var(--kenarlik);
+    border-radius: 18px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-bs-theme="dark"] .IletisimKarti {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+}
+
+/* Ortalama yanıt süresi rozeti */
+.IletisimRozet {
+    background-color: var(--vurgu-renk);
+    color: #111418;
+    font-weight: 700;
+    font-size: 0.75rem;
+}
+
+/* Form girdi kutuları (input, select, textarea) */
+.IletisimInput {
+    background-color: var(--arka-plan);
+    color: var(--metin-ana);
+    border: 1px solid var(--kenarlik);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+}
+
+.IletisimInput::placeholder {
+    color: var(--metin-ana);
+    opacity: 0.55;
+}
+
+.IletisimInput:focus {
+    background-color: var(--arka-plan);
+    color: var(--metin-ana);
+    border-color: var(--vurgu-renk);
+    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--vurgu-renk) 28%, transparent);
+}
+
+/* Şifre alanlarının sağındaki göz ikonu butonu */
+.IletisimGozBtn {
+    background-color: var(--arka-plan);
+    color: var(--metin-ana);
+    border: 1px solid var(--kenarlik);
+}
+
+.IletisimGozBtn:hover {
+    background-color: var(--vurgu-renk);
+    color: #111418;
+    border-color: var(--vurgu-renk);
+}
+
+.IletisimYardimMetin {
+    color: var(--metin-ana);
+    opacity: 0.7;
+}
+
+/* Radio ve Checkbox işaretlendiğinde vurgu rengini alsın */
+.IletisimKarti .form-check-input:checked {
+    background-color: var(--vurgu-renk);
+    border-color: var(--vurgu-renk);
+}
+
+/* Gönder ve Temizle butonları */
+.IletisimGonderBtn {
+    background-color: var(--vurgu-renk);
+    color: #111418;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.IletisimGonderBtn:hover {
+    background-color: var(--vurgu-hover);
+    color: #111418;
+    transform: translateY(-2px);
+}
+
+.IletisimTemizleBtn {
+    background-color: transparent;
+    color: var(--metin-ana);
+    border: 1px solid var(--kenarlik);
+    border-radius: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.IletisimTemizleBtn:hover {
+    background-color: var(--ikon-buton-bg);
+    color: var(--metin-ana);
+}
+
+/* Sağ sütundaki yuvarlak iletişim ikonları */
+.IletisimBilgiIkon {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--vurgu-renk);
+    color: #111418;
+}
+
+/* Sıkça Sorulan Sorular (Accordion) tema uyumu */
+.IletisimAccordion .accordion-item {
+    border-color: var(--kenarlik);
+}
+
+.IletisimAccordion .accordion-button {
+    color: var(--metin-ana);
+    box-shadow: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.IletisimAccordion .accordion-button:not(.collapsed) {
+    color: var(--metin-ana);
+}
+
+/* Koyu temada accordion açma oku beyaz görünsün */
+[data-bs-theme="dark"] .IletisimAccordion .accordion-button::after {
+    filter: invert(1);
+}
+
+/* Toast bildirimi tema uyumu */
+.IletisimToast {
+    background-color: var(--header-alt);
+    color: var(--metin-ana);
+    border: 1px solid var(--kenarlik);
+    border-left: 4px solid var(--vurgu-renk);
+}
+
+[data-bs-theme="dark"] .IletisimToast .btn-close {
+    filter: invert(1);
+}
