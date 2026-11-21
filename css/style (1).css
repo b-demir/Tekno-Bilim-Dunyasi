@@ -1,0 +1,545 @@
+* {
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+}
+
+/* ============================================================================
+   1. AÇIK VE KOYU TEMA RENK PALETLERİ
+   Açık Tema: #D3F6F3, #F9FCE1, #FEE9B2, #FBD1B7
+   Koyu Tema: #222831, #31363F, #76ABAE, #EEEEEE
+============================================================================ */
+:root,
+[data-bs-theme="light"] {
+    --arka-plan: #FFDCF7;
+    /* En açık ton (sayfa zemini) */
+    --header-ust: #B6FFEA;
+    /* Üst çubuk (canlı nane yeşili) */
+    --header-alt: #FCE2AE;
+    /* Alt navbar (sıcak krem/sarı) */
+    --vurgu-renk: #FFB3B3;
+    /* Butonlar, çizgiler ve vurgular (mercan pembesi) */
+    --vurgu-hover: #F29494;
+    /* Üzerine gelince biraz koyulaşan ton */
+    --metin-ana: #111418;
+    /* Rahat okunması için koyu metin */
+    --kenarlik: rgba(17, 20, 24, 0.16);
+    --ikon-buton-bg: rgba(17, 20, 24, 0.08);
+    --offcanvas-bg: #FFDCF7;
+    /* Açık temada sayfa zeminiyle aynı renk olsun */
+    --offcanvas-metin: #111418;
+    /* Yazılar koyu olsun ki rahat okunsun */
+}
+
+[data-bs-theme="dark"] {
+    --arka-plan: #222831;
+    --header-ust: #222831;
+    --header-alt: #31363F;
+    --vurgu-renk: #76ABAE;
+    --vurgu-hover: #5E9396;
+    --metin-ana: #EEEEEE;
+    --kenarlik: rgba(238, 238, 238, 0.12);
+    --ikon-buton-bg: rgba(238, 238, 238, 0.12);
+    --offcanvas-bg: #222831;
+    --offcanvas-metin: #EEEEEE;
+}
+
+body {
+    background-color: var(--arka-plan);
+    color: var(--metin-ana);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================================================
+   2. HEADER BÖLÜMLERİ
+============================================================================ */
+.UstCubuk {
+    background-color: var(--header-ust);
+    border-bottom: 1px solid var(--kenarlik);
+}
+
+.AnaNavbar,
+.MobilHeader {
+    background-color: var(--header-alt);
+    border-bottom: 1px solid var(--kenarlik);
+}
+
+.MarkaLogo,
+.AnaNavbar .nav-link {
+    color: var(--metin-ana);
+}
+
+.AnaNavbar .nav-link:hover,
+.AnaNavbar .nav-link.active {
+    opacity: 0.75;
+}
+
+/* Yuvarlak ikon butonları (Büyüteç, Tema, Hamburger) */
+.YuvarlakIkonButon {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--ikon-buton-bg);
+    color: var(--metin-ana);
+    border: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.YuvarlakIkonButon:hover {
+    background-color: var(--vurgu-renk);
+    color: #222831;
+}
+
+/* Masaüstü Giriş Yap Butonu */
+.GirisButonu {
+    background-color: var(--vurgu-renk);
+    color: #222831;
+    border: none;
+}
+
+.GirisButonu:hover {
+    background-color: var(--vurgu-hover);
+    color: #222831;
+}
+
+/* Kategoriler ile sayfaları ayıran | işareti */
+.MenuAyraci {
+    color: var(--metin-ana);
+    font-weight: 700;
+    font-size: 1.2rem;
+    opacity: 0.85;
+    user-select: none;
+    padding: 0 6px;
+}
+
+/* ============================================================================
+   3. BÜYÜTEÇ SOLUNDA AÇILAN ARAMA KUTUSU ANİMASYONU
+   Başlangıçta genişliği 0 ve görünmezdir. JS ile "Acik" sınıfı eklenince
+   sola doğru yumuşakça genişler.
+============================================================================ */
+.AramaKutusu {
+    width: 0;
+    padding-left: 0;
+    padding-right: 0;
+    opacity: 0;
+    border: none;
+    overflow: hidden;
+    transition: width 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
+}
+
+.AramaKutusu.Acik {
+    width: 220px;
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+    opacity: 1;
+    border: 1px solid var(--kenarlik);
+}
+
+/* ============================================================================
+   4. MOBİL OFFCANVAS MENÜ (Açık ve Koyu Temaya Uyumlu)
+============================================================================ */
+.MobilOffcanvas {
+    width: 100% !important;
+    max-width: 400px;
+    background-color: var(--offcanvas-bg);
+    color: var(--offcanvas-metin);
+}
+
+/* Eskiden sabit beyaz çizgi vardı, artık tema kenarlık rengini kullanıyor */
+.OffcanvasKenarlik {
+    border-color: var(--kenarlik) !important;
+}
+
+.OffcanvasGirisButonu {
+    background-color: var(--vurgu-renk);
+    color: #111418;
+    border: none;
+}
+
+.OffcanvasGirisButonu:hover {
+    background-color: var(--vurgu-hover);
+    color: #111418;
+}
+
+.OffcanvasGeriButonu {
+    background-color: transparent;
+    color: var(--offcanvas-metin);
+    border: 1px solid var(--kenarlik);
+}
+
+.OffcanvasGeriButonu:hover {
+    background-color: var(--ikon-buton-bg);
+    color: var(--offcanvas-metin);
+}
+
+.OffcanvasLink {
+    color: var(--offcanvas-metin);
+}
+
+.OffcanvasLink:hover {
+    background-color: var(--ikon-buton-bg);
+    color: var(--offcanvas-metin);
+}
+
+.OffcanvasAraButonu {
+    background-color: var(--vurgu-renk);
+    color: #111418;
+}
+
+/* ============================================================================
+   5. REFERANS TARZI 1 BÜYÜK + 4 KÜÇÜK MANŞET CAROUSEL
+============================================================================ */
+
+/* Her bir haber kutusunun temel hali */
+/* ============================================================================
+   5. ÜST MANŞET CAROUSEL (1 BÜYÜK + 4 KÜÇÜK OVERLAY CARD)
+============================================================================ */
+.MansetKart {
+    border-radius: 12px;
+    /* Editörün Seçimi kartlarıyla aynı yumuşak köşe */
+    overflow: hidden;
+}
+
+.MansetGorsel {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.MansetKart:hover .MansetGorsel {
+    transform: scale(1.05);
+}
+
+/* Masaüstünde soldaki büyük kartın boyu, sağdaki 2 küçük kart + aradaki 8px boşluğa eşit olsun */
+.MansetBuyuk {
+    height: 448px;
+}
+
+.MansetKucuk {
+    height: 220px;
+}
+
+/* Büyük kart karartması */
+.MansetOverlay {
+    padding: 20px;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.92) 0%,
+            rgba(0, 0, 0, 0.55) 55%,
+            rgba(0, 0, 0, 0.08) 100%);
+}
+
+/* Küçük kart karartması (biraz daha kompakt iç boşluk) */
+.MansetOverlayKucuk {
+    padding: 14px;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.90) 0%,
+            rgba(0, 0, 0, 0.40) 55%,
+            rgba(0, 0, 0, 0.05) 100%);
+}
+
+.MansetBaslikBuyuk {
+    font-size: 1.45rem;
+    line-height: 1.3;
+}
+
+.MansetBaslikKucuk {
+    font-size: 0.95rem;
+    line-height: 1.3;
+}
+
+/* Sol ve sağdaki beyaz kare ok butonları (referans fotoğraftaki gibi) */
+/* ============================================================================
+   CAROUSEL OK BUTONLARI (DÜZELTİLDİ: 1/4 opaklık + koyu mod uyumu)
+============================================================================ */
+.MansetOkButonu {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 40px;
+    height: 44px;
+    border: none;
+    /* Açık modda beyazın 1/4 (%25) opaklığı -> arkasındaki yazı okunur */
+    background-color: rgba(255, 255, 255, 0.25);
+    color: #222831;
+    backdrop-filter: blur(2px);
+    /* Arkasındaki görüntüyü hafif yumuşatır */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Koyu modda siyahın 1/4 opaklığı ve açık renk ok */
+[data-bs-theme="dark"] .MansetOkButonu {
+    background-color: rgba(34, 40, 49, 0.25);
+    color: #EEEEEE;
+}
+
+.MansetOkButonu:hover {
+    background-color: var(--vurgu-renk);
+    color: #222831;
+}
+
+.MansetOkSol {
+    left: 0;
+}
+
+.MansetOkSag {
+    right: 0;
+}
+
+/* Mobil ekranlarda kutuların boyunu biraz daha kompakt yapalım */
+@media (max-width: 991px) {
+    .MansetBuyuk {
+        height: 260px;
+    }
+
+    .MansetKucuk {
+        height: 175px;
+    }
+
+    .MansetBaslikBuyuk {
+        font-size: 1.2rem;
+    }
+
+    .MansetBaslikKucuk {
+        font-size: 0.9rem;
+    }
+}
+
+/* ============================================================================
+   6. SON YAZILAR BÖLÜMÜ (TABLO TASARIMI)
+============================================================================ */
+
+/* Başlığın altındaki ince çizgi ve sol taraftaki kalın vurgu çizgisi */
+.BolumBaslikKutusu {
+    position: relative;
+    border-bottom: 1px solid var(--kenarlik);
+}
+
+/* Bootstrap'in tablo arka planını şeffaf yapıyoruz ki bizim tema rengimiz görünsün */
+.SonYazilarTablo {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--metin-ana);
+    --bs-table-border-color: var(--kenarlik);
+}
+
+.SonYazilarTablo td {
+    padding: 24px 0;
+    /* Satırlar arasında ferah boşluk */
+    vertical-align: middle;
+}
+
+/* Sol sütun: Görsel genişliği sabit dursun */
+.TabloGorselHucre {
+    width: 38%;
+    padding-right: 28px !important;
+}
+
+.TabloGorsel {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.TabloGorsel:hover {
+    transform: scale(1.02);
+}
+
+.TabloMeta {
+    opacity: 0.85;
+}
+
+/* Özet yazısını soluklaştırmıyoruz ki Courier New ile rahat okunsun */
+.TabloOzet {
+    opacity: 1;
+    line-height: 1.6;
+}
+
+.TabloBaslikLink {
+    color: var(--metin-ana);
+}
+
+.TabloBaslikLink:hover {
+    opacity: 0.75;
+}
+
+/* Sol alttaki yuvarlak yazar/site ikonu */
+.YazarYuvarlakLogo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--vurgu-renk);
+    color: #222831;
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Sağ alttaki çerçeveli DEVAMINI OKU butonu */
+.DevaminiOkuBtn {
+    background-color: transparent;
+    color: var(--metin-ana);
+    border: 1.5px solid var(--vurgu-renk);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.DevaminiOkuBtn:hover {
+    background-color: var(--vurgu-renk);
+    color: #222831;
+}
+
+/* Mobilde tablo yan yana sıkışmasın diye hücreleri alt alta alıyoruz */
+@media (max-width: 767px) {
+
+    .SonYazilarTablo,
+    .SonYazilarTablo tbody,
+    .SonYazilarTablo tr,
+    .SonYazilarTablo td {
+        display: block;
+        width: 100%;
+    }
+
+    .TabloGorselHucre {
+        padding-right: 0 !important;
+        padding-bottom: 12px !important;
+        border-bottom: none !important;
+    }
+
+    .TabloIcerikHucre {
+        padding-top: 0 !important;
+    }
+}
+
+/* ============================================================================
+   7. EDİTÖRÜN SEÇİMİ CAROUSELİ (IMAGE OVERLAY CARD)
+============================================================================ */
+.EditorKart {
+    height: 380px;
+    /* Referanstaki gibi dikey/kareye yakın kart yüksekliği */
+    border-radius: 12px;
+    /* Yumuşak köşeler */
+    overflow: hidden;
+}
+
+.EditorGorsel {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.EditorKart:hover .EditorGorsel {
+    transform: scale(1.06);
+}
+
+/* Özet metni eklendiği için karartmayı biraz daha yukarı çıkardık */
+.EditorOverlay {
+    padding: 20px;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.94) 0%,
+            rgba(0, 0, 0, 0.62) 55%,
+            rgba(0, 0, 0, 0.08) 100%);
+}
+
+/* Özet metni en fazla 2 satır görünsün, uzarsa sonuna ... koysun */
+.EditorOzet {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.82rem;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.EditorRozet {
+    background-color: var(--vurgu-renk);
+    color: #111418;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.5px;
+}
+
+/* Mobilde kartlar çok uzun durmasın diye boyunu biraz kısaltıyoruz */
+@media (max-width: 767px) {
+    .EditorKart {
+        height: 300px;
+    }
+}
+
+/* ============================================================================
+   8. FOOTER ALANI
+============================================================================ */
+.SiteFooter {
+    background-color: var(--header-ust);
+    /* Açıkta nane yeşili, koyuda koyu antrasit */
+    color: var(--metin-ana);
+    border-top: 1px solid var(--kenarlik);
+}
+
+.FooterKenarlik {
+    border-color: var(--kenarlik) !important;
+}
+
+.FooterLink {
+    color: var(--metin-ana);
+    text-decoration: none;
+    transition: padding-left 0.2s ease, opacity 0.2s ease;
+}
+
+.FooterLink:hover {
+    padding-left: 5px;
+    /* Üstüne gelince hafif sağa kaysın */
+    opacity: 0.75;
+}
+
+/* ============================================================================
+   9. YUKARI ÇIK BUTONU
+============================================================================ */
+.YukariCikBtn {
+    position: fixed;
+    /* Sayfa kaysa da sağ altta sabit dursun */
+    bottom: 24px;
+    right: 24px;
+    width: 46px;
+    height: 46px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--vurgu-renk);
+    color: #111418;
+    border: none;
+
+    /* Başlangıçta gizli ve tıklanamaz olsun */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease, background-color 0.2s ease;
+}
+
+/* JS bu sınıfı ekleyince buton yumuşakça belirir */
+.YukariCikBtn.Gorunur {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.YukariCikBtn:hover {
+    background-color: var(--vurgu-hover);
+    color: #111418;
+    transform: translateY(-3px);
+}

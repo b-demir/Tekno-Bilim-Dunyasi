@@ -1,0 +1,29 @@
+/* Giriş sayfasına özel stiller. Ortalamayı Bootstrap flex yardımcı sınıfları yapar. */
+/* Ortak renk değişkenleri css/style.css içinden gelir. */
+.GirisAnaAlan { background-color: var(--arka-plan); }
+.GirisKarti {
+    background-color: var(--header-alt);
+    color: var(--metin-ana);
+    border: 1px solid var(--kenarlik);
+    border-radius: 24px;
+    box-shadow: 0 18px 52px rgba(0,0,0,.12);
+}
+[data-bs-theme="dark"] .GirisKarti { box-shadow: 0 18px 52px rgba(0,0,0,.28); }
+.GirisAmblem { width: 64px; height: 64px; background: var(--vurgu-renk); color: #222831; }
+.GirisUstBaslik { color: var(--metin-ana); letter-spacing: .08em; opacity: .75; }
+.GirisAciklama, .GirisGuvenlikNotu { color: var(--metin-ana); opacity: .8; }
+.GirisInputIkon { background-color: var(--arka-plan); color: var(--metin-ana); border-color: var(--kenarlik); }
+.GirisInput { background-color: var(--arka-plan); color: var(--metin-ana); border-color: var(--kenarlik); min-height: 46px; }
+.GirisInput::placeholder { color: var(--metin-ana); opacity: .55; }
+.GirisInput:focus { background-color: var(--arka-plan); color: var(--metin-ana); border-color: var(--vurgu-renk); box-shadow: 0 0 0 .2rem color-mix(in srgb, var(--vurgu-renk) 24%, transparent); }
+.GirisSifreButon { background-color: var(--arka-plan); border-color: var(--kenarlik); color: var(--metin-ana); }
+.GirisSifreButon:hover, .GirisSifreButon:focus { background-color: var(--vurgu-renk); color: #222831; border-color: var(--vurgu-renk); }
+.GirisGonderButon { background-color: var(--vurgu-renk); color: #222831; border: 1px solid transparent; border-radius: 12px; }
+.GirisGonderButon:hover, .GirisGonderButon:focus-visible { background-color: var(--vurgu-hover); color: #222831; transform: translateY(-1px); }
+.GirisAltBolum { border-top: 1px solid var(--kenarlik); }
+.GirisAnaSayfaLink { color: var(--metin-ana); transition: color .2s ease, transform .2s ease; }
+.GirisAnaSayfaLink:hover { color: var(--vurgu-hover); transform: translateX(-3px); }
+.GirisKarti .form-check-input:checked { background-color: var(--vurgu-renk); border-color: var(--vurgu-renk); }
+.GirisToast { background-color: var(--header-alt); color: var(--metin-ana); border: 1px solid var(--kenarlik); }
+[data-bs-theme="dark"] .GirisToast .btn-close { filter: invert(1); }
+@media (max-width: 575.98px) { .GirisKarti { border-radius: 18px; } }

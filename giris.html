@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="tr" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tekno Bilim Dünyası giriş yap sayfası">
+  <title>Giriş Yap | Tekno Bilim Dünyası</title>
+  <!-- Projenin kullandığı Bootstrap ve ikon sürümleri -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Ortak site stilleri ve yalnızca giriş sayfasına ait stiller -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/giris.css">
+  <!-- Tema geçişi ve ortak menü davranışları js/main.js içindedir. -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/giris.js" defer></script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <!-- Ortak header, mevcut index.html sayfasından alınmıştır. -->
+<header class="sticky-top SiteHeader">
+<!--
+            Büyük ekran (d-none d-lg-block)
+            d-none: Küçük ekranlarda gizler
+            d-lg-block: 992px ve üzeri ekranlarda gösterir
+        -->
+<div class="d-none d-lg-block">
+<!-- header ın -->
+<div class="UstCubuk py-2">
+<!-- d-flex justify-content-end: İçerideki tüm öğeleri sağa yaslar -->
+<div class="container d-flex justify-content-end align-items-center gap-2">
+<!-- Arama Alanı: Input, büyüteç butonunun SOLUNDA yer alır -->
+<form class="d-flex align-items-center" id="masaustu_arama_formu" role="search">
+<!-- Başlangıçta genişliği 0 olan, büyütece basınca sola doğru açılan arama kutusu -->
+<input aria-label="Sitede ara" class="form-control form-control-sm rounded-pill AramaKutusu" id="masaustu_arama_input" placeholder="Sitede ara..." type="search"/>
+<!-- Büyüteç İkon Butonu -->
+<button aria-label="Arama kutusunu aç veya kapat" class="btn btn-sm rounded-circle YuvarlakIkonButon ms-1" id="masaustu_arama_butonu" type="button">
+<i class="bi bi-search"></i>
+</button>
+</form>
+<!-- Açık / Koyu Mod Butonu -->
+<button aria-label="Temayı değiştir" class="btn btn-sm rounded-circle YuvarlakIkonButon TemaDegistirBtn" title="Açık / Koyu Mod" type="button">
+<i class="bi bi-moon-stars-fill TemaIkonu"></i>
+</button>
+<!-- Giriş Yap Butonu -->
+<a class="btn btn-sm rounded-pill px-3 fw-semibold GirisButonu" href="giris.html">
+                        GİRİŞ YAP
+                    </a>
+</div>
+</div>
+<!-- 2. BÖLÜM: Ana Navbar (Logo + Sayfa Linkleri) -->
+<nav aria-label="Ana Menü" class="navbar navbar-expand-lg py-3 AnaNavbar">
+<div class="container">
+<!-- Logo -->
+<a class="navbar-brand fw-bold d-flex align-items-center gap-2 MarkaLogo" href="index.html">
+<span>Tekno Bilim Dünyası</span>
+</a>
+<!-- Kategoriler | Sayfa Linkleri -->
+<ul class="navbar-nav ms-auto align-items-center gap-2 gap-xl-3">
+<!-- Kategoriler -->
+<li class="nav-item">
+<a class="nav-link fw-semibold" href="haber-detay.html">Yapay Zeka</a>
+</li>
+<li class="nav-item">
+<a class="nav-link fw-semibold" href="haber-detay.html">Uzay</a>
+</li>
+<li class="nav-item">
+<a class="nav-link fw-semibold" href="haber-detay.html">Biyoteknoloji</a>
+</li>
+<li class="nav-item">
+<a class="nav-link fw-semibold" href="haber-detay.html">Donanım</a>
+</li>
+<!-- İki grubu ayıran dikey çizgi -->
+<li aria-hidden="true" class="nav-item">
+<span class="MenuAyraci">|</span>
+</li>
+<!-- Ana Sayfalar -->
+<li class="nav-item">
+<a aria-current="page" class="nav-link active fw-semibold" href="index.html">Ana Sayfa</a>
+</li>
+<li class="nav-item">
+<a class="nav-link fw-semibold" href="hakkimizda.html">Hakkımızda</a>
+</li>
+<li class="nav-item">
+<a class="nav-link fw-semibold" href="iletisim.html">İletişim</a>
+</li>
+</ul>
+</div>
+</nav>
+</div>
+<!-- =================================================================
+             Küçük ekran (d-lg-none)
+             - d-lg-none: Masaüstünde (992px+) gizle, sadece küçük ekranlarda göster.
+             - Gönderdiğin 1. fotoğraftaki gibi solda logo, sağda 3 yuvarlak buton.
+        ================================================================== -->
+<div class="d-lg-none MobilHeader py-2">
+<div class="container d-flex justify-content-between align-items-center">
+<!-- Sol Taraf: Logo -->
+<a class="navbar-brand fw-bold d-flex align-items-center gap-2 MarkaLogo mb-0" href="index.html">
+<span class="fs-5">TBD</span>
+</a>
+<!-- Sağ Taraf: Yuvarlak İkon Butonları -->
+<div class="d-flex align-items-center gap-2">
+<!-- 1. Yuvarlak Buton: Büyüteç (Mobilde menüdeki arama kutusuna odaklanır veya üstte açılır) -->
+<button aria-label="Arama yap" class="btn rounded-circle YuvarlakIkonButon" data-bs-target="#mobil_menu_offcanvas" data-bs-toggle="offcanvas" type="button">
+<i class="bi bi-search"></i>
+</button>
+<!-- 2. Yuvarlak Buton: Açık / Koyu Mod (Referanstaki zil yerine tema butonu) -->
+<button aria-label="Temayı değiştir" class="btn rounded-circle YuvarlakIkonButon TemaDegistirBtn" type="button">
+<i class="bi bi-moon-stars-fill TemaIkonu"></i>
+</button>
+<!-- 3. Yuvarlak Buton: Hamburger Menü (Offcanvas'ı açar) -->
+<button aria-controls="mobil_menu_offcanvas" aria-label="Menüyü aç" class="btn rounded-circle YuvarlakIkonButon" data-bs-target="#mobil_menu_offcanvas" data-bs-toggle="offcanvas" type="button">
+<i class="bi bi-list fs-5"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- =====================================================================
+             MOBİL AÇILIR MENÜ (BOOTSTRAP OFFCANVAS)
+             - Gönderdiğin 2. fotoğraftaki tam ekran açılan menü yapısı.
+             - offcanvas-end: Sağdan sola doğru kayarak açılır.
+        ====================================================================== -->
+<div aria-labelledby="mobil_menu_baslik" class="offcanvas offcanvas-end MobilOffcanvas" id="mobil_menu_offcanvas" tabindex="-1">
+<!-- Üst Satır: Solda GİRİŞ YAP, Sağda GERİ DÖN -->
+<div class="offcanvas-header d-flex justify-content-between align-items-center px-3 py-3 border-bottom OffcanvasKenarlik">
+<a class="btn rounded-pill px-4 fw-bold OffcanvasGirisButonu" href="giris.html">
+                    GİRİŞ YAP
+                </a>
+<!-- data-bs-dismiss="offcanvas": Tıklandığında menüyü kapatır -->
+<button aria-label="Menüyü Kapat" class="btn rounded-pill px-3 fw-semibold OffcanvasGeriButonu" data-bs-dismiss="offcanvas" type="button">
+                    GERİ DÖN
+                </button>
+</div>
+<!-- Orta ve Alt Alan: d-flex flex-column sayesinde arama kutusu en alta itilir -->
+<div class="offcanvas-body d-flex flex-column p-0">
+<!-- Menü Linkleri (Alt alta, aralarında ince çizgi ile) -->
+<nav aria-label="Mobil Menü Linkleri">
+<ul class="list-unstyled mb-0">
+<!-- Ana Sayfalar -->
+<li class="border-bottom OffcanvasKenarlik">
+<a class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink" href="index.html">Ana Sayfa</a>
+</li>
+<li class="border-bottom OffcanvasKenarlik">
+<a class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink" href="hakkimizda.html">Hakkımızda</a>
+</li>
+<li class="border-bottom OffcanvasKenarlik">
+<a class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink" href="iletisim.html">İletişim</a>
+</li>
+<!-- Kategoriler Başlığı -->
+<li class="px-4 pt-3 pb-1 small fw-bold opacity-75">KATEGORİLER</li>
+<li class="border-bottom OffcanvasKenarlik">
+<a class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink" href="haber-detay.html">Yapay Zeka</a>
+</li>
+<li class="border-bottom OffcanvasKenarlik">
+<a class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink" href="haber-detay.html">Uzay</a>
+</li>
+<li class="border-bottom OffcanvasKenarlik">
+<a class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink" href="haber-detay.html">Biyoteknoloji</a>
+</li>
+<li class="border-bottom OffcanvasKenarlik">
+<a class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink" href="haber-detay.html">Donanım</a>
+</li>
+</ul>
+</nav>
+<!-- En Alt Kısım: mt-auto ile ekranın en altına sabitlenen Arama Kutusu -->
+<div class="mt-auto p-3 border-top OffcanvasKenarlik">
+<form class="input-group" role="search">
+<input aria-label="Ara" class="form-control border-0 py-2" placeholder="Ara ..." type="search"/>
+<button class="btn px-4 fw-bold OffcanvasAraButonu" type="submit">ARA</button>
+</form>
+</div>
+</div>
+</div>
+</header>
+  <!-- flex-grow-1 sayesinde form, header ve footer ARASINDA kalan boşlukta ortalanır. -->
+  <main id="ana-icerik" class="GirisAnaAlan flex-grow-1 d-flex align-items-center justify-content-center py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+          <section class="GirisKarti p-4 p-sm-5" aria-labelledby="giris-baslik">
+            <div class="text-center mb-4">
+              <span class="GirisAmblem d-inline-flex justify-content-center align-items-center rounded-circle mb-3" aria-hidden="true"><i class="bi bi-person-lock fs-3"></i></span>
+              <div class="small text-uppercase fw-bold GirisUstBaslik mb-2">Tekno Bilim Dünyası</div>
+              <h1 id="giris-baslik" class="h2 fw-bold mb-2">Hesabına giriş yap</h1>
+              <p class="GirisAciklama mb-0">Devam etmek için e-posta adresini ve şifreni gir.</p>
+            </div>
+            <!-- Gerçek sunucu girişi yoktur. Sadece istemci tarafı doğrulama yapılır. -->
+            <form id="girisFormu" novalidate>
+              <div class="mb-3">
+                <label for="girisEposta" class="form-label fw-semibold">E-posta adresi</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text GirisInputIkon"><i class="bi bi-envelope" aria-hidden="true"></i></span>
+                  <input id="girisEposta" name="eposta" type="email" class="form-control GirisInput" placeholder="ornek@eposta.com" autocomplete="username" inputmode="email" required aria-describedby="epostaHata">
+                  <div id="epostaHata" class="invalid-feedback">Geçerli bir e-posta adresi gir.</div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="girisSifre" class="form-label fw-semibold">Şifre</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text GirisInputIkon"><i class="bi bi-lock" aria-hidden="true"></i></span>
+                  <input id="girisSifre" name="sifre" type="password" class="form-control GirisInput" placeholder="Şifreni gir" autocomplete="current-password" minlength="6" required aria-describedby="sifreHata">
+                  <button id="sifreGosterButon" class="btn GirisSifreButon" type="button" aria-label="Şifreyi göster" aria-pressed="false"><i class="bi bi-eye" aria-hidden="true"></i></button>
+                  <div id="sifreHata" class="invalid-feedback">Şifre en az 6 karakter olmalıdır.</div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center gap-3 mb-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="beniHatirla">
+                  <label for="beniHatirla" class="form-check-label small">E-postamı hatırla</label>
+                </div>
+                <span class="GirisGuvenlikNotu small"><i class="bi bi-shield-check me-1" aria-hidden="true"></i> Güvenli arayüz</span>
+              </div>
+              <button class="btn GirisGonderButon w-100 d-flex align-items-center justify-content-center gap-2 fw-bold py-3" type="submit">Giriş Yap <i class="bi bi-arrow-right" aria-hidden="true"></i></button>
+            </form>
+            <div class="GirisAltBolum text-center mt-4 pt-3">
+              <a href="index.html" class="GirisAnaSayfaLink d-inline-flex align-items-center gap-2 fw-semibold text-decoration-none"><i class="bi bi-arrow-left" aria-hidden="true"></i> Ana Sayfaya Dön</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Ortak footer, mevcut index.html sayfasından alınmıştır. -->
+<footer class="SiteFooter pt-5 pb-4 mt-4">
+<div class="container">
+<div class="row g-4 pb-4 border-bottom FooterKenarlik">
+<!-- 1. Sütun: Logo ve kısa açıklama -->
+<div class="col-lg-5">
+<a class="d-inline-flex align-items-center gap-2 text-decoration-none fw-bold fs-5 mb-3 MarkaLogo" href="index.html">
+<span>Tekno Bilim Dünyası</span>
+</a>
+<p class="small mb-0">
+                        Bilim, teknoloji, uzay ve mühendislik dünyasından en güncel gelişmeleri sade ve anlaşılır bir dille aktaran dijital yayın platformu.
+                    </p>
+</div>
+<!-- 2. Sütun: Sayfa Linkleri -->
+<div class="col-6 col-lg-3">
+<h3 class="h6 fw-bold mb-3">Sayfalar</h3>
+<!-- list-unstyled: Liste başındaki siyah noktaları kaldırır -->
+<ul class="list-unstyled d-flex flex-column gap-2 small mb-0">
+<li><a class="FooterLink" href="index.html">Ana Sayfa</a></li>
+<li><a class="FooterLink" href="hakkimizda.html">Hakkımızda</a></li>
+<li><a class="FooterLink" href="iletisim.html">İletişim</a></li>
+<li><a class="FooterLink" href="giris.html">Giriş Yap</a></li>
+</ul>
+</div>
+<!-- 3. Sütun: Kategoriler -->
+<div class="col-6 col-lg-4">
+<h3 class="h6 fw-bold mb-3">Kategoriler</h3>
+<ul class="list-unstyled d-flex flex-column gap-2 small mb-0">
+<li><a class="FooterLink" href="haber-detay.html">Yapay Zeka</a></li>
+<li><a class="FooterLink" href="haber-detay.html">Uzay ve Astronomi</a></li>
+<li><a class="FooterLink" href="haber-detay.html">Biyoteknoloji</a></li>
+<li><a class="FooterLink" href="haber-detay.html">Donanım ve Yazılım</a></li>
+</ul>
+</div>
+</div>
+<!-- En alt telif satırı -->
+<div class="pt-3 d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 small">
+<span>© 2026 Tekno Bilim Dünyası. Tüm hakları saklıdır.</span>
+<span>Kırklareli Üniversitesi Yazılım Mühendisliği</span>
+</div>
+</div>
+</footer>
+  <!-- Sonuç, sadece kullanıcı etkileşiminden sonra Bootstrap Toast olarak gösterilir. -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1090">
+    <div id="girisBildirim" class="toast GirisToast" role="status" aria-live="polite" aria-atomic="true">
+      <div class="d-flex align-items-center">
+        <div id="girisBildirimMetni" class="toast-body"></div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Bildirimi kapat"></button>
+      </div>
+    </div>
+  </div>
+  <button type="button" id="yukari_cik_butonu" class="btn rounded-circle shadow YukariCikBtn" aria-label="Sayfanın en üstüne çık" title="Yukarı Çık"><i class="bi bi-arrow-up fs-5"></i></button>
+</body>
+</html>
