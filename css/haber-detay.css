@@ -1,0 +1,7 @@
+/* Haber detay sayfasına özel minimum CSS (açık ve koyu tema uyumlu) */
+.hd-avatar {
+  width: 44px;
+  height: 44px;
+  background-color: var(--vurgu-renk);
+  color: var(--metin-ana);
+}
