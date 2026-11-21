@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="tr">
+<!-- data-bs-theme: açık ve koyu modu ayarlar -->
+<html lang="tr" data-bs-theme="light">
+
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <script>
         // Bu kod o anki sayfamız için linklerin ana dizinde aranmasını sağlar.
         const PROJE_KLASORU = "Tekno-Bilim-Dunyasi"; // Proje Klasörü
@@ -36,76 +38,31 @@
 
     <!-- Kendi harici JS dosyamız -->
     <script src="js/main.js" defer></script>
-  <title>Hakkımızda – TeknoBilim Dünyası</title>
-  <link rel="stylesheet" href="css/hakkimizda.css">
+
+    <title>Hakkımızda – Tekno Bilim Dünyası</title>
 </head>
+
 <body id="ust" class="d-flex flex-column min-vh-100">
 
-  <input type="checkbox" id="tema-degistir" class="d-none">
+    <!--
+         header alanı
+         sticky-top: header sürekli ekranın üstünde kalır
+    -->
+    <header class="sticky-top SiteHeader">
 
-  <div class="bg-golge border-bottom border-isik py-1 d-none d-lg-block">
-    <div class="container sayfa-genislik d-flex justify-content-end align-items-center gap-3 small">
-
-      <details class="acilir-kutu">
-        <summary class="text-gumus" title="Ara"><i class="bi bi-search"></i></summary>
-        <div class="acilir-panel p-2 rounded-2">
-          <form action="#" class="d-flex gap-1">
-            <input type="text" class="form-control form-control-sm bg-golge text-yildiz border-isik" placeholder="Aradığınız kelimeyi girin...">
-            <button type="submit" class="btn btn-sm" style="background-color: var(--kehribar); color: #090D16;">
-              <i class="bi bi-search"></i>
-            </button>
-          </form>
-        </div>
-      </details>
-
-      <a href="#" class="text-gumus text-decoration-none" title="X"><i class="bi bi-twitter-x"></i></a>
-      <a href="#" class="text-gumus text-decoration-none" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
-      <a href="#" class="text-gumus text-decoration-none" title="Pinterest"><i class="bi bi-pinterest"></i></a>
-      <a href="#" class="text-gumus text-decoration-none" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-      <a href="#" class="text-gumus text-decoration-none" title="Instagram"><i class="bi bi-instagram"></i></a>
-
-      <label for="tema-degistir" class="tema-buton d-inline-flex align-items-center gap-2 px-2 py-0 rounded-pill bg-gece border border-isik mb-0" style="font-size: 0.78rem;" title="Aydınlık / Karanlık Mod">
-        <i class="bi bi-brightness-high-fill tema-gunes"></i>
-        <i class="bi bi-moon-fill tema-ay"></i>
-      </label>
-
-      <a href="#giris-modal" class="btn btn-sm rounded-pill px-3 py-0 bg-gece text-yildiz border border-isik" style="font-size: 0.78rem;">
-        <i class="bi bi-person me-1"></i>Giriş Yap
-      </a>
-
-      <details class="acilir-kutu">
-        <summary class="text-gumus" title="Bildirimler"><i class="bi bi-bell"></i></summary>
-        <div class="acilir-panel p-3 rounded-2 text-center">
-          <div class="fw-bold text-yildiz border-bottom border-isik pb-2 mb-2 text-start">Bildirimler</div>
-          <p class="text-gumus small mb-0 py-2">Bildiriminiz bulunmamaktadır.</p>
-        </div>
-      </details>
-
-    </div>
-  </div>
-
-  <header class="sticky-top SiteHeader">
-
-        <!--
-            Büyük ekran (d-none d-lg-block)
-            d-none: Küçük ekranlarda gizler
-            d-lg-block: 992px ve üzeri ekranlarda gösterir
-        -->
+        <!-- Büyük ekran (d-none d-lg-block) -->
         <div class="d-none d-lg-block">
 
-            <!-- header ın -->
+            <!-- Üst Çubuk -->
             <div class="UstCubuk py-2">
-                <!-- d-flex justify-content-end: İçerideki tüm öğeleri sağa yaslar -->
                 <div class="container d-flex justify-content-end align-items-center gap-2">
 
-                    <!-- Arama Alanı: Input, büyüteç butonunun SOLUNDA yer alır -->
+                    <!-- Arama Alanı -->
                     <form id="masaustu_arama_formu" class="d-flex align-items-center" role="search">
-                        <!-- Başlangıçta genişliği 0 olan, büyütece basınca sola doğru açılan arama kutusu -->
                         <input type="search" id="masaustu_arama_input"
                             class="form-control form-control-sm rounded-pill AramaKutusu"
                             placeholder="Sitede ara..." aria-label="Sitede ara">
 
-                        <!-- Büyüteç İkon Butonu -->
                         <button type="button" id="masaustu_arama_butonu"
                             class="btn btn-sm rounded-circle YuvarlakIkonButon ms-1"
                             aria-label="Arama kutusunu aç veya kapat">
@@ -137,7 +94,6 @@
 
                     <!-- Kategoriler | Sayfa Linkleri -->
                     <ul class="navbar-nav ms-auto align-items-center gap-2 gap-xl-3">
-                        <!-- Kategoriler -->
                         <li class="nav-item">
                             <a class="nav-link fw-semibold" href="haber-detay.html">Yapay Zeka</a>
                         </li>
@@ -151,17 +107,15 @@
                             <a class="nav-link fw-semibold" href="haber-detay.html">Donanım</a>
                         </li>
 
-                        <!-- İki grubu ayıran dikey çizgi -->
                         <li class="nav-item" aria-hidden="true">
                             <span class="MenuAyraci">|</span>
                         </li>
 
-                        <!-- Ana Sayfalar -->
                         <li class="nav-item">
-                            <a class="nav-link active fw-semibold" aria-current="page" href="index.html">Ana Sayfa</a>
+                            <a class="nav-link fw-semibold" href="index.html">Ana Sayfa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-semibold" href="hakkimizda.html">Hakkımızda</a>
+                            <a class="nav-link active fw-semibold" aria-current="page" href="hakkimizda.html">Hakkımızda</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fw-semibold" href="iletisim.html">İletişim</a>
@@ -172,35 +126,26 @@
 
         </div>
 
-        <!-- =================================================================
-             Küçük ekran (d-lg-none)
-             - d-lg-none: Masaüstünde (992px+) gizle, sadece küçük ekranlarda göster.
-             - Gönderdiğin 1. fotoğraftaki gibi solda logo, sağda 3 yuvarlak buton.
-        ================================================================== -->
+        <!-- Küçük ekran (d-lg-none) -->
         <div class="d-lg-none MobilHeader py-2">
             <div class="container d-flex justify-content-between align-items-center">
 
-                <!-- Sol Taraf: Logo -->
                 <a class="navbar-brand fw-bold d-flex align-items-center gap-2 MarkaLogo mb-0" href="index.html">
                     <span class="fs-5">TBD</span>
                 </a>
 
-                <!-- Sağ Taraf: Yuvarlak İkon Butonları -->
                 <div class="d-flex align-items-center gap-2">
-                    <!-- 1. Yuvarlak Buton: Büyüteç (Mobilde menüdeki arama kutusuna odaklanır veya üstte açılır) -->
                     <button type="button" class="btn rounded-circle YuvarlakIkonButon"
                         data-bs-toggle="offcanvas" data-bs-target="#mobil_menu_offcanvas"
                         aria-label="Arama yap">
                         <i class="bi bi-search"></i>
                     </button>
 
-                    <!-- 2. Yuvarlak Buton: Açık / Koyu Mod (Referanstaki zil yerine tema butonu) -->
                     <button type="button" class="btn rounded-circle YuvarlakIkonButon TemaDegistirBtn"
                         aria-label="Temayı değiştir">
                         <i class="bi bi-moon-stars-fill TemaIkonu"></i>
                     </button>
 
-                    <!-- 3. Yuvarlak Buton: Hamburger Menü (Offcanvas'ı açar) -->
                     <button type="button" class="btn rounded-circle YuvarlakIkonButon"
                         data-bs-toggle="offcanvas" data-bs-target="#mobil_menu_offcanvas"
                         aria-controls="mobil_menu_offcanvas" aria-label="Menüyü aç">
@@ -211,34 +156,24 @@
             </div>
         </div>
 
-        <!-- =====================================================================
-             MOBİL AÇILIR MENÜ (BOOTSTRAP OFFCANVAS)
-             - Gönderdiğin 2. fotoğraftaki tam ekran açılan menü yapısı.
-             - offcanvas-end: Sağdan sola doğru kayarak açılır.
-        ====================================================================== -->
+        <!-- MOBİL AÇILIR MENÜ (BOOTSTRAP OFFCANVAS) -->
         <div class="offcanvas offcanvas-end MobilOffcanvas" tabindex="-1" id="mobil_menu_offcanvas"
             aria-labelledby="mobil_menu_baslik">
-    
-            <!-- Üst Satır: Solda GİRİŞ YAP, Sağda GERİ DÖN -->
+
             <div class="offcanvas-header d-flex justify-content-between align-items-center px-3 py-3 border-bottom OffcanvasKenarlik">
                 <a href="giris-kayit.html" class="btn rounded-pill px-4 fw-bold OffcanvasGirisButonu">
                     GİRİŞ YAP
                 </a>
-    
-                <!-- data-bs-dismiss="offcanvas": Tıklandığında menüyü kapatır -->
+
                 <button type="button" class="btn rounded-pill px-3 fw-semibold OffcanvasGeriButonu"
                     data-bs-dismiss="offcanvas" aria-label="Menüyü Kapat">
                     GERİ DÖN
                 </button>
             </div>
-    
-            <!-- Orta ve Alt Alan: d-flex flex-column sayesinde arama kutusu en alta itilir -->
+
             <div class="offcanvas-body d-flex flex-column p-0">
-    
-                <!-- Menü Linkleri (Alt alta, aralarında ince çizgi ile) -->
                 <nav aria-label="Mobil Menü Linkleri">
                     <ul class="list-unstyled mb-0">
-                        <!-- Ana Sayfalar -->
                         <li class="border-bottom OffcanvasKenarlik">
                             <a href="index.html" class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink">Ana Sayfa</a>
                         </li>
@@ -249,7 +184,6 @@
                             <a href="iletisim.html" class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink">İletişim</a>
                         </li>
 
-                        <!-- Kategoriler Başlığı -->
                         <li class="px-4 pt-3 pb-1 small fw-bold opacity-75">KATEGORİLER</li>
                         <li class="border-bottom OffcanvasKenarlik">
                             <a href="haber-detay.html" class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink">Yapay Zeka</a>
@@ -265,91 +199,105 @@
                         </li>
                     </ul>
                 </nav>
-    
-                <!-- En Alt Kısım: mt-auto ile ekranın en altına sabitlenen Arama Kutusu -->
+
                 <div class="mt-auto p-3 border-top OffcanvasKenarlik">
                     <form class="input-group" role="search">
                         <input type="search" class="form-control border-0 py-2" placeholder="Ara ..." aria-label="Ara">
                         <button class="btn px-4 fw-bold OffcanvasAraButonu" type="submit">ARA</button>
                     </form>
                 </div>
-    
             </div>
         </div>
     </header>
 
-  <main class="flex-grow-1 py-4">
-    <div class="container sayfa-genislik">
-      <article class="bg-gece border border-isik p-4 p-md-5">
+    <!-- ANA İÇERİK (Açık ve Koyu moda otomatik uyumlu) -->
+    <main class="flex-grow-1 py-5">
+        <div class="container">
+            <article class="bg-body-tertiary border rounded-3 shadow-sm p-4 p-md-5">
 
-        <div class="mb-2" style="font-size: 0.8rem;">
-          <a href="index.html" class="text-gumus text-decoration-none">
-            <i class="bi bi-house-door-fill me-1"></i>Anasayfa
-          </a>
+                <div class="mb-2 small">
+                    <a href="index.html" class="text-body-secondary text-decoration-none">
+                        <i class="bi bi-house-door-fill me-1"></i>Ana Sayfa
+                    </a>
+                </div>
+
+                <div class="BolumBaslikKutusu mb-4">
+                    <h1 class="display-6 fw-bold text-body mb-2">Hakkımızda</h1>
+                </div>
+
+                <!-- Sosyal Medya Paylaşım Butonları -->
+                <div class="row g-2 mb-5 d-none d-lg-flex">
+                    <div class="col-2">
+                        <a href="https://www.facebook.com/sharer/sharer.php" target="_blank"
+                            class="d-block text-center text-white py-2 rounded-2 text-decoration-none"
+                            style="background-color: #1877F2;" title="Facebook'ta Paylaş">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                    </div>
+                    <div class="col-2">
+                        <a href="https://twitter.com/intent/tweet" target="_blank"
+                            class="d-block text-center text-white py-2 rounded-2 text-decoration-none bg-dark"
+                            title="X'te Paylaş">
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
+                    </div>
+                    <div class="col-2">
+                        <a href="https://api.whatsapp.com/send" target="_blank"
+                            class="d-block text-center text-white py-2 rounded-2 text-decoration-none"
+                            style="background-color: #25D366;" title="WhatsApp'ta Paylaş">
+                            <i class="bi bi-whatsapp"></i>
+                        </a>
+                    </div>
+                    <div class="col-2">
+                        <a href="https://pinterest.com/pin/create/button/" target="_blank"
+                            class="d-block text-center text-white py-2 rounded-2 text-decoration-none"
+                            style="background-color: #BD081C;" title="Pinterest'te Paylaş">
+                            <i class="bi bi-pinterest"></i>
+                        </a>
+                    </div>
+                    <div class="col-2">
+                        <a href="https://www.linkedin.com/sharing/share-offsite/" target="_blank"
+                            class="d-block text-center text-white py-2 rounded-2 text-decoration-none"
+                            style="background-color: #0A66C2;" title="LinkedIn'de Paylaş">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    </div>
+                    <div class="col-2">
+                        <a href="https://t.me/share/url" target="_blank"
+                            class="d-block text-center text-white py-2 rounded-2 text-decoration-none"
+                            style="background-color: #0088CC;" title="Telegram'da Paylaş">
+                            <i class="bi bi-telegram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <h2 class="h4 fw-bold text-body mb-3">Teknoloji ve Bilimi Anlamanın En Kolay Yolu</h2>
+
+                <p class="text-body-secondary lh-lg mb-3">
+                    <strong class="text-body">Tekno Bilim Dünyası</strong>, teknoloji ve bilim dünyasındaki en güncel gelişmeleri, derinlemesine analizleri ve yenilikçi trendleri okuyucularına ulaştırmak amacıyla hayata geçirilmiş bağımsız bir dijital yayın platformudur.
+                </p>
+
+                <p class="text-body-secondary lh-lg mb-3">
+                    Misyonumuz; hızla değişen teknoloji ve bilim ekosisteminde güvenilir, tarafsız ve anlaşılır içerikler sunarak hem sektör profesyonellerine hem de meraklı okurlara değer katmaktır.
+                </p>
+
+                <p class="text-body-secondary lh-lg mb-3">
+                    Yapay zekâdan siber güvenliğe, uzay araştırmalarından yazılım ve donanım dünyasına kadar geniş bir yelpazede haber, röportaj ve inceleme içerikleri yayınlıyoruz. Her içeriğimiz doğruluk ve kalite standartlarımız doğrultusunda titizlikle hazırlanır.
+                </p>
+
+                <p class="text-body-secondary lh-lg mb-0">
+                    <a href="index.html" class="fw-semibold text-decoration-underline TabloBaslikLink">Tekno Bilim Dünyası</a>, teknolojiye ve bilime ilgi duyan herkesin bilgiye hızlı, güvenilir ve keyifli bir şekilde ulaşabileceği bir merkez olmayı hedefler.
+                </p>
+
+            </article>
         </div>
+    </main>
 
-        <h1 class="display-6 fw-bold text-yildiz mb-4">Hakkımızda</h1>
-
-        <div class="row g-2 mb-5 d-none d-lg-flex">
-          <div class="col-2">
-            <a href="https://www.facebook.com/sharer/sharer.php" target="_blank" class="paylas-btn d-block text-center text-white py-2 rounded-1 text-decoration-none" style="background-color: #1877F2;" title="Facebook'ta Paylaş">
-              <i class="bi bi-facebook"></i>
-            </a>
-          </div>
-          <div class="col-2">
-            <a href="https://twitter.com/intent/tweet" target="_blank" class="paylas-btn d-block text-center text-white py-2 rounded-1 text-decoration-none" style="background-color: #090D16; border: 1px solid #283559;" title="X'te Paylaş">
-              <i class="bi bi-twitter-x"></i>
-            </a>
-          </div>
-          <div class="col-2">
-            <a href="https://api.whatsapp.com/send" target="_blank" class="paylas-btn d-block text-center text-white py-2 rounded-1 text-decoration-none" style="background-color: #25D366;" title="WhatsApp'ta Paylaş">
-              <i class="bi bi-whatsapp"></i>
-            </a>
-          </div>
-          <div class="col-2">
-            <a href="https://pinterest.com/pin/create/button/" target="_blank" class="paylas-btn d-block text-center text-white py-2 rounded-1 text-decoration-none" style="background-color: #BD081C;" title="Pinterest'te Paylaş">
-              <i class="bi bi-pinterest"></i>
-            </a>
-          </div>
-          <div class="col-2">
-            <a href="https://www.linkedin.com/sharing/share-offsite/" target="_blank" class="paylas-btn d-block text-center text-white py-2 rounded-1 text-decoration-none" style="background-color: #0A66C2;" title="LinkedIn'de Paylaş">
-              <i class="bi bi-linkedin"></i>
-            </a>
-          </div>
-          <div class="col-2">
-            <a href="https://t.me/share/url" target="_blank" class="paylas-btn d-block text-center text-white py-2 rounded-1 text-decoration-none" style="background-color: #0088CC;" title="Telegram'da Paylaş">
-              <i class="bi bi-telegram"></i>
-            </a>
-          </div>
-        </div>
-
-        <h2 class="h4 fw-bold text-yildiz mb-3">Teknoloji ve Bilimi Anlamanın En Kolay Yolu</h2>
-
-        <p class="text-gumus lh-lg mb-3">
-          <strong class="text-yildiz">TeknoBilim Dünyası</strong>, teknoloji ve bilim dünyasındaki en güncel gelişmeleri, derinlemesine analizleri ve yenilikçi trendleri okuyucularına ulaştırmak amacıyla hayata geçirilmiş bağımsız bir dijital yayın platformudur.
-        </p>
-
-        <p class="text-gumus lh-lg mb-3">
-          Misyonumuz; hızla değişen teknoloji ve bilim ekosisteminde güvenilir, tarafsız ve anlaşılır içerikler sunarak hem sektör profesyonellerine hem de meraklı okurlara değer katmaktır.
-        </p>
-
-        <p class="text-gumus lh-lg mb-3">
-          Yapay zekâdan siber güvenliğe, uzay araştırmalarından yazılım ve donanım dünyasına kadar geniş bir yelpazede haber, röportaj ve inceleme içerikleri yayınlıyoruz. Her içeriğimiz doğruluk ve kalite standartlarımız doğrultusunda titizlikle hazırlanır.
-        </p>
-
-        <p class="text-gumus lh-lg mb-0">
-          <a href="index.html" class="text-buz text-decoration-underline">TeknoBilim Dünyası</a>, teknolojiye ve bilime ilgi duyan herkesin bilgiye hızlı, güvenilir ve keyifli bir şekilde ulaşabileceği bir merkez olmayı hedefler.
-        </p>
-
-      </article>
-    </div>
-  </main>
-
-  <footer class="SiteFooter pt-5 pb-4 mt-4">
+    <!-- FOOTER (ALT BİLGİ) -->
+    <footer class="SiteFooter pt-5 pb-4 mt-4">
         <div class="container">
             <div class="row g-4 pb-4 border-bottom FooterKenarlik">
 
-                <!-- 1. Sütun: Logo ve kısa açıklama -->
                 <div class="col-lg-5">
                     <a href="index.html" class="d-inline-flex align-items-center gap-2 text-decoration-none fw-bold fs-5 mb-3 MarkaLogo">
                         <span>Tekno Bilim Dünyası</span>
@@ -359,10 +307,8 @@
                     </p>
                 </div>
 
-                <!-- 2. Sütun: Sayfa Linkleri -->
                 <div class="col-6 col-lg-3">
                     <h3 class="h6 fw-bold mb-3">Sayfalar</h3>
-                    <!-- list-unstyled: Liste başındaki siyah noktaları kaldırır -->
                     <ul class="list-unstyled d-flex flex-column gap-2 small mb-0">
                         <li><a href="index.html" class="FooterLink">Ana Sayfa</a></li>
                         <li><a href="hakkimizda.html" class="FooterLink">Hakkımızda</a></li>
@@ -371,7 +317,6 @@
                     </ul>
                 </div>
 
-                <!-- 3. Sütun: Kategoriler -->
                 <div class="col-6 col-lg-4">
                     <h3 class="h6 fw-bold mb-3">Kategoriler</h3>
                     <ul class="list-unstyled d-flex flex-column gap-2 small mb-0">
@@ -384,7 +329,6 @@
 
             </div>
 
-            <!-- En alt telif satırı -->
             <div class="pt-3 d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 small">
                 <span>&copy; 2026 Tekno Bilim Dünyası. Tüm hakları saklıdır.</span>
                 <span>Kırklareli Üniversitesi Yazılım Mühendisliği</span>
@@ -392,10 +336,12 @@
         </div>
     </footer>
 
-    <!-- YUKARI ÇIK BUTONU (Aşağı inince JS ile görünür olur) -->
+    <!-- YUKARI ÇIK BUTONU -->
     <button type="button" id="yukari_cik_butonu" class="btn rounded-circle shadow YukariCikBtn"
         aria-label="Sayfanın en üstüne çık" title="Yukarı Çık">
         <i class="bi bi-arrow-up fs-5"></i>
     </button>
+
 </body>
+
 </html>
