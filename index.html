@@ -1,10 +1,894 @@
 <!DOCTYPE html>
-<html lang="tr">
+<!-- data-bs-theme: açık ve koyu modu ayarlar -->
+<html lang="tr" data-bs-theme="light">
+
 <head>
     <meta charset="UTF-8">
+    <script>
+        // Bu kod o anki sayfamız için linklerin ana dizinde aranmasını sağlar.
+        const PROJE_KLASORU = "Tekno-Bilim-Dunyasi"; // Proje Klasörü
+
+        const tam_yol = window.location.href; // Dosyanın tam yolu
+
+        // Proje klasörünün başladığı kısım yolun içinde değilse -1 alır
+        const klasor_baslangici = tam_yol.indexOf(PROJE_KLASORU);
+
+        // Proje klasörünün başladığı kısım yolun içindeyse dizini bizim ana dizinimize ayarlar
+        if (klasor_baslangici !== -1) {
+            const ana_dizin = tam_yol.substring(0, klasor_baslangici + PROJE_KLASORU.length) + "/";
+            document.write('<base href="' + ana_dizin + '">');
+        }
+    </script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS'i -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+
+    <!-- İkonlar için Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Kendi harici CSS dosyamız -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Bootstrap JS'i -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous" defer></script>
+
+    <!-- Kendi harici JS dosyamız -->
+    <script src="js/main.js" defer></script>
+
     <title>Tekno Bilim Dünyası</title>
 </head>
+
 <body>
+
+    <!--
+         header alanı
+         sticky-top: header sürekli ekranın üstünde kalır
+    -->
+    <header class="sticky-top SiteHeader">
+
+        <!--
+            Büyük ekran (d-none d-lg-block)
+            d-none: Küçük ekranlarda gizler
+            d-lg-block: 992px ve üzeri ekranlarda gösterir
+        -->
+        <div class="d-none d-lg-block">
+
+            <!-- header ın -->
+            <div class="UstCubuk py-2">
+                <!-- d-flex justify-content-end: İçerideki tüm öğeleri sağa yaslar -->
+                <div class="container d-flex justify-content-end align-items-center gap-2">
+
+                    <!-- Arama Alanı: Input, büyüteç butonunun SOLUNDA yer alır -->
+                    <form id="masaustu_arama_formu" class="d-flex align-items-center" role="search">
+                        <!-- Başlangıçta genişliği 0 olan, büyütece basınca sola doğru açılan arama kutusu -->
+                        <input type="search" id="masaustu_arama_input"
+                            class="form-control form-control-sm rounded-pill AramaKutusu"
+                            placeholder="Sitede ara..." aria-label="Sitede ara">
+
+                        <!-- Büyüteç İkon Butonu -->
+                        <button type="button" id="masaustu_arama_butonu"
+                            class="btn btn-sm rounded-circle YuvarlakIkonButon ms-1"
+                            aria-label="Arama kutusunu aç veya kapat">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </form>
+
+                    <!-- Açık / Koyu Mod Butonu -->
+                    <button type="button" class="btn btn-sm rounded-circle YuvarlakIkonButon TemaDegistirBtn"
+                        aria-label="Temayı değiştir" title="Açık / Koyu Mod">
+                        <i class="bi bi-moon-stars-fill TemaIkonu"></i>
+                    </button>
+
+                    <!-- Giriş Yap Butonu -->
+                    <a href="giris-kayit.html" class="btn btn-sm rounded-pill px-3 fw-semibold GirisButonu">
+                        GİRİŞ YAP
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- 2. BÖLÜM: Ana Navbar (Logo + Sayfa Linkleri) -->
+            <nav class="navbar navbar-expand-lg py-3 AnaNavbar" aria-label="Ana Menü">
+                <div class="container">
+                    <!-- Logo -->
+                    <a class="navbar-brand fw-bold d-flex align-items-center gap-2 MarkaLogo" href="index.html">
+                        <span>Tekno Bilim Dünyası</span>
+                    </a>
+
+                    <!-- Kategoriler | Sayfa Linkleri -->
+                    <ul class="navbar-nav ms-auto align-items-center gap-2 gap-xl-3">
+                        <!-- Kategoriler -->
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold" href="haber-detay.html">Yapay Zeka</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold" href="haber-detay.html">Uzay</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold" href="haber-detay.html">Biyoteknoloji</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold" href="haber-detay.html">Donanım</a>
+                        </li>
+
+                        <!-- İki grubu ayıran dikey çizgi -->
+                        <li class="nav-item" aria-hidden="true">
+                            <span class="MenuAyraci">|</span>
+                        </li>
+
+                        <!-- Ana Sayfalar -->
+                        <li class="nav-item">
+                            <a class="nav-link active fw-semibold" aria-current="page" href="index.html">Ana Sayfa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold" href="hakkimizda.html">Hakkımızda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold" href="iletisim.html">İletişim</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+        </div>
+
+        <!-- =================================================================
+             Küçük ekran (d-lg-none)
+             - d-lg-none: Masaüstünde (992px+) gizle, sadece küçük ekranlarda göster.
+             - Gönderdiğin 1. fotoğraftaki gibi solda logo, sağda 3 yuvarlak buton.
+        ================================================================== -->
+        <div class="d-lg-none MobilHeader py-2">
+            <div class="container d-flex justify-content-between align-items-center">
+
+                <!-- Sol Taraf: Logo -->
+                <a class="navbar-brand fw-bold d-flex align-items-center gap-2 MarkaLogo mb-0" href="index.html">
+                    <span class="fs-5">TBD</span>
+                </a>
+
+                <!-- Sağ Taraf: Yuvarlak İkon Butonları -->
+                <div class="d-flex align-items-center gap-2">
+                    <!-- 1. Yuvarlak Buton: Büyüteç (Mobilde menüdeki arama kutusuna odaklanır veya üstte açılır) -->
+                    <button type="button" class="btn rounded-circle YuvarlakIkonButon"
+                        data-bs-toggle="offcanvas" data-bs-target="#mobil_menu_offcanvas"
+                        aria-label="Arama yap">
+                        <i class="bi bi-search"></i>
+                    </button>
+
+                    <!-- 2. Yuvarlak Buton: Açık / Koyu Mod (Referanstaki zil yerine tema butonu) -->
+                    <button type="button" class="btn rounded-circle YuvarlakIkonButon TemaDegistirBtn"
+                        aria-label="Temayı değiştir">
+                        <i class="bi bi-moon-stars-fill TemaIkonu"></i>
+                    </button>
+
+                    <!-- 3. Yuvarlak Buton: Hamburger Menü (Offcanvas'ı açar) -->
+                    <button type="button" class="btn rounded-circle YuvarlakIkonButon"
+                        data-bs-toggle="offcanvas" data-bs-target="#mobil_menu_offcanvas"
+                        aria-controls="mobil_menu_offcanvas" aria-label="Menüyü aç">
+                        <i class="bi bi-list fs-5"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- =====================================================================
+             MOBİL AÇILIR MENÜ (BOOTSTRAP OFFCANVAS)
+             - Gönderdiğin 2. fotoğraftaki tam ekran açılan menü yapısı.
+             - offcanvas-end: Sağdan sola doğru kayarak açılır.
+        ====================================================================== -->
+        <div class="offcanvas offcanvas-end MobilOffcanvas" tabindex="-1" id="mobil_menu_offcanvas"
+            aria-labelledby="mobil_menu_baslik">
+    
+            <!-- Üst Satır: Solda GİRİŞ YAP, Sağda GERİ DÖN -->
+            <div class="offcanvas-header d-flex justify-content-between align-items-center px-3 py-3 border-bottom OffcanvasKenarlik">
+                <a href="giris-kayit.html" class="btn rounded-pill px-4 fw-bold OffcanvasGirisButonu">
+                    GİRİŞ YAP
+                </a>
+    
+                <!-- data-bs-dismiss="offcanvas": Tıklandığında menüyü kapatır -->
+                <button type="button" class="btn rounded-pill px-3 fw-semibold OffcanvasGeriButonu"
+                    data-bs-dismiss="offcanvas" aria-label="Menüyü Kapat">
+                    GERİ DÖN
+                </button>
+            </div>
+    
+            <!-- Orta ve Alt Alan: d-flex flex-column sayesinde arama kutusu en alta itilir -->
+            <div class="offcanvas-body d-flex flex-column p-0">
+    
+                <!-- Menü Linkleri (Alt alta, aralarında ince çizgi ile) -->
+                <nav aria-label="Mobil Menü Linkleri">
+                    <ul class="list-unstyled mb-0">
+                        <!-- Ana Sayfalar -->
+                        <li class="border-bottom OffcanvasKenarlik">
+                            <a href="index.html" class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink">Ana Sayfa</a>
+                        </li>
+                        <li class="border-bottom OffcanvasKenarlik">
+                            <a href="hakkimizda.html" class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink">Hakkımızda</a>
+                        </li>
+                        <li class="border-bottom OffcanvasKenarlik">
+                            <a href="iletisim.html" class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink">İletişim</a>
+                        </li>
+
+                        <!-- Kategoriler Başlığı -->
+                        <li class="px-4 pt-3 pb-1 small fw-bold opacity-75">KATEGORİLER</li>
+                        <li class="border-bottom OffcanvasKenarlik">
+                            <a href="haber-detay.html" class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink">Yapay Zeka</a>
+                        </li>
+                        <li class="border-bottom OffcanvasKenarlik">
+                            <a href="haber-detay.html" class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink">Uzay</a>
+                        </li>
+                        <li class="border-bottom OffcanvasKenarlik">
+                            <a href="haber-detay.html" class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink">Biyoteknoloji</a>
+                        </li>
+                        <li class="border-bottom OffcanvasKenarlik">
+                            <a href="haber-detay.html" class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink">Donanım</a>
+                        </li>
+                    </ul>
+                </nav>
+    
+                <!-- En Alt Kısım: mt-auto ile ekranın en altına sabitlenen Arama Kutusu -->
+                <div class="mt-auto p-3 border-top OffcanvasKenarlik">
+                    <form class="input-group" role="search">
+                        <input type="search" class="form-control border-0 py-2" placeholder="Ara ..." aria-label="Ara">
+                        <button class="btn px-4 fw-bold OffcanvasAraButonu" type="submit">ARA</button>
+                    </form>
+                </div>
+    
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ÜST MANŞET CAROUSEL (1 Büyük + 4 Küçük Overlay Card) -->
+        <section id="manset_bolumu" class="py-4">
+            <div class="container">
+
+                <div id="manset_grid_carousel" class="carousel slide position-relative" data-bs-ride="carousel">
+
+                    <div class="carousel-inner">
+
+                        <!-- ==================== 1. SLAYT (5 HABER) ==================== -->
+                        <div class="carousel-item active" data-bs-interval="6000">
+                            <div class="row g-2">
+
+                                <!-- SOLDAKİ (MOBİLDE ÜSTTEKİ) BÜYÜK HABER KARTI -->
+                                <div class="col-12 col-lg-6">
+                                    <article class="card text-bg-dark border-0 shadow-sm MansetKart MansetBuyuk">
+                                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1000&q=80"
+                                            class="card-img MansetGorsel" alt="Yapay zeka sinir ağları">
+
+                                        <div class="card-img-overlay d-flex flex-column justify-content-end MansetOverlay">
+                                            <div class="mb-2">
+                                                <span class="badge EditorRozet text-uppercase px-2 py-1">Yapay Zeka</span>
+                                            </div>
+                                            <h2 class="card-title fw-bold mb-2 MansetBaslikBuyuk">
+                                                <a href="haber-detay.html" class="text-white text-decoration-none stretched-link">
+                                                    Kuantum Destekli Yapay Zeka Modelleri Bilimsel Keşifleri Hızlandırıyor
+                                                </a>
+                                            </h2>
+                                            <!-- Büyük kartta yer bol olduğu için özet ve yazar da var -->
+                                            <p class="card-text EditorOzet d-none d-sm-block mb-2">
+                                                Yeni hibrit mimari sayesinde aylarca süren moleküler simülasyonlar artık dakikalar içinde tamamlanabiliyor.
+                                            </p>
+                                            <div class="d-flex align-items-center gap-2 mt-1">
+                                                <span class="YazarYuvarlakLogo">T</span>
+                                                <span class="small fw-semibold text-white">Tekno Bilim</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                                <!-- SAĞDAKİ (MOBİLDE ALTTAKİ) 4 KÜÇÜK HABER KARTI -->
+                                <div class="col-12 col-lg-6">
+                                    <div class="row g-2">
+
+                                        <!-- Küçük Kart 1 -->
+                                        <div class="col-6">
+                                            <article class="card text-bg-dark border-0 shadow-sm MansetKart MansetKucuk">
+                                                <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=600&q=80"
+                                                    class="card-img MansetGorsel" alt="Uzaydan Dünya görünümü">
+                                                <div class="card-img-overlay d-flex flex-column justify-content-end MansetOverlayKucuk">
+                                                    <div class="mb-1">
+                                                        <span class="badge EditorRozet text-uppercase px-2 py-1">Uzay</span>
+                                                    </div>
+                                                    <h3 class="card-title fw-bold mb-0 MansetBaslikKucuk">
+                                                        <a href="haber-detay.html" class="text-white text-decoration-none stretched-link">
+                                                            Derin Uzay Teleskopları Yaşanabilir Bölgede Yeni Gezegen Buldu
+                                                        </a>
+                                                    </h3>
+                                                </div>
+                                            </article>
+                                        </div>
+
+                                        <!-- Küçük Kart 2 -->
+                                        <div class="col-6">
+                                            <article class="card text-bg-dark border-0 shadow-sm MansetKart MansetKucuk">
+                                                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80"
+                                                    class="card-img MansetGorsel" alt="Mikroçip ve devre kartı">
+                                                <div class="card-img-overlay d-flex flex-column justify-content-end MansetOverlayKucuk">
+                                                    <div class="mb-1">
+                                                        <span class="badge EditorRozet text-uppercase px-2 py-1">Donanım</span>
+                                                    </div>
+                                                    <h3 class="card-title fw-bold mb-0 MansetBaslikKucuk">
+                                                        <a href="haber-detay.html" class="text-white text-decoration-none stretched-link">
+                                                            Işıkla Çalışan Fotonik İşlemciler Silikon Çağının Sınırlarını Zorluyor
+                                                        </a>
+                                                    </h3>
+                                                </div>
+                                            </article>
+                                        </div>
+
+                                        <!-- Küçük Kart 3 -->
+                                        <div class="col-6">
+                                            <article class="card text-bg-dark border-0 shadow-sm MansetKart MansetKucuk">
+                                                <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=600&q=80"
+                                                    class="card-img MansetGorsel" alt="Biyoteknoloji laboratuvarı">
+                                                <div class="card-img-overlay d-flex flex-column justify-content-end MansetOverlayKucuk">
+                                                    <div class="mb-1">
+                                                        <span class="badge EditorRozet text-uppercase px-2 py-1">Biyoteknoloji</span>
+                                                    </div>
+                                                    <h3 class="card-title fw-bold mb-0 MansetBaslikKucuk">
+                                                        <a href="haber-detay.html" class="text-white text-decoration-none stretched-link">
+                                                            CRISPR Gen Düzenlemesinde Hata Payı Sıfıra Yaklaştı
+                                                        </a>
+                                                    </h3>
+                                                </div>
+                                            </article>
+                                        </div>
+
+                                        <!-- Küçük Kart 4 -->
+                                        <div class="col-6">
+                                            <article class="card text-bg-dark border-0 shadow-sm MansetKart MansetKucuk">
+                                                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=600&q=80"
+                                                    class="card-img MansetGorsel" alt="İnsansı robot prototipi">
+                                                <div class="card-img-overlay d-flex flex-column justify-content-end MansetOverlayKucuk">
+                                                    <div class="mb-1">
+                                                        <span class="badge EditorRozet text-uppercase px-2 py-1">Robotik</span>
+                                                    </div>
+                                                    <h3 class="card-title fw-bold mb-0 MansetBaslikKucuk">
+                                                        <a href="haber-detay.html" class="text-white text-decoration-none stretched-link">
+                                                            Dokunma Sensörlü Yeni Nesil Otonom Robot Eller Tanıtıldı
+                                                        </a>
+                                                    </h3>
+                                                </div>
+                                            </article>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- ==================== 2. SLAYT (5 HABER) ==================== -->
+                        <div class="carousel-item" data-bs-interval="6000">
+                            <div class="row g-2">
+
+                                <!-- Büyük Kart -->
+                                <div class="col-12 col-lg-6">
+                                    <article class="card text-bg-dark border-0 shadow-sm MansetKart MansetBuyuk">
+                                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1000&q=80"
+                                            class="card-img MansetGorsel" alt="Güneş panelleri">
+
+                                        <div class="card-img-overlay d-flex flex-column justify-content-end MansetOverlay">
+                                            <div class="mb-2">
+                                                <span class="badge EditorRozet text-uppercase px-2 py-1">Enerji</span>
+                                            </div>
+                                            <h2 class="card-title fw-bold mb-2 MansetBaslikBuyuk">
+                                                <a href="haber-detay.html" class="text-white text-decoration-none stretched-link">
+                                                    Perovskit Güneş Hücrelerinde Verimlilik Rekoru %34'ü Aştı
+                                                </a>
+                                            </h2>
+                                            <p class="card-text EditorOzet d-none d-sm-block mb-2">
+                                                Esnek ve düşük maliyetli yeni nesil paneller kapalı havalarda bile yüksek enerji üretimi sağlıyor.
+                                            </p>
+                                            <div class="d-flex align-items-center gap-2 mt-1">
+                                                <span class="YazarYuvarlakLogo">T</span>
+                                                <span class="small fw-semibold text-white">Tekno Bilim</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                                <!-- 4 Küçük Kart -->
+                                <div class="col-12 col-lg-6">
+                                    <div class="row g-2">
+
+                                        <div class="col-6">
+                                            <article class="card text-bg-dark border-0 shadow-sm MansetKart MansetKucuk">
+                                                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80"
+                                                    class="card-img MansetGorsel" alt="Siber güvenlik kodları">
+                                                <div class="card-img-overlay d-flex flex-column justify-content-end MansetOverlayKucuk">
+                                                    <div class="mb-1">
+                                                        <span class="badge EditorRozet text-uppercase px-2 py-1">Güvenlik</span>
+                                                    </div>
+                                                    <h3 class="card-title fw-bold mb-0 MansetBaslikKucuk">
+                                                        <a href="haber-detay.html" class="text-white text-decoration-none stretched-link">
+                                                            Kuantum Sonrası Şifreleme Standartları Yaygınlaşıyor
+                                                        </a>
+                                                    </h3>
+                                                </div>
+                                            </article>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <article class="card text-bg-dark border-0 shadow-sm MansetKart MansetKucuk">
+                                                <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=600&q=80"
+                                                    class="card-img MansetGorsel" alt="Mars yüzeyi">
+                                                <div class="card-img-overlay d-flex flex-column justify-content-end MansetOverlayKucuk">
+                                                    <div class="mb-1">
+                                                        <span class="badge EditorRozet text-uppercase px-2 py-1">Uzay</span>
+                                                    </div>
+                                                    <h3 class="card-title fw-bold mb-0 MansetBaslikKucuk">
+                                                        <a href="haber-detay.html" class="text-white text-decoration-none stretched-link">
+                                                            Ay'ın Güney Kutbunda Araştırma Üssü Testleri Başladı
+                                                        </a>
+                                                    </h3>
+                                                </div>
+                                            </article>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <article class="card text-bg-dark border-0 shadow-sm MansetKart MansetKucuk">
+                                                <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=600&q=80"
+                                                    class="card-img MansetGorsel" alt="Yazılım geliştirme ekranı">
+                                                <div class="card-img-overlay d-flex flex-column justify-content-end MansetOverlayKucuk">
+                                                    <div class="mb-1">
+                                                        <span class="badge EditorRozet text-uppercase px-2 py-1">Yazılım</span>
+                                                    </div>
+                                                    <h3 class="card-title fw-bold mb-0 MansetBaslikKucuk">
+                                                        <a href="haber-detay.html" class="text-white text-decoration-none stretched-link">
+                                                            WebAssembly 3.0 ile Tarayıcı Tabanlı Simülasyonlar Hızlanıyor
+                                                        </a>
+                                                    </h3>
+                                                </div>
+                                            </article>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <article class="card text-bg-dark border-0 shadow-sm MansetKart MansetKucuk">
+                                                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80"
+                                                    class="card-img MansetGorsel" alt="Uydu iletişim ağları">
+                                                <div class="card-img-overlay d-flex flex-column justify-content-end MansetOverlayKucuk">
+                                                    <div class="mb-1">
+                                                        <span class="badge EditorRozet text-uppercase px-2 py-1">İletişim</span>
+                                                    </div>
+                                                    <h3 class="card-title fw-bold mb-0 MansetBaslikKucuk">
+                                                        <a href="haber-detay.html" class="text-white text-decoration-none stretched-link">
+                                                            6G Protokolleri ve Uydu Ağları Tek Çatı Altında Birleşiyor
+                                                        </a>
+                                                    </h3>
+                                                </div>
+                                            </article>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Sol ve sağ kaydırma okları -->
+                    <button class="MansetOkButonu MansetOkSol" type="button"
+                        data-bs-target="#manset_grid_carousel" data-bs-slide="prev" aria-label="Önceki slayt">
+                        <i class="bi bi-arrow-left"></i>
+                    </button>
+
+                    <button class="MansetOkButonu MansetOkSag" type="button"
+                        data-bs-target="#manset_grid_carousel" data-bs-slide="next" aria-label="Sonraki slayt">
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SON YAZILAR BÖLÜMÜ (Tablo yapısıyla) -->
+        <section id="son_yazilar_bolumu" class="py-5">
+            <div class="container">
+
+                <!-- Bölüm Başlığı (Altındaki yarım vurgulu çizgi CSS ile veriliyor) -->
+                <div class="BolumBaslikKutusu mb-4">
+                    <h2 class="h5 fw-bold text-uppercase mb-2">Son Yazılar</h2>
+                </div>
+
+                <!--
+                    Tablo yapısı:
+                    Her satır (<tr>) bir haberi temsil ediyor.
+                    Sol hücrede (<td>) görsel, sağ hücrede haberin tüm detayları var.
+                -->
+                <table class="table align-middle SonYazilarTablo">
+                    <tbody>
+
+                        <!-- 1. HABER SATIRI -->
+                        <tr>
+                            <!-- Sol Hücre: Haber Görseli -->
+                            <td class="TabloGorselHucre">
+                                <a href="haber-detay.html">
+                                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80"
+                                        class="rounded-3 TabloGorsel" alt="Siber güvenlik görseli">
+                                </a>
+                            </td>
+
+                            <!-- Sağ Hücre: Tarih, Başlık, Özet, Yazar ve Buton -->
+                            <td class="TabloIcerikHucre">
+                                <!-- Üst bilgi satırı: Zaman ve okunma sayısı -->
+                                <div class="d-flex align-items-center gap-3 small TabloMeta mb-2">
+                                    <span><i class="bi bi-clock me-1"></i>1 gün önce</span>
+                                    <span><i class="bi bi-eye me-1"></i>119</span>
+                                </div>
+
+                                <!-- Haber Başlığı -->
+                                <h3 class="h5 fw-bold mb-2">
+                                    <a href="haber-detay.html" class="text-decoration-none TabloBaslikLink">
+                                        Büyük Finans Kuruluşuna Siber Saldırı: 16.000'den Fazla Verinin Risk Altında Olduğu Açıklandı
+                                    </a>
+                                </h3>
+
+                                <!-- Kısa Özet -->
+                                <p class="small TabloOzet mb-3">
+                                    Siber güvenlik ekipleri, dış hizmet sağlayıcıları üzerinden sızıldığı düşünülen veri ihlalini soruşturuyor. Olay, kurumların üçüncü parti yazılımlara olan bağımlılığını yeniden gündeme getirdi...
+                                </p>
+
+                                <!-- Alt Satır: Solda yazar/site rozeti, sağda Devamını Oku butonu -->
+                                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="YazarYuvarlakLogo">T</span>
+                                        <span class="fw-semibold small">Tekno Bilim</span>
+                                    </div>
+
+                                    <a href="haber-detay.html" class="btn btn-sm px-3 py-2 fw-semibold DevaminiOkuBtn">
+                                        DEVAMINI OKU
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- 2. HABER SATIRI -->
+                        <tr>
+                            <td class="TabloGorselHucre">
+                                <a href="haber-detay.html">
+                                    <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=600&q=80"
+                                        class="rounded-3 TabloGorsel" alt="Taşınabilir enerji reaktörü görseli">
+                                </a>
+                            </td>
+
+                            <td class="TabloIcerikHucre">
+                                <div class="d-flex align-items-center gap-3 small TabloMeta mb-2">
+                                    <span><i class="bi bi-clock me-1"></i>1 gün önce</span>
+                                    <span><i class="bi bi-eye me-1"></i>98</span>
+                                </div>
+
+                                <h3 class="h5 fw-bold mb-2">
+                                    <a href="haber-detay.html" class="text-decoration-none TabloBaslikLink">
+                                        Taşınabilir Mikro Nükleer Reaktörler Seri Üretime Hazırlanıyor
+                                    </a>
+                                </h3>
+
+                                <p class="small TabloOzet mb-3">
+                                    Yeni nesil kompakt reaktörler, enerji altyapısının ulaşamadığı bölgelerde ve afet alanlarında kesintisiz elektrik sağlamak için tırlarla taşınabilecek boyuta indirildi...
+                                </p>
+
+                                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="YazarYuvarlakLogo">T</span>
+                                        <span class="fw-semibold small">Tekno Bilim</span>
+                                    </div>
+
+                                    <a href="haber-detay.html" class="btn btn-sm px-3 py-2 fw-semibold DevaminiOkuBtn">
+                                        DEVAMINI OKU
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- 3. HABER SATIRI -->
+                        <tr>
+                            <td class="TabloGorselHucre">
+                                <a href="haber-detay.html">
+                                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=600&q=80"
+                                        class="rounded-3 TabloGorsel" alt="Yapay zeka asistan görseli">
+                                </a>
+                            </td>
+
+                            <td class="TabloIcerikHucre">
+                                <div class="d-flex align-items-center gap-3 small TabloMeta mb-2">
+                                    <span><i class="bi bi-clock me-1"></i>2 gün önce</span>
+                                    <span><i class="bi bi-eye me-1"></i>145</span>
+                                </div>
+
+                                <h3 class="h5 fw-bold mb-2">
+                                    <a href="haber-detay.html" class="text-decoration-none TabloBaslikLink">
+                                        Otonom Yapay Zeka Ajanları Tarayıcı Üzerinde Görev Almaya Başladı
+                                    </a>
+                                </h3>
+
+                                <p class="small TabloOzet mb-3">
+                                    Kullanıcı müdahalesi olmadan araştırma yapabilen, form doldurabilen ve günlük iş akışlarını planlayabilen yeni nesil asistanların ilk kapalı testleri başladı...
+                                </p>
+
+                                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="YazarYuvarlakLogo">T</span>
+                                        <span class="fw-semibold small">Tekno Bilim</span>
+                                    </div>
+
+                                    <a href="haber-detay.html" class="btn btn-sm px-3 py-2 fw-semibold DevaminiOkuBtn">
+                                        DEVAMINI OKU
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <!-- EDİTÖRÜN SEÇİMİ CAROUSELİ (Özetli Overlay Card) -->
+        <section id="editorun_secimi_bolumu" class="py-5">
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-end BolumBaslikKutusu mb-4 pb-2">
+                    <h2 class="h5 fw-bold text-uppercase mb-0">Editörün Seçimi</h2>
+
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn rounded-circle YuvarlakIkonButon"
+                            data-bs-target="#editor_secimi_carousel" data-bs-slide="prev"
+                            aria-label="Önceki seçkiler">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+                        <button type="button" class="btn rounded-circle YuvarlakIkonButon"
+                            data-bs-target="#editor_secimi_carousel" data-bs-slide="next"
+                            aria-label="Sonraki seçkiler">
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="editor_secimi_carousel" class="carousel slide" data-bs-ride="false">
+                    <div class="carousel-inner">
+
+                        <!-- ==================== 1. GRUP (3 KART) ==================== -->
+                        <div class="carousel-item active">
+                            <div class="row row-cols-1 row-cols-md-3 g-3">
+
+                                <!-- Kart 1 -->
+                                <div class="col">
+                                    <article class="card text-bg-dark border-0 shadow-sm EditorKart">
+                                        <img src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=700&q=80"
+                                            class="card-img EditorGorsel" alt="Laboratuvarda mikroskop incelemesi">
+
+                                        <div class="card-img-overlay d-flex flex-column justify-content-end EditorOverlay">
+                                            <div class="mb-2">
+                                                <span class="badge EditorRozet text-uppercase px-2 py-1">Nörobilim</span>
+                                            </div>
+                                            <h3 class="card-title h5 fw-bold mb-2">
+                                                <a href="haber-detay.html" class="text-white text-decoration-none stretched-link">
+                                                    Beyin-Bilgisayar Arayüzleri Konuşma Engelli Bireylere Umut Oluyor
+                                                </a>
+                                            </h3>
+                                            <!-- Eklenen haber özeti -->
+                                            <p class="card-text EditorOzet mb-2">
+                                                Düşünce sinyallerini milisaniyeler içinde metne ve sese çeviren yeni nesil başlıklar klinik testlerde.
+                                            </p>
+                                            <div class="d-flex align-items-center gap-2 mt-1">
+                                                <span class="YazarYuvarlakLogo">T</span>
+                                                <span class="small fw-semibold text-white">Tekno Bilim</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                                <!-- Kart 2 -->
+                                <div class="col">
+                                    <article class="card text-bg-dark border-0 shadow-sm EditorKart">
+                                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=700&q=80"
+                                            class="card-img EditorGorsel" alt="Mühendislik laboratuvarı">
+
+                                        <div class="card-img-overlay d-flex flex-column justify-content-end EditorOverlay">
+                                            <div class="mb-2">
+                                                <span class="badge EditorRozet text-uppercase px-2 py-1">Malzeme Bilimi</span>
+                                            </div>
+                                            <h3 class="card-title h5 fw-bold mb-2">
+                                                <a href="haber-detay.html" class="text-white text-decoration-none stretched-link">
+                                                    Kendi Kendini Onaran Akıllı Polimerler Havacılıkta Kullanılacak
+                                                </a>
+                                            </h3>
+                                            <p class="card-text EditorOzet mb-2">
+                                                Mikro çatlakları ısı tepkimesiyle kendiliğinden kapatan kompozit yüzeylerin dayanıklılık testleri bitti.
+                                            </p>
+                                            <div class="d-flex align-items-center gap-2 mt-1">
+                                                <span class="YazarYuvarlakLogo">T</span>
+                                                <span class="small fw-semibold text-white">Tekno Bilim</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                                <!-- Kart 3 -->
+                                <div class="col">
+                                    <article class="card text-bg-dark border-0 shadow-sm EditorKart">
+                                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=700&q=80"
+                                            class="card-img EditorGorsel" alt="Uydu iletişim ağları">
+
+                                        <div class="card-img-overlay d-flex flex-column justify-content-end EditorOverlay">
+                                            <div class="mb-2">
+                                                <span class="badge EditorRozet text-uppercase px-2 py-1">İletişim</span>
+                                            </div>
+                                            <h3 class="card-title h5 fw-bold mb-2">
+                                                <a href="haber-detay.html" class="text-white text-decoration-none stretched-link">
+                                                    6G Protokolleri ve Alçak Yörünge Uydu Ağlarının Birleşimi
+                                                </a>
+                                            </h3>
+                                            <p class="card-text EditorOzet mb-2">
+                                                Okyanus ortasından kutuplara kadar kesintisiz terabit hızında veri aktarımı nasıl mümkün olacak?
+                                            </p>
+                                            <div class="d-flex align-items-center gap-2 mt-1">
+                                                <span class="YazarYuvarlakLogo">T</span>
+                                                <span class="small fw-semibold text-white">Tekno Bilim</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- ==================== 2. GRUP (3 KART) ==================== -->
+                        <div class="carousel-item">
+                            <div class="row row-cols-1 row-cols-md-3 g-3">
+
+                                <!-- Kart 4 -->
+                                <div class="col">
+                                    <article class="card text-bg-dark border-0 shadow-sm EditorKart">
+                                        <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=700&q=80"
+                                            class="card-img EditorGorsel" alt="DNA sarmalı ve moleküler model">
+
+                                        <div class="card-img-overlay d-flex flex-column justify-content-end EditorOverlay">
+                                            <div class="mb-2">
+                                                <span class="badge EditorRozet text-uppercase px-2 py-1">Veri Depolama</span>
+                                            </div>
+                                            <h3 class="card-title h5 fw-bold mb-2">
+                                                <a href="haber-detay.html" class="text-white text-decoration-none stretched-link">
+                                                    Sentetik DNA İçinde Yüzlerce Yıl Saklanabilen Dijital Arşivler
+                                                </a>
+                                            </h3>
+                                            <p class="card-text EditorOzet mb-2">
+                                                Bir gram DNA molekülüne yüzlerce petabayt veriyi hatasız yazabilen yeni mikroakışkan çipler geliştirildi.
+                                            </p>
+                                            <div class="d-flex align-items-center gap-2 mt-1">
+                                                <span class="YazarYuvarlakLogo">T</span>
+                                                <span class="small fw-semibold text-white">Tekno Bilim</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                                <!-- Kart 5 -->
+                                <div class="col">
+                                    <article class="card text-bg-dark border-0 shadow-sm EditorKart">
+                                        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=700&q=80"
+                                            class="card-img EditorGorsel" alt="Elektronik test cihazı">
+
+                                        <div class="card-img-overlay d-flex flex-column justify-content-end EditorOverlay">
+                                            <div class="mb-2">
+                                                <span class="badge EditorRozet text-uppercase px-2 py-1">Donanım</span>
+                                            </div>
+                                            <h3 class="card-title h5 fw-bold mb-2">
+                                                <a href="haber-detay.html" class="text-white text-decoration-none stretched-link">
+                                                    Nöromorfik Çipler İnsan Beyninin Enerji Verimliliğini Taklit Ediyor
+                                                </a>
+                                            </h3>
+                                            <p class="card-text EditorOzet mb-2">
+                                                Sadece uyaran geldiğinde enerji harcayan olay tabanlı işlemciler akıllı cihazların pil ömrünü katlıyor.
+                                            </p>
+                                            <div class="d-flex align-items-center gap-2 mt-1">
+                                                <span class="YazarYuvarlakLogo">T</span>
+                                                <span class="small fw-semibold text-white">Tekno Bilim</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                                <!-- Kart 6 -->
+                                <div class="col">
+                                    <article class="card text-bg-dark border-0 shadow-sm EditorKart">
+                                        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=700&q=80"
+                                            class="card-img EditorGorsel" alt="Galaksi bulutsusu">
+
+                                        <div class="card-img-overlay d-flex flex-column justify-content-end EditorOverlay">
+                                            <div class="mb-2">
+                                                <span class="badge EditorRozet text-uppercase px-2 py-1">Astrofizik</span>
+                                            </div>
+                                            <h3 class="card-title h5 fw-bold mb-2">
+                                                <a href="haber-detay.html" class="text-white text-decoration-none stretched-link">
+                                                    Karanlık Maddenin Evrendeki Dağılımını Gösteren En Detaylı Harita
+                                                </a>
+                                            </h3>
+                                            <p class="card-text EditorOzet mb-2">
+                                                Kütleçekimsel mercekleme verileriyle oluşturulan 3 boyutlu kozmik ağ modeli neleri ortaya çıkardı?
+                                            </p>
+                                            <div class="d-flex align-items-center gap-2 mt-1">
+                                                <span class="YazarYuvarlakLogo">T</span>
+                                                <span class="small fw-semibold text-white">Tekno Bilim</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER (ALT BİLGİ) -->
+    <footer class="SiteFooter pt-5 pb-4 mt-4">
+        <div class="container">
+            <div class="row g-4 pb-4 border-bottom FooterKenarlik">
+
+                <!-- 1. Sütun: Logo ve kısa açıklama -->
+                <div class="col-lg-5">
+                    <a href="index.html" class="d-inline-flex align-items-center gap-2 text-decoration-none fw-bold fs-5 mb-3 MarkaLogo">
+                        <span>Tekno Bilim Dünyası</span>
+                    </a>
+                    <p class="small mb-0">
+                        Bilim, teknoloji, uzay ve mühendislik dünyasından en güncel gelişmeleri sade ve anlaşılır bir dille aktaran dijital yayın platformu.
+                    </p>
+                </div>
+
+                <!-- 2. Sütun: Sayfa Linkleri -->
+                <div class="col-6 col-lg-3">
+                    <h3 class="h6 fw-bold mb-3">Sayfalar</h3>
+                    <!-- list-unstyled: Liste başındaki siyah noktaları kaldırır -->
+                    <ul class="list-unstyled d-flex flex-column gap-2 small mb-0">
+                        <li><a href="index.html" class="FooterLink">Ana Sayfa</a></li>
+                        <li><a href="hakkimizda.html" class="FooterLink">Hakkımızda</a></li>
+                        <li><a href="iletisim.html" class="FooterLink">İletişim</a></li>
+                        <li><a href="giris-kayit.html" class="FooterLink">Giriş Yap / Kayıt Ol</a></li>
+                    </ul>
+                </div>
+
+                <!-- 3. Sütun: Kategoriler -->
+                <div class="col-6 col-lg-4">
+                    <h3 class="h6 fw-bold mb-3">Kategoriler</h3>
+                    <ul class="list-unstyled d-flex flex-column gap-2 small mb-0">
+                        <li><a href="haber-detay.html" class="FooterLink">Yapay Zeka</a></li>
+                        <li><a href="haber-detay.html" class="FooterLink">Uzay ve Astronomi</a></li>
+                        <li><a href="haber-detay.html" class="FooterLink">Biyoteknoloji</a></li>
+                        <li><a href="haber-detay.html" class="FooterLink">Donanım ve Yazılım</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- En alt telif satırı -->
+            <div class="pt-3 d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 small">
+                <span>&copy; 2026 Tekno Bilim Dünyası. Tüm hakları saklıdır.</span>
+                <span>Kırklareli Üniversitesi Yazılım Mühendisliği</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- YUKARI ÇIK BUTONU (Aşağı inince JS ile görünür olur) -->
+    <button type="button" id="yukari_cik_butonu" class="btn rounded-circle shadow YukariCikBtn"
+        aria-label="Sayfanın en üstüne çık" title="Yukarı Çık">
+        <i class="bi bi-arrow-up fs-5"></i>
+    </button>
+
 </body>
+
 </html>
