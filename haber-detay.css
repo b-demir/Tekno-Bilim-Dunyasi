@@ -1,0 +1,18 @@
+/* Sitenin koyu renk paletini Bootstrap 5.3 değişkenlerine uygular */
+[data-bs-theme="dark"] {
+  --bs-body-bg: #090D16;
+  --bs-body-color: #E8EEF7;
+  --bs-secondary-color: #8A99B8;
+  --bs-tertiary-bg: #0D111E;
+  --bs-border-color: #283559;
+  --bs-link-color: #A3C6F7;
+}
+
+.card { background-color: #161E35; }
+
+.hd-avatar {
+  width: 44px;
+  height: 44px;
+  background-color: #283559;
+  color: #A3C6F7;
+}
