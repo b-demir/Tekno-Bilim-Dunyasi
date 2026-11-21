@@ -1,154 +1,163 @@
-/* ============================================================================
-   İLETİŞİM SAYFASINA ÖZEL STİLLER (css/iletisim.css)
-   Tüm renkler css/style.css içindeki ortak tema değişkenlerinden alınır.
-============================================================================ */
+/* İletişim sayfasına özel stiller. Renkler style.css içindeki tema değişkenlerinden alınır, böylece açık ve koyu mod uyumlu olur */
 
-/* Sayfa üstündeki Ana Sayfa geri dönüş linki */
+/* Sayfanın üstündeki konum yolunda yer alan "Ana Sayfa" geri dönüş linki */
 .IletisimGeriLink {
-    color: var(--metin-ana);
-    opacity: 0.75;
-    transition: opacity 0.2s ease;
+    color: var(--metin-ana); /* linkin varsayılan mavi rengini iptal edip tema metin rengini verir */
+    opacity: 0.75; /* normalde biraz soluk görünür */
+    transition: opacity 0.2s ease; /* üzerine gelince opaklığın yumuşakça değişmesini sağlar */
 }
 
+/* Fareyle "Ana Sayfa" linkinin üzerine gelince tam görünür yapıyoruz */
 .IletisimGeriLink:hover {
-    opacity: 1;
-    color: var(--metin-ana);
+    opacity: 1; /* saydamlığı tamamen kaldırıp yazıyı netleştirir */
+    color: var(--metin-ana); /* Bootstrap'in hover rengi devreye girmesin diye aynı rengi korur */
 }
 
-/* Form, İletişim Bilgileri ve SSS kartlarının ortak kutu stili */
+/* Form kartı, iletişim bilgileri kartı ve SSS kartının hepsi bu ortak kutu stilini kullanır */
 .IletisimKarti {
-    background-color: var(--header-alt);
-    color: var(--metin-ana);
-    border: 1px solid var(--kenarlik);
-    border-radius: 18px;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    background-color: var(--header-alt); /* kart arka planı temaya göre krem veya koyu gri olur */
+    color: var(--metin-ana); /* kart içindeki yazıların rengi */
+    border: 1px solid var(--kenarlik); /* kenarlara 1px ince çerçeve çeker */
+    border-radius: 18px; /* kart köşelerini 18px yuvarlatır */
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08); /* hafif bir alt gölgeyle kartı zeminden ayırır */
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* tema değişirken renkler aniden atlamasın diye geçiş ekler */
 }
 
+/* Koyu temada gölge daha net seçilsin diye opaklığı %25'e çıkardık */
 [data-bs-theme="dark"] .IletisimKarti {
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25); /* koyu arka planda daha koyu bir gölge oluşturur */
 }
 
-/* Ortalama yanıt süresi rozeti */
+/* "Mesaj Gönder" başlığının sağındaki "Ortalama yanıt: 24 saat" rozeti */
 .IletisimRozet {
-    background-color: var(--vurgu-renk);
-    color: #111418;
-    font-weight: 700;
-    font-size: 0.75rem;
+    background-color: var(--vurgu-renk); /* rozet zeminini sitenin vurgu rengi yapar */
+    color: #111418; /* yazı rengini koyu tutar, açık pembe ve turkuaz üstünde rahat okunur */
+    font-weight: 700; /* yazıyı kalınlaştırır */
+    font-size: 0.75rem; /* rozet içindeki yazıyı biraz küçültür */
 }
 
-/* Form girdi kutuları (input, select, textarea) */
+/* Formdaki ad soyad, e-posta, konu seçimi, şifre ve mesaj kutularının ortak stili */
 .IletisimInput {
-    background-color: var(--arka-plan);
-    color: var(--metin-ana);
-    border: 1px solid var(--kenarlik);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+    background-color: var(--arka-plan); /* kart zemininden ayırt edilsin diye sayfa arka plan tonunu verdik */
+    color: var(--metin-ana); /* yazılan metnin rengi */
+    border: 1px solid var(--kenarlik); /* kenarlık rengi */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease; /* tıklayınca veya tema değişince yumuşak geçiş yapar */
 }
 
+/* Inputların içinde duran örnek (placeholder) yazılar */
 .IletisimInput::placeholder {
-    color: var(--metin-ana);
-    opacity: 0.55;
+    color: var(--metin-ana); /* ana metin rengini alır */
+    opacity: 0.55; /* kullanıcı yazdığıyla karıştırmasın diye yarı saydam görünür */
 }
 
+/* Kullanıcı herhangi bir form alanına tıkladığında (:focus) görünümü ayarlıyoruz */
 .IletisimInput:focus {
-    background-color: var(--arka-plan);
-    color: var(--metin-ana);
-    border-color: var(--vurgu-renk);
-    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--vurgu-renk) 28%, transparent);
+    background-color: var(--arka-plan); /* Bootstrap odaklanınca beyaz yaptığı için tekrar tema rengini veriyoruz */
+    color: var(--metin-ana); /* yazı rengini korur */
+    border-color: var(--vurgu-renk); /* odaklanılan kutunun kenarlığını vurgu rengine boyar */
+    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--vurgu-renk) 28%, transparent); /* etrafına vurgu renginin %28 saydam haliyle yumuşak bir odak halkası ekler */
 }
 
-/* Şifre alanlarının sağındaki göz ikonu butonu */
+/* Şifre ve şifre tekrar kutularının yanındaki göz butonları */
 .IletisimGozBtn {
-    background-color: var(--arka-plan);
-    color: var(--metin-ana);
-    border: 1px solid var(--kenarlik);
+    background-color: var(--arka-plan); /* yanındaki inputla aynı arka plan rengi */
+    color: var(--metin-ana); /* göz ikonunun rengi */
+    border: 1px solid var(--kenarlik); /* uyumlu kenarlık */
 }
 
+/* Göz butonunun üzerine fareyle gelince rengini vurguluyoruz */
 .IletisimGozBtn:hover {
-    background-color: var(--vurgu-renk);
-    color: #111418;
-    border-color: var(--vurgu-renk);
+    background-color: var(--vurgu-renk); /* arka plan vurgu rengi olur */
+    color: #111418; /* ikon koyu renge döner */
+    border-color: var(--vurgu-renk); /* kenarlık da arka planla birleşir */
 }
 
+/* Şifre alanının altındaki küçük açıklama metni */
 .IletisimYardimMetin {
-    color: var(--metin-ana);
-    opacity: 0.7;
+    color: var(--metin-ana); /* Bootstrap'in kendi gri rengini tema rengiyle değiştirir */
+    opacity: 0.7; /* yardımcı metin olduğu için biraz soluk gösterir */
 }
 
-/* Radio ve Checkbox işaretlendiğinde vurgu rengini alsın */
+/* Talep önceliği radio butonları ve KVKK onay kutusu işaretlenince Bootstrap mavisi yerine vurgu rengini kullanıyoruz */
 .IletisimKarti .form-check-input:checked {
-    background-color: var(--vurgu-renk);
-    border-color: var(--vurgu-renk);
+    background-color: var(--vurgu-renk); /* seçili daire/kutu dolgu rengi */
+    border-color: var(--vurgu-renk); /* seçili kenarlık rengi */
 }
 
-/* Gönder ve Temizle butonları */
+/* Formun ana gönderme butonu ("Mesajı Gönder") */
 .IletisimGonderBtn {
-    background-color: var(--vurgu-renk);
-    color: #111418;
-    border: none;
-    border-radius: 10px;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    background-color: var(--vurgu-renk); /* dikkat çekmesi için vurgu rengi */
+    color: #111418; /* koyu yazı rengi */
+    border: none; /* kenarlığı kaldırır */
+    border-radius: 10px; /* köşeleri 10px yuvarlatır */
+    transition: background-color 0.2s ease, transform 0.2s ease; /* renk ve yukarı kalkma animasyonu için geçiş */
 }
 
+/* Gönder butonunun üzerine gelince koyulaşıp hafifçe yukarı çıkar */
 .IletisimGonderBtn:hover {
-    background-color: var(--vurgu-hover);
-    color: #111418;
-    transform: translateY(-2px);
+    background-color: var(--vurgu-hover); /* vurgunun koyu tonuna geçer */
+    color: #111418; /* yazı rengini sabit tutar */
+    transform: translateY(-2px); /* butonu 2 piksel yukarı oynatır */
 }
 
+/* Formdaki verileri sıfırlayan "Temizle" butonu */
 .IletisimTemizleBtn {
-    background-color: transparent;
-    color: var(--metin-ana);
-    border: 1px solid var(--kenarlik);
-    border-radius: 10px;
-    transition: background-color 0.2s ease;
+    background-color: transparent; /* ikincil buton olduğu için arka planı şeffaf bıraktık */
+    color: var(--metin-ana); /* yazı rengi ana metin rengi */
+    border: 1px solid var(--kenarlik); /* sınırları belli etmek için ince kenarlık */
+    border-radius: 10px; /* gönder butonuyla aynı köşe yuvarlaklığı */
+    transition: background-color 0.2s ease; /* hover rengi yumuşak değişsin */
 }
 
+/* "Temizle" butonunun üzerine gelince hafif dolgu verir */
 .IletisimTemizleBtn:hover {
-    background-color: var(--ikon-buton-bg);
-    color: var(--metin-ana);
+    background-color: var(--ikon-buton-bg); /* yarı saydam hafif bir arka plan ekler */
+    color: var(--metin-ana); /* yazı rengi değişmez */
 }
 
-/* Sağ sütundaki yuvarlak iletişim ikonları */
+/* Sağ sütundaki adres, e-posta ve çalışma saatlerinin başındaki yuvarlak ikon kutuları */
 .IletisimBilgiIkon {
-    width: 38px;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--vurgu-renk);
-    color: #111418;
+    width: 38px; /* genişlik 38px */
+    height: 38px; /* yükseklik 38px, HTML'deki rounded-circle ile tam daire olur */
+    display: flex; /* içindeki ikonu rahat ortalamak için flex yapıyoruz */
+    align-items: center; /* ikonu dikey ortalar */
+    justify-content: center; /* ikonu yatay ortalar */
+    background-color: var(--vurgu-renk); /* dairenin zemin rengi */
+    color: #111418; /* içindeki ikonun koyu rengi */
 }
 
-/* Sıkça Sorulan Sorular (Accordion) tema uyumu */
+/* Sıkça Sorulan Sorular (Bootstrap Accordion) bölümünü kendi temamıza uyarlıyoruz */
 .IletisimAccordion .accordion-item {
-    border-color: var(--kenarlik);
+    border-color: var(--kenarlik); /* soruların arasındaki çizgi rengini temaya uydurur */
 }
 
+/* Her sorunun tıklanabilen başlık butonu */
 .IletisimAccordion .accordion-button {
-    color: var(--metin-ana);
-    box-shadow: none;
-    padding-left: 0;
-    padding-right: 0;
+    color: var(--metin-ana); /* soru metninin rengi */
+    box-shadow: none; /* tıklanınca Bootstrap'in eklediği mavi odak gölgesini kapatır */
+    padding-left: 0; /* sol boşluğu sıfırlayıp kart başlığıyla aynı hizaya getirir */
+    padding-right: 0; /* sağ boşluğu sıfırlayıp oku kenara yaslar */
 }
 
+/* Soru açıkken (.collapsed sınıfı yoksa) rengin maviye dönmesini engelliyoruz */
 .IletisimAccordion .accordion-button:not(.collapsed) {
-    color: var(--metin-ana);
+    color: var(--metin-ana); /* açıkken de ana metin renginde kalır */
 }
 
-/* Koyu temada accordion açma oku beyaz görünsün */
+/* Koyu modda accordion ok ikonu siyah kalıp görünmez olmasın diye rengi ters çeviriyoruz */
 [data-bs-theme="dark"] .IletisimAccordion .accordion-button::after {
-    filter: invert(1);
+    filter: invert(1); /* koyu ok ikonunu beyaz yapar */
 }
 
-/* Toast bildirimi tema uyumu */
+/* Form gönderilince sağ altta çıkan Bootstrap toast bildirimi */
 .IletisimToast {
-    background-color: var(--header-alt);
-    color: var(--metin-ana);
-    border: 1px solid var(--kenarlik);
-    border-left: 4px solid var(--vurgu-renk);
+    background-color: var(--header-alt); /* kartlarla aynı zemin rengi */
+    color: var(--metin-ana); /* yazı rengi */
+    border: 1px solid var(--kenarlik); /* çerçeve rengi */
+    border-left: 4px solid var(--vurgu-renk); /* sol kenara kalın vurgu şeridi ekledik ki bildirim hemen göze çarpsın */
 }
 
+/* Koyu modda toast üzerindeki kapatma (X) ikonunu beyaza çeviriyoruz */
 [data-bs-theme="dark"] .IletisimToast .btn-close {
-    filter: invert(1);
+    filter: invert(1); /* siyah ikonu ters çevirip beyaz yapar */
 }

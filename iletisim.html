@@ -1,62 +1,68 @@
 <!DOCTYPE html>
-<!-- data-bs-theme: açık ve koyu modu ayarlar -->
+<!-- Ziyaretçilerin mesaj gönderebildiği ve iletişim bilgilerini gördüğü iletişim sayfası. Özel stiller css/iletisim.css, form doğrulaması js/iletisim.js içindedir -->
+<!-- data-bs-theme="light": Bootstrap 5 tema sistemi için başlangıçta açık modu seçer -->
 <html lang="tr" data-bs-theme="light">
 
 <head>
+    <!-- Türkçe karakterler düzgün görünsün diye UTF-8 tanımlıyoruz -->
     <meta charset="UTF-8">
     <script>
-        // Bu kod o anki sayfamız için linklerin ana dizinde aranmasını sağlar.
-        const PROJE_KLASORU = "Tekno-Bilim-Dunyasi"; // Proje Klasörü
+        // Sayfa alt klasörde açılsa bile css, js ve html linklerinin hep proje kök klasöründen aranması için <base> etiketi yazıyoruz
+        const PROJE_KLASORU = "Tekno-Bilim-Dunyasi"; // proje kök klasörünün adı
 
-        const tam_yol = window.location.href; // Dosyanın tam yolu
+        const tam_yol = window.location.href; // tarayıcıdaki tam URL
 
-        // Proje klasörünün başladığı kısım yolun içinde değilse -1 alır
+        // Adres içinde proje klasörünün adı geçiyor mu kontrol ediyoruz, bulamazsa -1 döner
         const klasor_baslangici = tam_yol.indexOf(PROJE_KLASORU);
 
-        // Proje klasörünün başladığı kısım yolun içindeyse dizini bizim ana dizinimize ayarlar
+        // Klasör adı adreste varsa ana dizin yolunu çıkarıp <base href="..."> olarak sayfaya ekliyoruz
         if (klasor_baslangici !== -1) {
             const ana_dizin = tam_yol.substring(0, klasor_baslangici + PROJE_KLASORU.length) + "/";
             document.write('<base href="' + ana_dizin + '">');
         }
     </script>
 
+    <!-- Mobil cihazlarda sayfanın ekran genişliğine göre düzgün ölçeklenmesi için viewport ayarı -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Arama motorları için sayfa açıklaması -->
     <meta name="description" content="Tekno Bilim Dünyası iletişim formu ve destek bilgileri">
 
-    <!-- Bootstrap CSS'i -->
+    <!-- Bootstrap 5.3.3 CSS ve Bootstrap Icons 1.11.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         crossorigin="anonymous">
 
-    <!-- İkonlar için Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Ortak site stilleri ve sadece iletişim sayfasına özel stiller -->
+    <!-- Önce ortak site stilleri, sonra bu sayfaya özel iletisim.css yüklenir -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/iletisim.css">
 
-    <!-- Bootstrap JS'i -->
+    <!-- Bootstrap JS ve kendi scriptlerimiz (defer ile HTML okunduktan sonra çalıştırılır) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous" defer></script>
 
-    <!-- Ortak JS ve iletişim sayfası doğrulama JS'i -->
+    <!-- main.js tema, arama ve yukarı çık butonunu; iletisim.js ise form doğrulamasını yönetir -->
     <script src="js/main.js" defer></script>
     <script src="js/iletisim.js" defer></script>
 
+    <!-- Tarayıcı sekme başlığı -->
     <title>İletişim | Tekno Bilim Dünyası</title>
 </head>
 
+<!-- d-flex flex-column min-vh-100: sayfa içeriği kısa olsa da footer'ı en altta tutar -->
 <body class="d-flex flex-column min-vh-100">
 
-    <!-- Ortak header alanı (index.html ile birebir uyumlu) -->
+    <!-- Tüm sayfalarda ortak olan üst menü alanı; sticky-top ile aşağı kaydırırken üstte sabit kalır -->
     <header class="sticky-top SiteHeader">
 
-        <!-- Büyük ekran (d-none d-lg-block) -->
+        <!-- Masaüstü menü bloğu: mobilde d-none ile gizli, 992px üstünde d-lg-block ile açık -->
         <div class="d-none d-lg-block">
 
-            <!-- Üst Çubuk -->
+            <!-- En üstteki arama, tema ve giriş yap çubuğu (.UstCubuk stili style.css'den gelir) -->
             <div class="UstCubuk py-2">
                 <div class="container d-flex justify-content-end align-items-center gap-2">
 
+                    <!-- Masaüstü arama formu: js/main.js büyüteç butonuna tıklanınca inputa .Acik sınıfını ekler -->
                     <form id="masaustu_arama_formu" class="d-flex align-items-center" role="search">
                         <input type="search" id="masaustu_arama_input"
                             class="form-control form-control-sm rounded-pill AramaKutusu"
@@ -69,11 +75,13 @@
                         </button>
                     </form>
 
+                    <!-- Açık / koyu mod geçiş butonu (TemaDegistirBtn ve TemaIkonu js/main.js ile yönetilir) -->
                     <button type="button" class="btn btn-sm rounded-circle YuvarlakIkonButon TemaDegistirBtn"
                         aria-label="Temayı değiştir" title="Açık / Koyu Mod">
                         <i class="bi bi-moon-stars-fill TemaIkonu"></i>
                     </button>
 
+                    <!-- Giriş sayfasına yönlendiren buton -->
                     <a href="giris.html" class="btn btn-sm rounded-pill px-3 fw-semibold GirisButonu">
                         GİRİŞ YAP
                     </a>
@@ -81,7 +89,7 @@
                 </div>
             </div>
 
-            <!-- 2. BÖLÜM: Ana Navbar -->
+            <!-- Ana menü çubuğu: solda marka adı, sağda kategoriler ve sayfa bağlantıları -->
             <nav class="navbar navbar-expand-lg py-3 AnaNavbar" aria-label="Ana Menü">
                 <div class="container">
                     <a class="navbar-brand fw-bold d-flex align-items-center gap-2 MarkaLogo" href="index.html">
@@ -102,6 +110,7 @@
                             <a class="nav-link fw-semibold" href="haber-detay.html">Donanım</a>
                         </li>
 
+                        <!-- Kategorilerle sayfa linkleri arasındaki "|" ayracı -->
                         <li class="nav-item" aria-hidden="true">
                             <span class="MenuAyraci">|</span>
                         </li>
@@ -112,6 +121,7 @@
                         <li class="nav-item">
                             <a class="nav-link fw-semibold" href="hakkimizda.html">Hakkımızda</a>
                         </li>
+                        <!-- İletişim sayfasında olduğumuz için active sınıfı ve aria-current="page" burada -->
                         <li class="nav-item">
                             <a class="nav-link active fw-semibold" aria-current="page" href="iletisim.html">İletişim</a>
                         </li>
@@ -121,14 +131,16 @@
 
         </div>
 
-        <!-- Küçük ekran (d-lg-none) -->
+        <!-- Mobil üst çubuk (d-lg-none ile sadece 992px altı ekranlarda görünür) -->
         <div class="d-lg-none MobilHeader py-2">
             <div class="container d-flex justify-content-between align-items-center">
 
+                <!-- Mobilde kısa TBD logosunu gösteriyoruz -->
                 <a class="navbar-brand fw-bold d-flex align-items-center gap-2 MarkaLogo mb-0" href="index.html">
                     <span class="fs-5">TBD</span>
                 </a>
 
+                <!-- Sağdaki arama, tema ve menü açma butonları -->
                 <div class="d-flex align-items-center gap-2">
                     <button type="button" class="btn rounded-circle YuvarlakIkonButon"
                         data-bs-toggle="offcanvas" data-bs-target="#mobil_menu_offcanvas"
@@ -151,7 +163,7 @@
             </div>
         </div>
 
-        <!-- Mobil Açılır Menü (Bootstrap Offcanvas) -->
+        <!-- Mobilde sağdan kayarak açılan Bootstrap Offcanvas menüsü -->
         <div class="offcanvas offcanvas-end MobilOffcanvas" tabindex="-1" id="mobil_menu_offcanvas"
             aria-labelledby="mobil_menu_baslik">
 
@@ -195,6 +207,7 @@
                     </ul>
                 </nav>
 
+                <!-- Mobil menü en altındaki arama formu -->
                 <div class="mt-auto p-3 border-top OffcanvasKenarlik">
                     <form class="input-group" role="search">
                         <input type="search" class="form-control border-0 py-2" placeholder="Ara ..." aria-label="Ara">
@@ -205,12 +218,13 @@
         </div>
     </header>
 
-    <!-- ANA İÇERİK -->
+    <!-- Sayfa ana içeriği: flex-grow-1 boşluğu doldurur, py-4 py-lg-5 dikey iç boşluk verir -->
     <main class="flex-grow-1 py-4 py-lg-5">
         <div class="container">
 
-            <!-- Sayfa Üst Başlığı ve Konum Yolu (Breadcrumb) -->
+            <!-- Üst bölüm: sayfanın konum yolu (breadcrumb) ve sayfa ana başlığı -->
             <section class="mb-4">
+                <!-- Konum yolu linkleri; IletisimGeriLink sınıfı iletisim.css'den gelir -->
                 <nav aria-label="Sayfa konumu" class="mb-2 small">
                     <a href="index.html" class="text-decoration-none IletisimGeriLink">
                         <i class="bi bi-house-door-fill me-1"></i>Ana Sayfa
@@ -219,6 +233,7 @@
                     <span class="fw-semibold">İletişim</span>
                 </nav>
 
+                <!-- Altı çizgili bölüm başlığı kutusu (BolumBaslikKutusu style.css'den gelir) -->
                 <div class="BolumBaslikKutusu pb-2">
                     <h1 class="h2 fw-bold mb-1">Bizimle İletişime Geçin</h1>
                     <p class="small mb-0 opacity-75">
@@ -227,31 +242,34 @@
                 </div>
             </section>
 
-            <!-- 2 Sütunlu Grid: Solda İletişim Formu, Sağda Bilgiler + SSS -->
+            <!-- 2 sütunlu ana düzen: masaüstünde solda 8 birim form, sağda 4 birim iletişim bilgileri ve SSS -->
             <div class="row g-4">
 
-                <!-- SOL SÜTUN: İLETİŞİM FORMU (7 farklı girdi türü + JS doğrulama) -->
+                <!-- Sol sütun: 7 farklı input türü içeren iletişim formu (col-lg-8) -->
                 <section class="col-lg-8" aria-labelledby="form_baslik">
+                    <!-- .IletisimKarti kart zeminini, yuvarlak köşeyi ve gölgeyi verir (iletisim.css) -->
                     <div class="IletisimKarti p-4 p-md-5">
                         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
                             <h2 id="form_baslik" class="h4 fw-bold mb-0">
                                 <i class="bi bi-envelope-paper-fill me-2"></i>Mesaj Gönder
                             </h2>
+                            <!-- Ortalama yanıt süresini gösteren vurgu renkli rozet (.IletisimRozet iletisim.css) -->
                             <span class="badge rounded-pill px-3 py-2 IletisimRozet">Ortalama yanıt: 24 saat</span>
                         </div>
 
-                        <!-- Form gönderim sonrası durum mesajı (Bootstrap Alert - JS ile görünür olur) -->
+                        <!-- Form gönderildikten sonra başarı veya hata mesajının gösterildiği Bootstrap Alert kutusu (başlangıçta d-none ile gizli, js/iletisim.js açar) -->
                         <div id="iletisim_form_uyari" class="alert d-none mb-4" role="alert"></div>
 
-                        <!-- novalidate: Tarayıcının varsayılan balonlarını kapatır, kendi JS doğrulamamızı çalıştırır -->
+                        <!-- novalidate tarayıcının varsayılan hata balonlarını kapatır; tüm kontrolleri js/iletisim.js içindeki IletisimFormYoneticisi yapar -->
                         <form id="iletisim_formu" novalidate>
                             <div class="row g-3">
 
-                                <!-- 1. GİRDİ TÜRÜ: text (Ad Soyad) -->
+                                <!-- 1. girdi türü: text (Ad Soyad alanı, en az 3 karakter kontrolü var) -->
                                 <div class="col-md-6">
                                     <label for="iletisim_ad_soyad" class="form-label fw-semibold small">
                                         Ad Soyad <span class="text-danger">*</span>
                                     </label>
+                                    <!-- .IletisimInput arka planı ve odak rengini temaya uyarlar; .invalid-feedback hatalı durumda görünür olur -->
                                     <input type="text" id="iletisim_ad_soyad" name="ad_soyad"
                                         class="form-control IletisimInput" placeholder="Örn: Ahmet Yılmaz"
                                         autocomplete="name" required>
@@ -260,7 +278,7 @@
                                     </div>
                                 </div>
 
-                                <!-- 2. GİRDİ TÜRÜ: email (E-posta Adresi) -->
+                                <!-- 2. girdi türü: email (E-posta adresi, regex ile format kontrolü yapılır) -->
                                 <div class="col-md-6">
                                     <label for="iletisim_eposta" class="form-label fw-semibold small">
                                         E-posta Adresi <span class="text-danger">*</span>
@@ -273,7 +291,7 @@
                                     </div>
                                 </div>
 
-                                <!-- 3. GİRDİ TÜRÜ: select (Konu Seçimi) -->
+                                <!-- 3. girdi türü: select (Mesaj konusu açılır listesi) -->
                                 <div class="col-md-6">
                                     <label for="iletisim_konu" class="form-label fw-semibold small">
                                         Konu <span class="text-danger">*</span>
@@ -291,7 +309,7 @@
                                     </div>
                                 </div>
 
-                                <!-- 4. GİRDİ TÜRÜ: radio (Öncelik Durumu) -->
+                                <!-- 4. girdi türü: radio (Talep önceliği seçimi; aynı name="oncelik" ile tek seçim yapılır) -->
                                 <div class="col-md-6">
                                     <span class="form-label fw-semibold small d-block">
                                         Talep Önceliği <span class="text-danger">*</span>
@@ -315,16 +333,17 @@
                                     </div>
                                 </div>
 
-                                <!-- 5. GİRDİ TÜRÜ: password (Talep Takip Şifresi + Şifre Tekrarı) -->
-                                <!-- Ödev yönergesindeki şifre uzunluğu ve şifre tekrarı doğrulama şartını karşılar -->
+                                <!-- 5. girdi türü: password (Talep takip şifresi ve şifre tekrar doğrulaması) -->
                                 <div class="col-md-6">
                                     <label for="iletisim_sifre" class="form-label fw-semibold small">
                                         Talep Takip Şifresi <span class="text-danger">*</span>
                                     </label>
+                                    <!-- input-group has-validation: göz butonu ve doğrulama hata mesajını beraber düzgün hizalar -->
                                     <div class="input-group has-validation">
                                         <input type="password" id="iletisim_sifre" name="takip_sifre"
                                             class="form-control IletisimInput" placeholder="En az 6 karakter"
                                             minlength="6" required>
+                                        <!-- Şifre görünürlüğünü açıp kapatan göz butonu (#sifre_goster_btn js/iletisim.js tarafından dinlenir) -->
                                         <button type="button" id="sifre_goster_btn"
                                             class="btn IletisimGozBtn" aria-label="Şifreyi göster veya gizle">
                                             <i class="bi bi-eye"></i>
@@ -333,11 +352,13 @@
                                             Şifre en az 6 karakter olmalıdır.
                                         </div>
                                     </div>
+                                    <!-- Kutunun altındaki kısa yardım metni (.IletisimYardimMetin iletisim.css) -->
                                     <div class="form-text small IletisimYardimMetin">
                                         Talebinizin durumunu sorgulamak için belirleyin.
                                     </div>
                                 </div>
 
+                                <!-- Şifre tekrar kutusu: ilk şifreyle eşleşip eşleşmediği js/iletisim.js ile kontrol edilir -->
                                 <div class="col-md-6">
                                     <label for="iletisim_sifre_tekrar" class="form-label fw-semibold small">
                                         Takip Şifresi (Tekrar) <span class="text-danger">*</span>
@@ -356,13 +377,13 @@
                                     </div>
                                 </div>
 
-                                <!-- 6. GİRDİ TÜRÜ: textarea (Mesaj Alanı + Canlı Karakter Sayacı) -->
+                                <!-- 6. girdi türü: textarea (Mesaj kutusu ve sağ üstünde canlı karakter sayacı) -->
                                 <div class="col-12">
                                     <div class="d-flex justify-content-between align-items-center mb-1">
                                         <label for="iletisim_mesaj" class="form-label fw-semibold small mb-0">
                                             Mesajınız <span class="text-danger">*</span>
                                         </label>
-                                        <!-- JS ile anlık güncellenen karakter sayacı -->
+                                        <!-- Kullanıcı yazdıkça js/iletisim.js tarafından güncellenen karakter sayacı -->
                                         <small id="mesaj_karakter_sayaci" class="opacity-75">0 / 500</small>
                                     </div>
                                     <textarea id="iletisim_mesaj" name="mesaj" rows="5" maxlength="500"
@@ -374,7 +395,7 @@
                                     </div>
                                 </div>
 
-                                <!-- 7. GİRDİ TÜRÜ: checkbox (KVKK / İletişim Onayı) -->
+                                <!-- 7. girdi türü: checkbox (İletişim / KVKK onay kutusu) -->
                                 <div class="col-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="iletisim_onay" required>
@@ -387,11 +408,13 @@
                                     </div>
                                 </div>
 
-                                <!-- Form Butonları -->
+                                <!-- Form aksiyon butonları: gönderme ve formu temizleme -->
                                 <div class="col-12 d-flex flex-wrap gap-2 pt-2">
+                                    <!-- Ana gönder butonu (.IletisimGonderBtn iletisim.css) -->
                                     <button type="submit" class="btn px-4 py-2 fw-bold IletisimGonderBtn">
                                         <i class="bi bi-send-fill me-2"></i>Mesajı Gönder
                                     </button>
+                                    <!-- Reset butonu: alanları boşaltır, js/iletisim.js doğrulama renklerini ve sayacı da sıfırlar -->
                                     <button type="reset" id="iletisim_temizle_btn" class="btn px-4 py-2 fw-semibold IletisimTemizleBtn">
                                         <i class="bi bi-arrow-counterclockwise me-1"></i>Temizle
                                     </button>
@@ -402,14 +425,15 @@
                     </div>
                 </section>
 
-                <!-- SAĞ SÜTUN: İLETİŞİM BİLGİLERİ VE SIKÇA SORULAN SORULAR -->
+                <!-- Sağ sütun: iletişim bilgileri kartı ve sıkça sorulan sorular (col-lg-4) -->
                 <aside class="col-lg-4 d-flex flex-column gap-4">
 
-                    <!-- İletişim Bilgileri Kartı -->
+                    <!-- Adres, e-posta ve çalışma saatlerini gösteren bilgi kartı -->
                     <div class="IletisimKarti p-4">
                         <h2 class="h5 fw-bold mb-3">İletişim Bilgileri</h2>
 
                         <ul class="list-unstyled d-flex flex-column gap-3 mb-0 small">
+                            <!-- Adres satırı: IletisimBilgiIkon 38x38 yuvarlak ikon kutusunu verir, flex-shrink-0 daralmasını engeller -->
                             <li class="d-flex align-items-start gap-3">
                                 <span class="IletisimBilgiIkon rounded-circle flex-shrink-0">
                                     <i class="bi bi-geo-alt-fill"></i>
@@ -420,6 +444,7 @@
                                 </div>
                             </li>
 
+                            <!-- E-posta satırı -->
                             <li class="d-flex align-items-start gap-3">
                                 <span class="IletisimBilgiIkon rounded-circle flex-shrink-0">
                                     <i class="bi bi-envelope-fill"></i>
@@ -432,6 +457,7 @@
                                 </div>
                             </li>
 
+                            <!-- Çalışma saatleri satırı -->
                             <li class="d-flex align-items-start gap-3">
                                 <span class="IletisimBilgiIkon rounded-circle flex-shrink-0">
                                     <i class="bi bi-clock-fill"></i>
@@ -444,12 +470,14 @@
                         </ul>
                     </div>
 
-                    <!-- Sıkça Sorulan Sorular (Bootstrap Accordion bileşeni) -->
+                    <!-- Sıkça Sorulan Sorular kartı (Bootstrap Accordion bileşeni, .IletisimAccordion tema renklerini verir) -->
                     <div class="IletisimKarti p-4">
                         <h2 class="h5 fw-bold mb-3">Sıkça Sorulan Sorular</h2>
 
+                        <!-- accordion-flush kenar çizgilerini sadeleştirir, data-bs-parent bir soru açılınca diğerini kapatır -->
                         <div class="accordion accordion-flush IletisimAccordion" id="iletisim_sss_accordion">
 
+                            <!-- 1. SSS sorusu -->
                             <div class="accordion-item bg-transparent">
                                 <h3 class="accordion-header">
                                     <button class="accordion-button collapsed bg-transparent fw-semibold small" type="button"
@@ -465,6 +493,7 @@
                                 </div>
                             </div>
 
+                            <!-- 2. SSS sorusu -->
                             <div class="accordion-item bg-transparent">
                                 <h3 class="accordion-header">
                                     <button class="accordion-button collapsed bg-transparent fw-semibold small" type="button"
@@ -480,6 +509,7 @@
                                 </div>
                             </div>
 
+                            <!-- 3. SSS sorusu -->
                             <div class="accordion-item bg-transparent">
                                 <h3 class="accordion-header">
                                     <button class="accordion-button collapsed bg-transparent fw-semibold small" type="button"
@@ -504,11 +534,12 @@
         </div>
     </main>
 
-    <!-- Ortak Footer -->
+    <!-- Tüm sayfalarda ortak olan footer (alt bilgi) alanı -->
     <footer class="SiteFooter pt-5 pb-4 mt-4">
         <div class="container">
             <div class="row g-4 pb-4 border-bottom FooterKenarlik">
 
+                <!-- 1. sütun: logo ve açıklama -->
                 <div class="col-lg-5">
                     <a href="index.html" class="d-inline-flex align-items-center gap-2 text-decoration-none fw-bold fs-5 mb-3 MarkaLogo">
                         <span>Tekno Bilim Dünyası</span>
@@ -518,6 +549,7 @@
                     </p>
                 </div>
 
+                <!-- 2. sütun: sayfa bağlantıları -->
                 <div class="col-6 col-lg-3">
                     <h3 class="h6 fw-bold mb-3">Sayfalar</h3>
                     <ul class="list-unstyled d-flex flex-column gap-2 small mb-0">
@@ -528,6 +560,7 @@
                     </ul>
                 </div>
 
+                <!-- 3. sütun: kategori bağlantıları -->
                 <div class="col-6 col-lg-4">
                     <h3 class="h6 fw-bold mb-3">Kategoriler</h3>
                     <ul class="list-unstyled d-flex flex-column gap-2 small mb-0">
@@ -540,6 +573,7 @@
 
             </div>
 
+            <!-- Telif hakkı ve üniversite bilgisi satırı -->
             <div class="pt-3 d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 small">
                 <span>&copy; 2026 Tekno Bilim Dünyası. Tüm hakları saklıdır.</span>
                 <span>Kırklareli Üniversitesi Yazılım Mühendisliği</span>
@@ -547,8 +581,9 @@
         </div>
     </footer>
 
-    <!-- Bootstrap Toast Bildirimi (Form gönderildiğinde sağ altta görünür) -->
+    <!-- Form başarıyla gönderilince js/iletisim.js tarafından sağ altta gösterilen Bootstrap Toast bildirimi -->
     <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1090;">
+        <!-- .IletisimToast temaya göre arka planı ve sol vurgu şeridini verir -->
         <div id="iletisim_bildirim_toast" class="toast IletisimToast" role="status" aria-live="polite" aria-atomic="true">
             <div class="d-flex align-items-center">
                 <div id="iletisim_toast_metin" class="toast-body fw-semibold small"></div>
@@ -557,7 +592,7 @@
         </div>
     </div>
 
-    <!-- Yukarı Çık Butonu -->
+    <!-- Sayfada 300px aşağı inince js/main.js tarafından gösterilen yukarı çık butonu -->
     <button type="button" id="yukari_cik_butonu" class="btn rounded-circle shadow YukariCikBtn"
         aria-label="Sayfanın en üstüne çık" title="Yukarı Çık">
         <i class="bi bi-arrow-up fs-5"></i>

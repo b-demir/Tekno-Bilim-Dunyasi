@@ -1,7 +1,9 @@
-/* Haber detay sayfasına özel minimum CSS (açık ve koyu tema uyumlu) */
+/* Haber detay sayfasına özel stiller, renkleri style.css içindeki tema değişkenlerinden alıyoruz */
+
+/* haber-detay.html sayfasında yazarın baş harflerini gösteren yuvarlak avatar kutusu */
 .hd-avatar {
-  width: 44px;
-  height: 44px;
-  background-color: var(--vurgu-renk);
-  color: var(--metin-ana);
+  width: 44px; /* kutunun genişliğini sabit 44 piksel yapıyoruz */
+  height: 44px; /* yüksekliği de 44px veriyoruz ki HTML'deki rounded-circle sınıfıyla tam daire olsun */
+  background-color: var(--vurgu-renk); /* arka plan rengini temaya göre değişen vurgu renginden alır */
+  color: var(--metin-ana); /* baş harflerin rengini ana metin rengi yapar, açık ve koyu modda rahat okunur */
 }

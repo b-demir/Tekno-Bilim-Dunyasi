@@ -1,210 +1,247 @@
+/* Bu dosya hakkımızda sayfasının önceki saf CSS ve uzay temalı tasarımı için yazılmıştı. Şu an hakkimizda.html ortak style.css dosyasını kullanıyor ama bu sınıfları ve JS'siz tema mantığını referans olarak tutuyoruz */
+
+/* Kök html elementinde varsayılan koyu uzay teması için renk değişkenlerini tanımlıyoruz */
 :root {
-    --uzay-siyahi: #090D16;
-    --golgeli: #0D111E;
-    --gece-mavisi: #161E35;
-    --isik-alan: #283559;
-    --buz-mavisi: #A3C6F7;
-    --gok-mavisi: #4A77B5;
-    --yildiz-beyazi: #E8EEF7;
-    --kehribar: #F2C97D;
-    --gumusi-gri: #8A99B8;
+    --uzay-siyahi: #090D16; /* sayfanın en arka zemin rengi */
+    --golgeli: #0D111E; /* kart ve kutuların arka plan rengi */
+    --gece-mavisi: #161E35; /* açılır menü ve paneller gibi öne çıkan alanların rengi */
+    --isik-alan: #283559; /* kenarlıklar ve hafif vurgulu kutular için lacivert ton */
+    --buz-mavisi: #A3C6F7; /* linklerin üzerine gelince çıkan açık mavi vurgu */
+    --gok-mavisi: #4A77B5; /* buton kenarlıkları ve hover zeminleri için mavi ton */
+    --yildiz-beyazi: #E8EEF7; /* ana yazıların okunaklı beyazımsı rengi */
+    --kehribar: #F2C97D; /* güneş/ay ikonu ve alt çizgi vurgusu için sarı ton */
+    --gumusi-gri: #8A99B8; /* tarih veya footer linki gibi ikincil yazılar için gri ton */
 }
 
+/* Sayfa içinde #tema-degistir checkbox'ı işaretliyse :has() seçicisi ile JS kullanmadan değişkenleri açık temaya çeviriyoruz */
 body:has(#tema-degistir:checked) {
-    --uzay-siyahi: #E8EEF7;
-    --golgeli: #FFFFFF;
-    --gece-mavisi: #F8FAFC;
-    --isik-alan: #CBD5E1;
-    --buz-mavisi: #4A77B5;
-    --gok-mavisi: #283559;
-    --yildiz-beyazi: #090D16;
-    --kehribar: #D99B26;
-    --gumusi-gri: #475569;
+    --uzay-siyahi: #E8EEF7; /* açık modda arka plan açık gri-mavi olur */
+    --golgeli: #FFFFFF; /* kart zeminleri beyaza döner */
+    --gece-mavisi: #F8FAFC; /* açılır paneller çok açık gri olur */
+    --isik-alan: #CBD5E1; /* kenarlıklar açık gri tonuna geçer */
+    --buz-mavisi: #4A77B5; /* beyaz üstünde okunması için maviyi koyulaştırıyoruz */
+    --gok-mavisi: #283559; /* koyu lacivert ton */
+    --yildiz-beyazi: #090D16; /* ana yazılar açık zeminde koyu renge döner */
+    --kehribar: #D99B26; /* sarı vurguyu biraz koyulaştırıyoruz */
+    --gumusi-gri: #475569; /* ikincil yazılar koyu gri olur */
 }
 
+/* Sayfa içi çapa (#) linklerine tıklayınca ekran aniden atlamak yerine yumuşak kaydırılsın */
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth; /* kaydırma hareketini animasyonlu yapar */
 }
 
+/* Sayfanın genel gövde stili */
 body {
-    background-color: var(--uzay-siyahi);
-    color: var(--yildiz-beyazi);
-    font-size: 0.94rem;
-    transition: background-color 0.25s, color 0.25s;
+    background-color: var(--uzay-siyahi); /* zemin rengini tema değişkeninden alır */
+    color: var(--yildiz-beyazi); /* tüm sayfanın varsayılan yazı rengi */
+    font-size: 0.94rem; /* temel yazı boyutunu biraz daha kompakt tuttuk */
+    transition: background-color 0.25s, color 0.25s; /* tema değişirken renklerin 0.25 saniyede yumuşakça geçmesini sağlar */
 }
 
+/* İçeriğin geniş ekranlarda aşırı yayılmaması için maksimum genişlik sınırı */
 .sayfa-genislik {
-    max-width: 1140px;
+    max-width: 1140px; /* kutu genişliği en fazla 1140px olabilir */
 }
 
+/* Kart ve ana bloklar için arka plan yardımcı sınıfı */
 .bg-golge {
-    background-color: var(--golgeli);
-    transition: background-color 0.25s;
+    background-color: var(--golgeli); /* gölgeli tonunu uygular */
+    transition: background-color 0.25s; /* tema değişiminde yumuşak geçiş verir */
 }
 
+/* Yükseltilmiş paneller için gece mavisi arka plan yardımcı sınıfı */
 .bg-gece {
-    background-color: var(--gece-mavisi);
-    transition: background-color 0.25s;
+    background-color: var(--gece-mavisi); /* gece mavisi tonunu uygular */
+    transition: background-color 0.25s; /* renk geçişini yumuşatır */
 }
 
+/* Vurgulu küçük alanlar için yardımcı arka plan sınıfı */
 .bg-isik {
-    background-color: var(--isik-alan);
-    transition: background-color 0.25s;
+    background-color: var(--isik-alan); /* ışık alan rengini uygular */
+    transition: background-color 0.25s; /* renk geçişini yumuşatır */
 }
 
+/* Bootstrap border sınıflarının rengini kendi tema kenarlığımızla ezmek için */
 .border-isik {
-    border-color: var(--isik-alan) !important;
+    border-color: var(--isik-alan) !important; /* !important ile Bootstrap'ın varsayılan kenarlık rengini eziyoruz */
 }
 
+/* Ana yazı rengini tek sınıf ile vermek için yardımcı sınıflar */
 .text-yildiz {
-    color: var(--yildiz-beyazi);
+    color: var(--yildiz-beyazi); /* ana metin rengini uygular */
 }
 
+/* İkincil/soluk yazılar için gümüş gri yazı sınıfı */
 .text-gumus {
-    color: var(--gumusi-gri);
+    color: var(--gumusi-gri); /* gümüş gri rengini uygular */
 }
 
+/* Mavi vurgu gerektiren başlık veya metinler için */
 .text-buz {
-    color: var(--buz-mavisi);
+    color: var(--buz-mavisi); /* buz mavisi rengini uygular */
 }
 
+/* Kehribar sarısı vurgu metinleri için */
 .text-kehribar {
-    color: var(--kehribar);
+    color: var(--kehribar); /* kehribar rengini uygular */
 }
 
+/* Tema değiştirme kutusunu tetikleyen tıklanabilir label alanı */
 .tema-buton {
-    cursor: pointer;
-    user-select: none;
+    cursor: pointer; /* üzerine gelince el işareti çıkarıp tıklanabilir olduğunu gösterir */
+    user-select: none; /* art arda tıklarken yazı veya ikonların yanlışlıkla seçilmesini önler */
 }
 
+/* Koyu temadayken güneş ikonu pasif gri renkte durur */
 .tema-gunes {
-    color: var(--gumusi-gri);
+    color: var(--gumusi-gri); /* pasif renk */
 }
 
+/* Koyu temadayken ay ikonu aktif olduğu için kehribar sarısı yanar */
 .tema-ay {
-    color: var(--kehribar);
+    color: var(--kehribar); /* aktif vurgu rengi */
 }
 
+/* Açık temaya geçince (#tema-degistir işaretliyken) bu sefer güneş ikonu aktifleşir */
 body:has(#tema-degistir:checked) .tema-gunes {
-    color: var(--kehribar);
+    color: var(--kehribar); /* güneş aktif sarı renge döner */
 }
 
+/* Açık temaya geçince ay ikonu pasif gri renge döner */
 body:has(#tema-degistir:checked) .tema-ay {
-    color: var(--gumusi-gri);
+    color: var(--gumusi-gri); /* ay pasif gri olur */
 }
 
+/* Üst menüdeki navigasyon bağlantıları */
 .link-menu {
-    color: var(--yildiz-beyazi);
-    text-decoration: none;
-    font-size: 0.88rem;
-    padding: 0.65rem 0;
-    border-bottom: 2px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
+    color: var(--yildiz-beyazi); /* normal yazı rengi */
+    text-decoration: none; /* linkin altındaki klasik çizgiyi kaldırır */
+    font-size: 0.88rem; /* menü yazılarını biraz küçültür */
+    padding: 0.65rem 0; /* üstten alttan tıklama alanı genişliği verir */
+    border-bottom: 2px solid transparent; /* hover'da alt çizgi çıkınca yazı yukarı kaymasın diye baştan görünmez 2px çizgi koyduk */
+    transition: color 0.2s, border-color 0.2s; /* yazı ve alt çizgi rengi 0.2sn'de yumuşak değişir */
 }
 
+/* Menü linkinin üzerine gelince yazı mavi olur, alttaki şeffaf çizgi sarıya döner */
 .link-menu:hover {
-    color: var(--buz-mavisi);
-    border-bottom-color: var(--kehribar);
+    color: var(--buz-mavisi); /* yazı buz mavisi olur */
+    border-bottom-color: var(--kehribar); /* altta kehribar rengi çizgi belirir */
 }
 
+/* Sayfa sonundaki footer bağlantıları */
 .link-footer {
-    color: var(--gumusi-gri);
-    text-decoration: none;
-    font-size: 0.86rem;
-    transition: color 0.2s;
+    color: var(--gumusi-gri); /* soluk gri renk */
+    text-decoration: none; /* alt çizgiyi kaldırır */
+    font-size: 0.86rem; /* biraz daha küçük yazı boyutu */
+    transition: color 0.2s; /* hover renk geçişi */
 }
 
+/* Footer linkinin üzerine gelince buz mavisine döner */
 .link-footer:hover {
-    color: var(--buz-mavisi);
+    color: var(--buz-mavisi); /* üzerine gelince dikkat çeken mavi renk */
 }
 
+/* Sosyal medya paylaşım butonları için geçiş ayarı */
 .paylas-btn {
-    transition: opacity 0.2s, transform 0.15s;
+    transition: opacity 0.2s, transform 0.15s; /* saydamlık ve hafif yükselme animasyonu */
 }
 
+/* Paylaşım butonunun üzerine gelince hafif soluklaşıp 1px yukarı kalkar */
 .paylas-btn:hover {
-    opacity: 0.88;
-    transform: translateY(-1px);
+    opacity: 0.88; /* hafif saydamlık efekti */
+    transform: translateY(-1px); /* 1 piksel yukarı oynatır */
 }
 
+/* JS kullanmadan HTML details/summary etiketiyle açılır menü yapmak için kapsayıcı */
 details.acilir-kutu {
-    position: relative;
+    position: relative; /* içindeki açılır paneli buna göre hizalamak için referans yapıyoruz */
 }
 
+/* Açılır kutunun tıklanan başlık kısmı */
 details.acilir-kutu summary {
-    list-style: none;
-    cursor: pointer;
+    list-style: none; /* tarayıcının summary yanına otomatik koyduğu siyah üçgeni kaldırır */
+    cursor: pointer; /* tıklanabilir el imleci gösterir */
 }
 
+/* Chrome ve Safari gibi tarayıcılarda kalan gizli üçgen işaretini de tamamen gizler */
 details.acilir-kutu summary::-webkit-details-marker {
-    display: none;
+    display: none; /* WebKit üçgenini görünmez yapar */
 }
 
+/* details açılınca aşağı doğru çıkan açılır panel kutusu */
 details.acilir-kutu .acilir-panel {
-    position: absolute;
-    right: 0;
-    top: 140%;
-    z-index: 1050;
-    min-width: 270px;
-    background-color: var(--gece-mavisi);
-    border: 1px solid var(--isik-alan);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    position: absolute; /* sayfa düzenini bozmadan kutunun üstünde yüzmesini sağlar */
+    right: 0; /* sağ kenardan hizalar */
+    top: 140%; /* başlığın biraz altında açılmasını sağlar */
+    z-index: 1050; /* diğer içeriklerin üstünde kalsın */
+    min-width: 270px; /* en az 270px genişlikte dursun */
+    background-color: var(--gece-mavisi); /* panelin arka plan rengi */
+    border: 1px solid var(--isik-alan); /* ince kenarlık */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35); /* arkaya derinlik veren koyu gölge */
 }
 
+/* Ekranı kaplayan açılır pencere (modal) arka plan katmanı */
 .modal-katman {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 2000;
-    background-color: rgba(9, 13, 22, 0.78);
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
+    display: none; /* normalde tamamen gizli durur */
+    position: fixed; /* sayfa kaysa da tüm ekrana sabit kalır */
+    inset: 0; /* top, right, bottom, left hepsini 0 yapıp ekranı tamamen kaplar */
+    z-index: 2000; /* mobil menü dahil her şeyin en üstünde görünür */
+    background-color: rgba(9, 13, 22, 0.78); /* arkadaki siteyi karartmak için yarı saydam koyu zemin */
+    align-items: center; /* açılınca içindeki pencereyi dikey ortalar */
+    justify-content: center; /* açılınca içindeki pencereyi yatay ortalar */
+    padding: 1rem; /* çok dar ekranlarda kutu kenara yapışmasın diye boşluk bırakır */
 }
 
+/* Linkle bu modalın id'si hedeflendiğinde (#modal-id) JS olmadan görünür olur */
 .modal-katman:target {
-    display: flex;
+    display: flex; /* flex yaparak hem görünür hale getirir hem içeriği ortalar */
 }
 
+/* Küçük ekranlarda tam ekran açılan mobil menü katmanı */
 .mobil-menu-katman {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 1900;
-    background-color: var(--golgeli);
-    flex-direction: column;
-    overflow-y: auto;
+    display: none; /* başlangıçta gizli */
+    position: fixed; /* ekrana sabit */
+    inset: 0; /* tüm ekranı kaplar */
+    z-index: 1900; /* modalın bir tık altında ama tüm sayfanın üstünde */
+    background-color: var(--golgeli); /* menü arka plan rengi */
+    flex-direction: column; /* açılınca linkleri alt alta dizer */
+    overflow-y: auto; /* menü uzarsa kendi içinde aşağı kaydırılabilsin */
 }
 
+/* URL'deki # hedefi mobil menüyü gösterdiğinde açılır */
 .mobil-menu-katman:target {
-    display: flex;
+    display: flex; /* menüyü görünür yapar */
 }
 
+/* Sağ altta sabit duran yukarı çık butonu */
 .yukari-cik {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    width: 40px;
-    height: 40px;
-    z-index: 1040;
-    background-color: var(--isik-alan);
-    color: var(--yildiz-beyazi);
-    border: 1px solid var(--gok-mavisi);
-    transition: background-color 0.2s;
+    position: fixed; /* sayfa kaydırılsa da köşede sabit kalır */
+    right: 20px; /* sağ kenardan 20px içeride */
+    bottom: 20px; /* alt kenardan 20px yukarıda */
+    width: 40px; /* buton genişliği */
+    height: 40px; /* buton yüksekliği */
+    z-index: 1040; /* normal öğelerin üstünde dursun */
+    background-color: var(--isik-alan); /* zemin rengi */
+    color: var(--yildiz-beyazi); /* ok ikonunun rengi */
+    border: 1px solid var(--gok-mavisi); /* ince mavi kenarlık */
+    transition: background-color 0.2s; /* hover'da arka plan yumuşak değişsin */
 }
 
+/* Yukarı çık butonunun üzerine gelince rengi belirginleşir */
 .yukari-cik:hover {
-    background-color: var(--gok-mavisi);
-    color: #FFFFFF;
+    background-color: var(--gok-mavisi); /* gök mavisine döner */
+    color: #FFFFFF; /* ok ikonu tam beyaz olur */
 }
 
+/* Tablet ve telefon ekranları (992px altı) için alt boşluk düzenlemeleri */
 @media (max-width: 991.98px) {
     body {
-        padding-bottom: 44px;
+        padding-bottom: 44px; /* altta sabit duran mobil menü barı içeriği kapatmasın diye alttan boşluk bırakır */
     }
 
     .yukari-cik {
-        bottom: 56px;
-        right: 14px;
+        bottom: 56px; /* alt çubuğun üstünde kalması için butonu biraz yukarı aldık */
+        right: 14px; /* dar ekranda sağ kenara biraz daha yaklaştırdık */
     }
 }

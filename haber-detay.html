@@ -1,59 +1,63 @@
 <!DOCTYPE html>
-<!-- data-bs-theme: açık ve koyu modu ayarlar -->
+<!-- Tekil bir haberin tam metnini, yorumlarını ve sağ yan menüyü gösteren haber detay sayfası -->
+<!-- data-bs-theme="light" Bootstrap açık temasını başlatır, main.js sonradan değiştirebilir -->
 <html lang="tr" data-bs-theme="light">
 
 <head>
+    <!-- UTF-8 karakter kodlaması -->
     <meta charset="UTF-8">
     <script>
-        // Bu kod o anki sayfamız için linklerin ana dizinde aranmasını sağlar.
-        const PROJE_KLASORU = "Tekno-Bilim-Dunyasi"; // Proje Klasörü
+        // Dosya nereden açılırsa açılsın göreceli css/js/resim yollarının proje kökünden okunması için <base> etiketi yazıyoruz
+        const PROJE_KLASORU = "Tekno-Bilim-Dunyasi"; // proje kök klasörünün adı
 
-        const tam_yol = window.location.href; // Dosyanın tam yolu
+        const tam_yol = window.location.href; // sayfanın o anki tam adresi
 
-        // Proje klasörünün başladığı kısım yolun içinde değilse -1 alır
+        // Klasör adı adreste yoksa -1 döner
         const klasor_baslangici = tam_yol.indexOf(PROJE_KLASORU);
 
-        // Proje klasörünün başladığı kısım yolun içindeyse dizini bizim ana dizinimize ayarlar
+        // Klasör adı bulunduysa proje ana dizinini bulup sayfaya <base href="..."> ekliyoruz
         if (klasor_baslangici !== -1) {
             const ana_dizin = tam_yol.substring(0, klasor_baslangici + PROJE_KLASORU.length) + "/";
             document.write('<base href="' + ana_dizin + '">');
         }
     </script>
 
+    <!-- Mobil ekranlarda düzgün görüntüleme için viewport ayarı -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Bootstrap CSS'i -->
+    <!-- Bootstrap 5.3.3 CSS ve Bootstrap Icons 1.11.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         crossorigin="anonymous">
 
-    <!-- İkonlar için Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Ortak site CSS ve haber detay CSS -->
+    <!-- Önce ortak site stilleri, sonra bu sayfaya özel .hd-avatar stilini içeren haber-detay.css -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/haber-detay.css">
 
-    <!-- Bootstrap JS'i -->
+    <!-- Bootstrap JS ve ortak JS dosyamız (defer HTML okunduktan sonra çalıştırır) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous" defer></script>
 
-    <!-- Kendi harici JS dosyamız -->
     <script src="js/main.js" defer></script>
 
+    <!-- Tarayıcı sekme başlığı -->
     <title>Haber Detay - Tekno Bilim Dünyası</title>
 </head>
 
 <body>
 
-    <!-- header alanı -->
+    <!-- Üst menü alanı (sticky-top sayfa kaydırılınca üstte yapışık kalmasını sağlar) -->
     <header class="sticky-top SiteHeader">
 
-        <!-- Büyük ekran (d-none d-lg-block) -->
+        <!-- Masaüstü header: mobilde d-none ile gizli, 992px üstünde d-lg-block ile açık -->
         <div class="d-none d-lg-block">
 
+            <!-- Üst çubuk: arama kutusu, tema butonu ve giriş butonu -->
             <div class="UstCubuk py-2">
                 <div class="container d-flex justify-content-end align-items-center gap-2">
 
+                    <!-- Masaüstü arama alanı (js/main.js büyütece basınca AramaKutusu'na .Acik sınıfını ekler) -->
                     <form id="masaustu_arama_formu" class="d-flex align-items-center" role="search">
                         <input type="search" id="masaustu_arama_input"
                             class="form-control form-control-sm rounded-pill AramaKutusu"
@@ -66,11 +70,13 @@
                         </button>
                     </form>
 
+                    <!-- Tema değiştirme butonu -->
                     <button type="button" class="btn btn-sm rounded-circle YuvarlakIkonButon TemaDegistirBtn"
                         aria-label="Temayı değiştir" title="Açık / Koyu Mod">
                         <i class="bi bi-moon-stars-fill TemaIkonu"></i>
                     </button>
 
+                    <!-- Giriş yap butonu -->
                     <a href="giris.html" class="btn btn-sm rounded-pill px-3 fw-semibold GirisButonu">
                         GİRİŞ YAP
                     </a>
@@ -78,7 +84,7 @@
                 </div>
             </div>
 
-            <!-- 2. BÖLÜM: Ana Navbar -->
+            <!-- Ana menü çubuğu -->
             <nav class="navbar navbar-expand-lg py-3 AnaNavbar" aria-label="Ana Menü">
                 <div class="container">
                     <a class="navbar-brand fw-bold d-flex align-items-center gap-2 MarkaLogo" href="index.html">
@@ -86,6 +92,7 @@
                     </a>
 
                     <ul class="navbar-nav ms-auto align-items-center gap-2 gap-xl-3">
+                        <!-- Bu haber Yapay Zeka kategorisinde olduğu için Yapay Zeka bağlantısı active işaretli -->
                         <li class="nav-item">
                             <a class="nav-link active fw-semibold" aria-current="page" href="haber-detay.html">Yapay Zeka</a>
                         </li>
@@ -99,6 +106,7 @@
                             <a class="nav-link fw-semibold" href="haber-detay.html">Donanım</a>
                         </li>
 
+                        <!-- Kategorilerle sayfa linkleri arasındaki dikey ayraç -->
                         <li class="nav-item" aria-hidden="true">
                             <span class="MenuAyraci">|</span>
                         </li>
@@ -118,7 +126,7 @@
 
         </div>
 
-        <!-- Küçük ekran (d-lg-none) -->
+        <!-- Mobil header: sadece 992px altı ekranlarda görünür -->
         <div class="d-lg-none MobilHeader py-2">
             <div class="container d-flex justify-content-between align-items-center">
 
@@ -127,17 +135,20 @@
                 </a>
 
                 <div class="d-flex align-items-center gap-2">
+                    <!-- Arama ikonu mobilde offcanvas menüyü açar -->
                     <button type="button" class="btn rounded-circle YuvarlakIkonButon"
                         data-bs-toggle="offcanvas" data-bs-target="#mobil_menu_offcanvas"
                         aria-label="Arama yap">
                         <i class="bi bi-search"></i>
                     </button>
 
+                    <!-- Mobil tema değiştirme butonu -->
                     <button type="button" class="btn rounded-circle YuvarlakIkonButon TemaDegistirBtn"
                         aria-label="Temayı değiştir">
                         <i class="bi bi-moon-stars-fill TemaIkonu"></i>
                     </button>
 
+                    <!-- Hamburger menü butonu -->
                     <button type="button" class="btn rounded-circle YuvarlakIkonButon"
                         data-bs-toggle="offcanvas" data-bs-target="#mobil_menu_offcanvas"
                         aria-controls="mobil_menu_offcanvas" aria-label="Menüyü aç">
@@ -148,7 +159,7 @@
             </div>
         </div>
 
-        <!-- MOBİL AÇILIR MENÜ (BOOTSTRAP OFFCANVAS) -->
+        <!-- Sağdan açılan mobil menü (Bootstrap Offcanvas) -->
         <div class="offcanvas offcanvas-end MobilOffcanvas" tabindex="-1" id="mobil_menu_offcanvas"
             aria-labelledby="mobil_menu_baslik">
 
@@ -192,6 +203,7 @@
                     </ul>
                 </nav>
 
+                <!-- Mobil menü altındaki arama formu -->
                 <div class="mt-auto p-3 border-top OffcanvasKenarlik">
                     <form class="input-group" role="search">
                         <input type="search" class="form-control border-0 py-2" placeholder="Ara ..." aria-label="Ara">
@@ -202,22 +214,26 @@
         </div>
     </header>
 
-    <!-- HABER DETAY İÇERİĞİ -->
+    <!-- Ana içerik alanı: Bootstrap grid ile solda 8 sütunluk haber makalesi, sağda 4 sütunluk yan menü yer alır -->
     <main class="container py-4 py-lg-5">
 
         <div class="row g-4">
-            <!-- SOL SÜTUN: HABER DETAYI -->
+            <!-- Sol sütun: haberin kendisi ve altındaki yorumlar bölümü (col-lg-8 büyük ekranda 8/12 genişlik alır) -->
             <article class="col-lg-8">
+                <!-- Makale kartı (rounded-4 köşeleri yumuşatır, shadow-sm hafif gölge ekler) -->
                 <div class="card rounded-4 shadow-sm">
                     <div class="card-body p-4 p-md-5">
+                        <!-- Kategori etiketi -->
                         <span class="badge text-bg-warning mb-3 px-3 py-2">Yapay Zeka</span>
 
+                        <!-- Haber ana başlığı ve giriş özeti (lead yazı boyutunu büyütür, text-body-secondary ikincil renk verir) -->
                         <h1 class="fw-bold mb-3">Yeni Nesil Yapay Zeka Modelleri Yazılım Geliştirme Süreçlerini Nasıl Dönüştürüyor?</h1>
                         <p class="lead text-body-secondary mb-4">Otonom kod asistanları ve akıllı test araçları, geliştiricilerin iş akışlarını hızlandırırken yazılım mimarisinde yeni standartlar belirliyor.</p>
 
-                        <!-- Yazar ve Paylaşım -->
+                        <!-- Yazar bilgisi ve sosyal medya paylaşım butonları satırı -->
                         <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 py-3 mb-4 border-top border-bottom">
                             <div class="d-flex align-items-center gap-3">
+                                <!-- .hd-avatar sınıfı haber-detay.css içinden gelir; 44x44px daire ve vurgu rengi arka planı verir -->
                                 <div class="hd-avatar rounded-circle border d-flex align-items-center justify-content-center fw-bold">ÇD</div>
                                 <div>
                                     <div class="fw-semibold">Çiçek Çizmeci Devge</div>
@@ -227,6 +243,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Paylaşım butonları -->
                             <div class="d-flex gap-2">
                                 <button class="btn btn-outline-secondary btn-sm" title="X'te Paylaş"><i class="bi bi-twitter-x"></i></button>
                                 <button class="btn btn-outline-secondary btn-sm" title="LinkedIn'de Paylaş"><i class="bi bi-linkedin"></i></button>
@@ -234,18 +251,19 @@
                             </div>
                         </div>
 
-                        <!-- Kapak Görseli -->
+                        <!-- Haber kapak görseli ve alt yazısı (<figure> ve <figcaption>) -->
                         <figure class="mb-4">
                             <img src="https://placehold.co/900x480/161E35/A3C6F7?text=Haber+Kapak+Gorseli" class="img-fluid rounded-3 border w-100" alt="Yapay zeka ve yazılım geliştirme">
                             <figcaption class="small text-body-secondary text-center mt-2">Yapay zeka destekli araçlar, modern yazılım ekiplerinin temel parçası haline geliyor.</figcaption>
                         </figure>
 
-                        <!-- Haber Metni -->
+                        <!-- Makalenin ana gövde metni -->
                         <p>Teknoloji ekosistemindeki hızlı dönüşüm, yazılım geliştirme alışkanlıklarını kökten değiştiriyor. Eskiden saatler süren hata ayıklama (debugging), dokümantasyon yazımı ve birim test süreçleri artık yapay zeka destekli sistemlerle dakikalar içinde tamamlanabiliyor.</p>
 
                         <h2 class="h4 fw-bold text-primary-emphasis mt-4 mb-3">Geliştiricilerin Rolü Yeniden Tanımlanıyor</h2>
                         <p>Uzmanlara göre bu dönüşüm yazılımcıların yerini almak yerine, onların odak noktasını tekrarlayan kod bloklarından sistem tasarımına, problem çözmeye ve ürün mimarisine kaydırıyor.</p>
 
+                        <!-- Öne çıkarılan alıntı kutusu (border-start border-4 border-primary ile sol tarafa kalın mavi çizgi koyar) -->
                         <blockquote class="blockquote bg-body-tertiary border-start border-4 border-primary rounded-3 p-4 my-4">
                             <p class="fs-6 fst-italic mb-2">"Geleceğin en başarılı yazılım mühendisleri, en hızlı kod yazanlar değil; doğru soruları sorabilen ve sistem mimarisini en verimli şekilde kurgulayabilenler olacak."</p>
                             <footer class="blockquote-footer mb-0">Teknoloji Araştırma Raporu, 2026</footer>
@@ -254,6 +272,7 @@
                         <h2 class="h4 fw-bold text-primary-emphasis mt-4 mb-3">Dikkat Edilmesi Gereken Kritik Noktalar</h2>
                         <p>Yapay zeka araçlarını projelere entegre ederken güvenlik, kod kalitesi ve veri gizliliği gibi konular ön plana çıkıyor. Ekiplerin özellikle şu üç başlığa odaklanması öneriliyor:</p>
 
+                        <!-- Öneriler listesi -->
                         <ul class="mb-4">
                             <li class="mb-2">Üretilen kodların mutlaka insan gözüyle denetlenmesi (Code Review).</li>
                             <li class="mb-2">Hassas verilerin ve API anahtarlarının dış sistemlerle paylaşılmaması.</li>
@@ -262,7 +281,7 @@
 
                         <p>Önümüzdeki dönemde hem bireysel geliştiriciler hem de büyük teknoloji şirketleri için yapay zeka okuryazarlığı, temel bir yetkinlik olarak öne çıkmaya devam edecek.</p>
 
-                        <!-- Etiketler -->
+                        <!-- Makale sonundaki konu etiketleri -->
                         <div class="d-flex flex-wrap align-items-center gap-2 mt-4 pt-4 border-top">
                             <span class="small text-body-secondary me-1"><i class="bi bi-tags me-1"></i>Etiketler:</span>
                             <a href="#" class="badge rounded-pill text-bg-secondary text-decoration-none px-3 py-2">#YapayZeka</a>
@@ -273,11 +292,12 @@
                     </div>
                 </div>
 
-                <!-- YORUMLAR -->
+                <!-- Makale altındaki yorumlar ve yorum ekleme formu kartı -->
                 <section class="card rounded-4 shadow-sm mt-4">
                     <div class="card-body p-4 p-md-5">
                         <h3 class="h5 fw-bold mb-4">Yorumlar (2)</h3>
 
+                        <!-- 1. örnek okuyucu yorumu -->
                         <div class="bg-body-tertiary border rounded-3 p-3 mb-3">
                             <div class="d-flex justify-content-between mb-1">
                                 <span class="fw-semibold text-primary-emphasis">Ahmet Yılmaz</span>
@@ -286,6 +306,7 @@
                             <p class="small mb-0">Özellikle kod inceleme (code review) maddesi çok önemli. Yapay zeka hız kazandırıyor ama kontrolü elden bırakmamak gerekiyor.</p>
                         </div>
 
+                        <!-- 2. örnek okuyucu yorumu -->
                         <div class="bg-body-tertiary border rounded-3 p-3 mb-4">
                             <div class="d-flex justify-content-between mb-1">
                                 <span class="fw-semibold text-primary-emphasis">Elif Kaya</span>
@@ -294,6 +315,7 @@
                             <p class="small mb-0">Çok akıcı ve anlaşılır bir özet olmuş, emeğinize sağlık!</p>
                         </div>
 
+                        <!-- Yeni yorum yazma formu -->
                         <h4 class="h6 fw-bold mb-3">Bir Yorum Bırak</h4>
                         <form class="row g-3">
                             <div class="col-md-6"><input type="text" class="form-control" placeholder="Adınız Soyadınız" required></div>
@@ -305,9 +327,10 @@
                 </section>
             </article>
 
-            <!-- SAĞ SÜTUN: YAN MENÜ -->
+            <!-- Sağ sütun: arama, popüler haberler, kategoriler ve bülten kartlarını içeren yan menü (col-lg-4) -->
             <aside class="col-lg-4 d-flex flex-column gap-4">
 
+                <!-- Yan menü haber arama kutusu -->
                 <div class="card rounded-4 shadow-sm">
                     <div class="card-body p-4">
                         <h3 class="h6 fw-bold mb-3">Haber Ara</h3>
@@ -318,18 +341,22 @@
                     </div>
                 </div>
 
+                <!-- Popüler haberler listesi (flex-shrink-0 küçük kare resimlerin ezilmesini engeller) -->
                 <div class="card rounded-4 shadow-sm">
                     <div class="card-body p-4">
                         <h3 class="h6 fw-bold mb-3">Popüler Haberler</h3>
                         <div class="d-flex flex-column gap-3">
+                            <!-- 1. popüler haber -->
                             <a href="haber-detay.html" class="d-flex gap-3 text-decoration-none text-reset">
                                 <img src="https://placehold.co/80x80/283559/E8EEF7?text=AI" class="rounded-2 flex-shrink-0" alt="Haber 1">
                                 <div><h4 class="h6 mb-1">Siber Güvenlikte 2026 Trendleri Neler?</h4><span class="small text-body-secondary">18 Kasım 2026</span></div>
                             </a>
+                            <!-- 2. popüler haber -->
                             <a href="haber-detay.html" class="d-flex gap-3 text-decoration-none text-reset">
                                 <img src="https://placehold.co/80x80/283559/E8EEF7?text=Tech" class="rounded-2 flex-shrink-0" alt="Haber 2">
                                 <div><h4 class="h6 mb-1">Sürdürülebilir Veri Merkezleri Yaygınlaşıyor</h4><span class="small text-body-secondary">15 Kasım 2026</span></div>
                             </a>
+                            <!-- 3. popüler haber -->
                             <a href="haber-detay.html" class="d-flex gap-3 text-decoration-none text-reset">
                                 <img src="https://placehold.co/80x80/283559/E8EEF7?text=Web" class="rounded-2 flex-shrink-0" alt="Haber 3">
                                 <div><h4 class="h6 mb-1">Kuantum Bilgisayarlarda Yeni Eşik Aşıldı</h4><span class="small text-body-secondary">12 Kasım 2026</span></div>
@@ -338,9 +365,11 @@
                     </div>
                 </div>
 
+                <!-- Kategoriler ve yazı sayılarını gösteren Bootstrap list-group kartı -->
                 <div class="card rounded-4 shadow-sm">
                     <div class="card-body p-4">
                         <h3 class="h6 fw-bold mb-3">Kategoriler</h3>
+                        <!-- list-group-flush dış kenarlığı kaldırır, bg-transparent kart rengini korur -->
                         <div class="list-group list-group-flush">
                             <a href="haber-detay.html" class="list-group-item list-group-item-action bg-transparent d-flex justify-content-between align-items-center px-0"><span>Yapay Zeka</span><span class="badge text-bg-secondary rounded-pill">24</span></a>
                             <a href="haber-detay.html" class="list-group-item list-group-item-action bg-transparent d-flex justify-content-between align-items-center px-0"><span>Teknoloji</span><span class="badge text-bg-secondary rounded-pill">18</span></a>
@@ -350,6 +379,7 @@
                     </div>
                 </div>
 
+                <!-- Haftalık e-posta bülteni abonelik kartı -->
                 <div class="card rounded-4 shadow-sm border-primary">
                     <div class="card-body p-4">
                         <h3 class="h6 fw-bold text-primary-emphasis mb-2">Haftalık Teknoloji Bülteni</h3>
@@ -365,11 +395,12 @@
         </div>
     </main>
 
-    <!-- FOOTER (ALT BİLGİ) -->
+    <!-- Ortak alt bilgi (footer) bölümü -->
     <footer class="SiteFooter pt-5 pb-4 mt-4">
         <div class="container">
             <div class="row g-4 pb-4 border-bottom FooterKenarlik">
 
+                <!-- 1. sütun: logo ve açıklama -->
                 <div class="col-lg-5">
                     <a href="index.html" class="d-inline-flex align-items-center gap-2 text-decoration-none fw-bold fs-5 mb-3 MarkaLogo">
                         <span>Tekno Bilim Dünyası</span>
@@ -379,6 +410,7 @@
                     </p>
                 </div>
 
+                <!-- 2. sütun: sayfa bağlantıları -->
                 <div class="col-6 col-lg-3">
                     <h3 class="h6 fw-bold mb-3">Sayfalar</h3>
                     <ul class="list-unstyled d-flex flex-column gap-2 small mb-0">
@@ -389,6 +421,7 @@
                     </ul>
                 </div>
 
+                <!-- 3. sütun: kategori bağlantıları -->
                 <div class="col-6 col-lg-4">
                     <h3 class="h6 fw-bold mb-3">Kategoriler</h3>
                     <ul class="list-unstyled d-flex flex-column gap-2 small mb-0">
@@ -401,6 +434,7 @@
 
             </div>
 
+            <!-- En alt telif satırı -->
             <div class="pt-3 d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 small">
                 <span>&copy; 2026 Tekno Bilim Dünyası. Tüm hakları saklıdır.</span>
                 <span>Kırklareli Üniversitesi Yazılım Mühendisliği</span>
@@ -408,7 +442,7 @@
         </div>
     </footer>
 
-    <!-- YUKARI ÇIK BUTONU -->
+    <!-- Sayfada aşağı inince js/main.js tarafından gösterilen yukarı çık butonu -->
     <button type="button" id="yukari_cik_butonu" class="btn rounded-circle shadow YukariCikBtn"
         aria-label="Sayfanın en üstüne çık" title="Yukarı Çık">
         <i class="bi bi-arrow-up fs-5"></i>

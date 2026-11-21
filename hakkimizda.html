@@ -1,63 +1,65 @@
 <!DOCTYPE html>
-<!-- data-bs-theme: açık ve koyu modu ayarlar -->
+<!-- Platformumuzun amacını ve misyonunu anlatan Hakkımızda sayfası -->
+<!-- lang="tr" sayfa dilini Türkçe yapar, data-bs-theme="light" Bootstrap temasını açık modda başlatır -->
 <html lang="tr" data-bs-theme="light">
 
 <head>
+    <!-- Karakter kodlamasını UTF-8 yapıyoruz ki Türkçe harfler düzgün görünsün -->
     <meta charset="UTF-8">
     <script>
-        // Bu kod o anki sayfamız için linklerin ana dizinde aranmasını sağlar.
-        const PROJE_KLASORU = "Tekno-Bilim-Dunyasi"; // Proje Klasörü
+        // Sayfa alt klasörde açılsa bile css, js ve html linklerinin hep proje kök klasöründen aranması için dinamik <base> etiketi ekliyoruz
+        const PROJE_KLASORU = "Tekno-Bilim-Dunyasi"; // proje ana klasörümüzün adı
 
-        const tam_yol = window.location.href; // Dosyanın tam yolu
+        const tam_yol = window.location.href; // tarayıcıdaki tam adres
 
-        // Proje klasörünün başladığı kısım yolun içinde değilse -1 alır
+        // Adres içinde proje klasörünün adı geçiyor mu kontrol ediyoruz (bulamazsa -1 döner)
         const klasor_baslangici = tam_yol.indexOf(PROJE_KLASORU);
 
-        // Proje klasörünün başladığı kısım yolun içindeyse dizini bizim ana dizinimize ayarlar
+        // Klasör adı adres içinde varsa o kısma kadar olan yolu alıp sayfaya <base href="..."> yazdırıyoruz
         if (klasor_baslangici !== -1) {
             const ana_dizin = tam_yol.substring(0, klasor_baslangici + PROJE_KLASORU.length) + "/";
             document.write('<base href="' + ana_dizin + '">');
         }
     </script>
 
+    <!-- Mobil cihazlarda sayfanın ekran genişliğine göre düzgün ölçeklenmesi için viewport ayarı -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Bootstrap CSS'i -->
+    <!-- Bootstrap 5.3.3 CSS kütüphanesi -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         crossorigin="anonymous">
 
-    <!-- İkonlar için Bootstrap Icons -->
+    <!-- İkonlar için Bootstrap Icons 1.11.3 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Kendi harici CSS dosyamız -->
+    <!-- Tüm sitede ortak tema ve düzen kurallarını içeren ana CSS dosyamız -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Bootstrap JS'i -->
+    <!-- Bootstrap'in offcanvas gibi bileşenlerini çalıştıran JS paketi -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous" defer></script>
 
-    <!-- Kendi harici JS dosyamız -->
+    <!-- Tema değiştirme, arama kutusu ve yukarı çık butonunu yöneten ortak JS dosyamız -->
     <script src="js/main.js" defer></script>
 
+    <!-- Tarayıcı sekmesinde görünen sayfa başlığı -->
     <title>Hakkımızda – Tekno Bilim Dünyası</title>
 </head>
 
+<!-- id="ust" sayfa tepesini işaretler; d-flex flex-column min-vh-100 sayesinde kısa içerikte bile footer en altta kalır -->
 <body id="ust" class="d-flex flex-column min-vh-100">
 
-    <!--
-         header alanı
-         sticky-top: header sürekli ekranın üstünde kalır
-    -->
+    <!-- Ortak üst menü: sticky-top ile sayfa kaydırıldığında üstte sabit kalır -->
     <header class="sticky-top SiteHeader">
 
-        <!-- Büyük ekran (d-none d-lg-block) -->
+        <!-- Masaüstü menü bloğu (d-none ile mobilde gizlenir, d-lg-block ile 992px ve üstünde görünür) -->
         <div class="d-none d-lg-block">
 
-            <!-- Üst Çubuk -->
+            <!-- En üstteki arama, tema ve giriş yap çubuğu (.UstCubuk style.css'den arka plan rengini alır) -->
             <div class="UstCubuk py-2">
                 <div class="container d-flex justify-content-end align-items-center gap-2">
 
-                    <!-- Arama Alanı -->
+                    <!-- Arama formu: büyütece basınca js/main.js inputa .Acik sınıfını ekleyip kutuyu açar -->
                     <form id="masaustu_arama_formu" class="d-flex align-items-center" role="search">
                         <input type="search" id="masaustu_arama_input"
                             class="form-control form-control-sm rounded-pill AramaKutusu"
@@ -70,13 +72,13 @@
                         </button>
                     </form>
 
-                    <!-- Açık / Koyu Mod Butonu -->
+                    <!-- Tema değiştirme butonu (TemaDegistirBtn ve TemaIkonu sınıflarını TemaYoneticisi kontrol eder) -->
                     <button type="button" class="btn btn-sm rounded-circle YuvarlakIkonButon TemaDegistirBtn"
                         aria-label="Temayı değiştir" title="Açık / Koyu Mod">
                         <i class="bi bi-moon-stars-fill TemaIkonu"></i>
                     </button>
 
-                    <!-- Giriş Yap Butonu -->
+                    <!-- Giriş sayfasına yönlendiren buton -->
                     <a href="giris.html" class="btn btn-sm rounded-pill px-3 fw-semibold GirisButonu">
                         GİRİŞ YAP
                     </a>
@@ -84,15 +86,15 @@
                 </div>
             </div>
 
-            <!-- 2. BÖLÜM: Ana Navbar (Logo + Sayfa Linkleri) -->
+            <!-- Ana navigasyon çubuğu: solda site adı, sağda kategoriler ve sayfa bağlantıları -->
             <nav class="navbar navbar-expand-lg py-3 AnaNavbar" aria-label="Ana Menü">
                 <div class="container">
-                    <!-- Logo -->
+                    <!-- Ana sayfaya giden site başlığı -->
                     <a class="navbar-brand fw-bold d-flex align-items-center gap-2 MarkaLogo" href="index.html">
                         <span>Tekno Bilim Dünyası</span>
                     </a>
 
-                    <!-- Kategoriler | Sayfa Linkleri -->
+                    <!-- Sağdaki menü listesi -->
                     <ul class="navbar-nav ms-auto align-items-center gap-2 gap-xl-3">
                         <li class="nav-item">
                             <a class="nav-link fw-semibold" href="haber-detay.html">Yapay Zeka</a>
@@ -107,6 +109,7 @@
                             <a class="nav-link fw-semibold" href="haber-detay.html">Donanım</a>
                         </li>
 
+                        <!-- Kategorilerle sayfa linklerini ayıran "|" işareti -->
                         <li class="nav-item" aria-hidden="true">
                             <span class="MenuAyraci">|</span>
                         </li>
@@ -114,6 +117,7 @@
                         <li class="nav-item">
                             <a class="nav-link fw-semibold" href="index.html">Ana Sayfa</a>
                         </li>
+                        <!-- Hakkımızda sayfasında olduğumuz için active sınıfı ve aria-current="page" burada -->
                         <li class="nav-item">
                             <a class="nav-link active fw-semibold" aria-current="page" href="hakkimizda.html">Hakkımızda</a>
                         </li>
@@ -126,14 +130,16 @@
 
         </div>
 
-        <!-- Küçük ekran (d-lg-none) -->
+        <!-- Mobil üst çubuk (d-lg-none ile 992px altında görünür) -->
         <div class="d-lg-none MobilHeader py-2">
             <div class="container d-flex justify-content-between align-items-center">
 
+                <!-- Mobilde sığması için kısa TBD logosu -->
                 <a class="navbar-brand fw-bold d-flex align-items-center gap-2 MarkaLogo mb-0" href="index.html">
                     <span class="fs-5">TBD</span>
                 </a>
 
+                <!-- Sağdaki yuvarlak butonlar: arama, tema değiştirme ve menü açma -->
                 <div class="d-flex align-items-center gap-2">
                     <button type="button" class="btn rounded-circle YuvarlakIkonButon"
                         data-bs-toggle="offcanvas" data-bs-target="#mobil_menu_offcanvas"
@@ -146,6 +152,7 @@
                         <i class="bi bi-moon-stars-fill TemaIkonu"></i>
                     </button>
 
+                    <!-- Hamburger butonu: offcanvas menüyü açar -->
                     <button type="button" class="btn rounded-circle YuvarlakIkonButon"
                         data-bs-toggle="offcanvas" data-bs-target="#mobil_menu_offcanvas"
                         aria-controls="mobil_menu_offcanvas" aria-label="Menüyü aç">
@@ -156,10 +163,11 @@
             </div>
         </div>
 
-        <!-- MOBİL AÇILIR MENÜ (BOOTSTRAP OFFCANVAS) -->
+        <!-- Mobilde sağdan kayarak açılan Bootstrap Offcanvas menüsü -->
         <div class="offcanvas offcanvas-end MobilOffcanvas" tabindex="-1" id="mobil_menu_offcanvas"
             aria-labelledby="mobil_menu_baslik">
 
+            <!-- Üst kısım: giriş yap ve menüyü kapatan geri dön butonu -->
             <div class="offcanvas-header d-flex justify-content-between align-items-center px-3 py-3 border-bottom OffcanvasKenarlik">
                 <a href="giris.html" class="btn rounded-pill px-4 fw-bold OffcanvasGirisButonu">
                     GİRİŞ YAP
@@ -171,6 +179,7 @@
                 </button>
             </div>
 
+            <!-- Menü linkleri ve altta sabitlenen arama kutusu -->
             <div class="offcanvas-body d-flex flex-column p-0">
                 <nav aria-label="Mobil Menü Linkleri">
                     <ul class="list-unstyled mb-0">
@@ -200,6 +209,7 @@
                     </ul>
                 </nav>
 
+                <!-- Mobil menü içi arama formu -->
                 <div class="mt-auto p-3 border-top OffcanvasKenarlik">
                     <form class="input-group" role="search">
                         <input type="search" class="form-control border-0 py-2" placeholder="Ara ..." aria-label="Ara">
@@ -210,23 +220,27 @@
         </div>
     </header>
 
-    <!-- ANA İÇERİK (Açık ve Koyu moda otomatik uyumlu) -->
+    <!-- Sayfa ana içeriği: flex-grow-1 boşluğu doldurur, Bootstrap bg-body-tertiary ve text-body sınıfları açık/koyu moda kendiliğinden uyar -->
     <main class="flex-grow-1 py-5">
         <div class="container">
+            <!-- Hakkımızda tanıtım kartı -->
             <article class="bg-body-tertiary border rounded-3 shadow-sm p-4 p-md-5">
 
+                <!-- Üstteki küçük Ana Sayfa dönüş linki -->
                 <div class="mb-2 small">
                     <a href="index.html" class="text-body-secondary text-decoration-none">
                         <i class="bi bi-house-door-fill me-1"></i>Ana Sayfa
                     </a>
                 </div>
 
+                <!-- Altında çizgi bulunan bölüm başlığı (BolumBaslikKutusu style.css'den gelir) -->
                 <div class="BolumBaslikKutusu mb-4">
                     <h1 class="display-6 fw-bold text-body mb-2">Hakkımızda</h1>
                 </div>
 
-                <!-- Sosyal Medya Paylaşım Butonları -->
+                <!-- Sosyal medya paylaşım butonları: 6 adet col-2 sütunu yan yana durur, d-none d-lg-flex ile sadece geniş ekranlarda gösterilir -->
                 <div class="row g-2 mb-5 d-none d-lg-flex">
+                    <!-- Facebook paylaşım butonu -->
                     <div class="col-2">
                         <a href="https://www.facebook.com/sharer/sharer.php" target="_blank"
                             class="d-block text-center text-white py-2 rounded-2 text-decoration-none"
@@ -234,6 +248,7 @@
                             <i class="bi bi-facebook"></i>
                         </a>
                     </div>
+                    <!-- X (Twitter) paylaşım butonu -->
                     <div class="col-2">
                         <a href="https://twitter.com/intent/tweet" target="_blank"
                             class="d-block text-center text-white py-2 rounded-2 text-decoration-none bg-dark"
@@ -241,6 +256,7 @@
                             <i class="bi bi-twitter-x"></i>
                         </a>
                     </div>
+                    <!-- WhatsApp paylaşım butonu -->
                     <div class="col-2">
                         <a href="https://api.whatsapp.com/send" target="_blank"
                             class="d-block text-center text-white py-2 rounded-2 text-decoration-none"
@@ -248,6 +264,7 @@
                             <i class="bi bi-whatsapp"></i>
                         </a>
                     </div>
+                    <!-- Pinterest paylaşım butonu -->
                     <div class="col-2">
                         <a href="https://pinterest.com/pin/create/button/" target="_blank"
                             class="d-block text-center text-white py-2 rounded-2 text-decoration-none"
@@ -255,6 +272,7 @@
                             <i class="bi bi-pinterest"></i>
                         </a>
                     </div>
+                    <!-- LinkedIn paylaşım butonu -->
                     <div class="col-2">
                         <a href="https://www.linkedin.com/sharing/share-offsite/" target="_blank"
                             class="d-block text-center text-white py-2 rounded-2 text-decoration-none"
@@ -262,6 +280,7 @@
                             <i class="bi bi-linkedin"></i>
                         </a>
                     </div>
+                    <!-- Telegram paylaşım butonu -->
                     <div class="col-2">
                         <a href="https://t.me/share/url" target="_blank"
                             class="d-block text-center text-white py-2 rounded-2 text-decoration-none"
@@ -271,6 +290,7 @@
                     </div>
                 </div>
 
+                <!-- Tanıtım alt başlığı ve açıklama paragrafları (lh-lg satır aralarını rahat okuma için açar) -->
                 <h2 class="h4 fw-bold text-body mb-3">Teknoloji ve Bilimi Anlamanın En Kolay Yolu</h2>
 
                 <p class="text-body-secondary lh-lg mb-3">
@@ -285,6 +305,7 @@
                     Yapay zekâdan siber güvenliğe, uzay araştırmalarından yazılım ve donanım dünyasına kadar geniş bir yelpazede haber, röportaj ve inceleme içerikleri yayınlıyoruz. Her içeriğimiz doğruluk ve kalite standartlarımız doğrultusunda titizlikle hazırlanır.
                 </p>
 
+                <!-- Son paragrafta TabloBaslikLink sınıfıyla tema renginde altı çizili ana sayfa bağlantısı verdik -->
                 <p class="text-body-secondary lh-lg mb-0">
                     <a href="index.html" class="fw-semibold text-decoration-underline TabloBaslikLink">Tekno Bilim Dünyası</a>, teknolojiye ve bilime ilgi duyan herkesin bilgiye hızlı, güvenilir ve keyifli bir şekilde ulaşabileceği bir merkez olmayı hedefler.
                 </p>
@@ -293,11 +314,12 @@
         </div>
     </main>
 
-    <!-- FOOTER (ALT BİLGİ) -->
+    <!-- Tüm sayfalarda ortak olan footer (alt bilgi) alanı -->
     <footer class="SiteFooter pt-5 pb-4 mt-4">
         <div class="container">
             <div class="row g-4 pb-4 border-bottom FooterKenarlik">
 
+                <!-- 1. sütun: logo ve platform özeti -->
                 <div class="col-lg-5">
                     <a href="index.html" class="d-inline-flex align-items-center gap-2 text-decoration-none fw-bold fs-5 mb-3 MarkaLogo">
                         <span>Tekno Bilim Dünyası</span>
@@ -307,6 +329,7 @@
                     </p>
                 </div>
 
+                <!-- 2. sütun: sayfa linkleri -->
                 <div class="col-6 col-lg-3">
                     <h3 class="h6 fw-bold mb-3">Sayfalar</h3>
                     <ul class="list-unstyled d-flex flex-column gap-2 small mb-0">
@@ -317,6 +340,7 @@
                     </ul>
                 </div>
 
+                <!-- 3. sütun: kategori linkleri -->
                 <div class="col-6 col-lg-4">
                     <h3 class="h6 fw-bold mb-3">Kategoriler</h3>
                     <ul class="list-unstyled d-flex flex-column gap-2 small mb-0">
@@ -329,6 +353,7 @@
 
             </div>
 
+            <!-- Alt telif satırı -->
             <div class="pt-3 d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 small">
                 <span>&copy; 2026 Tekno Bilim Dünyası. Tüm hakları saklıdır.</span>
                 <span>Kırklareli Üniversitesi Yazılım Mühendisliği</span>
@@ -336,7 +361,7 @@
         </div>
     </footer>
 
-    <!-- YUKARI ÇIK BUTONU -->
+    <!-- Sağ alttaki yukarı çık butonu (scroll olunca js/main.js gösterir) -->
     <button type="button" id="yukari_cik_butonu" class="btn rounded-circle shadow YukariCikBtn"
         aria-label="Sayfanın en üstüne çık" title="Yukarı Çık">
         <i class="bi bi-arrow-up fs-5"></i>

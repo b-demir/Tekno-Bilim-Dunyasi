@@ -1,29 +1,141 @@
-/* Giriş sayfasına özel stiller. Ortalamayı Bootstrap flex yardımcı sınıfları yapar. */
-/* Ortak renk değişkenleri css/style.css içinden gelir. */
-.GirisAnaAlan { background-color: var(--arka-plan); }
-.GirisKarti {
-    background-color: var(--header-alt);
-    color: var(--metin-ana);
-    border: 1px solid var(--kenarlik);
-    border-radius: 24px;
-    box-shadow: 0 18px 52px rgba(0,0,0,.12);
+/* Giriş sayfasına özel stiller. Kartı sayfa ortasında tutma işini Bootstrap flex sınıfları hallediyor, renk değişkenleri de style.css içinden geliyor */
+
+/* main etiketine verdiğimiz ana alan sınıfı, tüm arka planı tema rengine boyar */
+.GirisAnaAlan {
+    background-color: var(--arka-plan); /* açık modda lila/pembe, koyu modda koyu gri arka plan */
 }
-[data-bs-theme="dark"] .GirisKarti { box-shadow: 0 18px 52px rgba(0,0,0,.28); }
-.GirisAmblem { width: 64px; height: 64px; background: var(--vurgu-renk); color: #222831; }
-.GirisUstBaslik { color: var(--metin-ana); letter-spacing: .08em; opacity: .75; }
-.GirisAciklama, .GirisGuvenlikNotu { color: var(--metin-ana); opacity: .8; }
-.GirisInputIkon { background-color: var(--arka-plan); color: var(--metin-ana); border-color: var(--kenarlik); }
-.GirisInput { background-color: var(--arka-plan); color: var(--metin-ana); border-color: var(--kenarlik); min-height: 46px; }
-.GirisInput::placeholder { color: var(--metin-ana); opacity: .55; }
-.GirisInput:focus { background-color: var(--arka-plan); color: var(--metin-ana); border-color: var(--vurgu-renk); box-shadow: 0 0 0 .2rem color-mix(in srgb, var(--vurgu-renk) 24%, transparent); }
-.GirisSifreButon { background-color: var(--arka-plan); border-color: var(--kenarlik); color: var(--metin-ana); }
-.GirisSifreButon:hover, .GirisSifreButon:focus { background-color: var(--vurgu-renk); color: #222831; border-color: var(--vurgu-renk); }
-.GirisGonderButon { background-color: var(--vurgu-renk); color: #222831; border: 1px solid transparent; border-radius: 12px; }
-.GirisGonderButon:hover, .GirisGonderButon:focus-visible { background-color: var(--vurgu-hover); color: #222831; transform: translateY(-1px); }
-.GirisAltBolum { border-top: 1px solid var(--kenarlik); }
-.GirisAnaSayfaLink { color: var(--metin-ana); transition: color .2s ease, transform .2s ease; }
-.GirisAnaSayfaLink:hover { color: var(--vurgu-hover); transform: translateX(-3px); }
-.GirisKarti .form-check-input:checked { background-color: var(--vurgu-renk); border-color: var(--vurgu-renk); }
-.GirisToast { background-color: var(--header-alt); color: var(--metin-ana); border: 1px solid var(--kenarlik); }
-[data-bs-theme="dark"] .GirisToast .btn-close { filter: invert(1); }
-@media (max-width: 575.98px) { .GirisKarti { border-radius: 18px; } }
+
+/* Giriş formunu içinde tutan ortadaki ana kart kutusu */
+.GirisKarti {
+    background-color: var(--header-alt); /* kart zeminini temanın ikincil panel rengiyle boyar */
+    color: var(--metin-ana); /* kart içindeki yazıların varsayılan rengini temaya göre ayarlar */
+    border: 1px solid var(--kenarlik); /* ince ve yarı saydam bir kenarlık ekler */
+    border-radius: 24px; /* köşeleri belirgin şekilde yuvarlatır */
+    box-shadow: 0 18px 52px rgba(0,0,0,.12); /* kartın sayfadan biraz öne çıkması için yumuşak bir alt gölge verir */
+}
+
+/* Koyu tema aktifken giriş kartının gölgesini biraz daha belirgin yapıyoruz */
+[data-bs-theme="dark"] .GirisKarti {
+    box-shadow: 0 18px 52px rgba(0,0,0,.28); /* koyu zeminde gölge kaybolmasın diye saydamlığı %28 yaptık */
+}
+
+/* Kartın en üstündeki kilit ikonlu yuvarlak rozet/amblem */
+.GirisAmblem {
+    width: 64px; /* amblemin genişliği */
+    height: 64px; /* yüksekliği de 64px olduğu için rounded-circle ile tam yuvarlak görünür */
+    background: var(--vurgu-renk); /* arka planı vurgu rengiyle doldurur */
+    color: #222831; /* içindeki ikonun her temada okunması için koyu renk verdik */
+}
+
+/* Amblemin hemen altındaki küçük "Tekno Bilim Dünyası" üst yazısı */
+.GirisUstBaslik {
+    color: var(--metin-ana); /* temaya uygun ana yazı rengi */
+    letter-spacing: .08em; /* harflerin arasını biraz açıp daha şık durmasını sağlar */
+    opacity: .75; /* ana başlıktan rol çalmasın diye biraz soluk yaptık */
+}
+
+/* Giriş açıklamasını ve alttaki güvenlik notunu birlikte biraz soluklaştırıyoruz */
+.GirisAciklama, .GirisGuvenlikNotu {
+    color: var(--metin-ana); /* yazı rengi ana metin rengiyle aynı */
+    opacity: .8; /* ikincil bilgi olduğu için %80 opaklık verdik */
+}
+
+/* E-posta ve şifre kutularının solundaki ikon kutucuğu */
+.GirisInputIkon {
+    background-color: var(--arka-plan); /* input içiyle uyumlu görünmesi için sayfa zemin rengini verdik */
+    color: var(--metin-ana); /* zarf ve kilit ikonlarının rengi */
+    border-color: var(--kenarlik); /* kenarlık rengi input ile aynı */
+}
+
+/* E-posta ve şifre yazdığımız input alanları */
+.GirisInput {
+    background-color: var(--arka-plan); /* kart zemininden ayrışması için arka plan değişkenini kullanır */
+    color: var(--metin-ana); /* kullanıcının yazdığı yazının rengi */
+    border-color: var(--kenarlik); /* dış çerçeve rengi */
+    min-height: 46px; /* mobilde de rahat tıklanabilmesi için en az 46px yükseklik verdik */
+}
+
+/* Input boşken içeride görünen örnek/ipucu yazısı */
+.GirisInput::placeholder {
+    color: var(--metin-ana); /* ana metin rengini alır */
+    opacity: .55; /* kullanıcının yazdığı gerçek metinle karışmasın diye soluk tutar */
+}
+
+/* Input alanına tıklayıp yazı yazmaya başlayınca (:focus durumu) */
+.GirisInput:focus {
+    background-color: var(--arka-plan); /* Bootstrap odaklanınca arka planı beyaza çevirmesin diye tekrar ayarlıyoruz */
+    color: var(--metin-ana); /* yazı rengini korur */
+    border-color: var(--vurgu-renk); /* kenarlığı vurgu rengine çevirip seçili alanı belli eder */
+    box-shadow: 0 0 0 .2rem color-mix(in srgb, var(--vurgu-renk) 24%, transparent); /* vurgu renginin %24 saydam haliyle etrafa hafif bir odak halkası çizer */
+}
+
+/* Şifre kutusunun sağındaki göz ikonlu göster/gizle butonu */
+.GirisSifreButon {
+    background-color: var(--arka-plan); /* input ile bütün durması için aynı zemini alır */
+    border-color: var(--kenarlik); /* input kenarlığı ile uyumlu çerçeve */
+    color: var(--metin-ana); /* göz ikonunun rengi */
+}
+
+/* Göz butonunun üzerine gelince veya buton seçili olunca rengi canlandırıyoruz */
+.GirisSifreButon:hover, .GirisSifreButon:focus {
+    background-color: var(--vurgu-renk); /* zemini vurgu rengi yapar */
+    color: #222831; /* ikon koyu renge döner */
+    border-color: var(--vurgu-renk); /* kenarlığı da zeminle aynı renk yapar */
+}
+
+/* Formun en altındaki tam genişlikli "Giriş Yap" gönderme butonu */
+.GirisGonderButon {
+    background-color: var(--vurgu-renk); /* ana eylem butonu olduğu için vurgu rengini kullanır */
+    color: #222831; /* buton yazısı her iki temada da koyu ve okunaklı kalır */
+    border: 1px solid transparent; /* varsayılan kenarlığı görünmez yapar */
+    border-radius: 12px; /* köşeleri 12px yuvarlatır */
+}
+
+/* Giriş butonunun üzerine gelince veya klavyeden seçilince ufak bir hareket efekti */
+.GirisGonderButon:hover, .GirisGonderButon:focus-visible {
+    background-color: var(--vurgu-hover); /* üzerine gelince biraz daha koyu tonunu alır */
+    color: #222831; /* yazı rengini koyu tutar */
+    transform: translateY(-1px); /* butonu 1 piksel yukarı kaydırıp hafif kalkma hissi verir */
+}
+
+/* Kartın en altında "Ana Sayfaya Dön" linkini ayıran alt bölüm */
+.GirisAltBolum {
+    border-top: 1px solid var(--kenarlik); /* üst kısma ince bir ayırıcı çizgi çeker */
+}
+
+/* "Ana Sayfaya Dön" bağlantısı */
+.GirisAnaSayfaLink {
+    color: var(--metin-ana); /* ana metin rengi */
+    transition: color .2s ease, transform .2s ease; /* renk ve kayma hareketi 0.2 saniyede yumuşakça olur */
+}
+
+/* Ana sayfaya dönüş linkinin üzerine gelince renk değiştirip sola doğru hafifçe kayar */
+.GirisAnaSayfaLink:hover {
+    color: var(--vurgu-hover); /* yazı rengini vurgunun koyu tonuna çevirir */
+    transform: translateX(-3px); /* ok yönüne doğru 3 piksel sola kayar */
+}
+
+/* Kart içindeki "E-postamı hatırla" onay kutusu işaretlenince Bootstrap mavisi yerine bizim vurgu rengi gelsin */
+.GirisKarti .form-check-input:checked {
+    background-color: var(--vurgu-renk); /* işaretli kutu arka planı */
+    border-color: var(--vurgu-renk); /* işaretli kutu kenarlığı */
+}
+
+/* Giriş formu gönderildikten sonra sağ altta çıkan Bootstrap toast bildirim kutusu */
+.GirisToast {
+    background-color: var(--header-alt); /* kartla aynı arka plan tonu */
+    color: var(--metin-ana); /* bildirim yazısının rengi */
+    border: 1px solid var(--kenarlik); /* ince çerçeve */
+}
+
+/* Koyu modda toast bildirimini kapatan çarpı (X) ikonunu beyaz yapmak için renkleri ters çeviriyoruz */
+[data-bs-theme="dark"] .GirisToast .btn-close {
+    filter: invert(1); /* siyah ikonu beyaza çevirir */
+}
+
+/* Küçük telefon ekranlarında (576px altı) kartın köşelerini biraz daha az yuvarlatıyoruz */
+@media (max-width: 575.98px) {
+    .GirisKarti {
+        border-radius: 18px; /* dar ekranda 24px yerine 18px köşe yuvarlaklığı daha derli toplu durur */
+    }
+}

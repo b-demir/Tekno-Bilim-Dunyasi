@@ -1,63 +1,67 @@
 <!doctype html>
+<!-- Kullanıcı giriş sayfası. Ortak header/footer yapısını kullanır, forma özel stiller css/giris.css ve doğrulama mantığı js/giris.js içindedir -->
+<!-- data-bs-theme="light": Bootstrap 5 tema sistemi için başlangıçta açık modu seçer, main.js bunu değiştirebilir -->
 <html lang="tr" data-bs-theme="light">
 <head>
+  <!-- Türkçe karakterlerin bozulmaması için UTF-8 karakter setini tanımlıyoruz -->
   <meta charset="UTF-8">
+  <!-- Telefon ve tablet ekranlarında sayfanın cihaz genişliğine göre ölçeklenmesini sağlar -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Arama motorları için sayfa açıklaması -->
   <meta name="description" content="Tekno Bilim Dünyası giriş yap sayfası">
+  <!-- Tarayıcı sekmesinde görünen sayfa başlığı -->
   <title>Giriş Yap | Tekno Bilim Dünyası</title>
-  <!-- Projenin kullandığı Bootstrap ve ikon sürümleri -->
+  <!-- Bootstrap 5.3.3 CSS ve Bootstrap Icons 1.11.3 CDN bağlantıları -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <!-- Ortak site stilleri ve yalnızca giriş sayfasına ait stiller -->
+  <!-- Önce tüm sitede ortak olan style.css, sonra bu sayfaya özel giris.css yüklenir -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/giris.css">
-  <!-- Tema geçişi ve ortak menü davranışları js/main.js içindedir. -->
+  <!-- Bootstrap JS ve kendi scriptlerimizi defer ile yüklüyoruz ki HTML ayrıştırıldıktan sonra çalışsınlar -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <!-- main.js tema değiştirme, arama kutusu ve yukarı çık butonunu yönetir; giris.js form doğrulamasını yapar -->
   <script src="js/main.js" defer></script>
   <script src="js/giris.js" defer></script>
 </head>
+<!-- d-flex flex-column min-vh-100: sayfayı en az ekran yüksekliği kadar dikey esnek kutu yapar, böylece içerik kısa kalsa bile footer en altta durur -->
 <body class="d-flex flex-column min-vh-100">
-  <!-- Ortak header, mevcut index.html sayfasından alınmıştır. -->
+  <!-- Ortak üst menü alanı. sticky-top sayesinde sayfa aşağı kaydırıldığında bile üstte sabit kalır -->
 <header class="sticky-top SiteHeader">
-<!--
-            Büyük ekran (d-none d-lg-block)
-            d-none: Küçük ekranlarda gizler
-            d-lg-block: 992px ve üzeri ekranlarda gösterir
-        -->
+<!-- Masaüstü görünümü: d-none ile mobilde gizlenir, d-lg-block ile 992px ve üzeri ekranlarda görünür -->
 <div class="d-none d-lg-block">
-<!-- header ın -->
+<!-- En üstteki nane yeşili/antrasit yardımcı çubuk (.UstCubuk rengi style.css'den gelir, py-2 dikey iç boşluk verir) -->
 <div class="UstCubuk py-2">
-<!-- d-flex justify-content-end: İçerideki tüm öğeleri sağa yaslar -->
+<!-- container içeriği ortalayıp sınırlar; d-flex justify-content-end gap-2 ise öğeleri sağa yaslayıp aralarına boşluk koyar -->
 <div class="container d-flex justify-content-end align-items-center gap-2">
-<!-- Arama Alanı: Input, büyüteç butonunun SOLUNDA yer alır -->
+<!-- Masaüstü arama formu: js/main.js büyütece tıklanınca inputu sola doğru açar -->
 <form class="d-flex align-items-center" id="masaustu_arama_formu" role="search">
-<!-- Başlangıçta genişliği 0 olan, büyütece basınca sola doğru açılan arama kutusu -->
+<!-- Arama kutusu: AramaKutusu sınıfı başlangıçta width:0 ile gizlidir, JS .Acik sınıfını ekleyince genişler -->
 <input aria-label="Sitede ara" class="form-control form-control-sm rounded-pill AramaKutusu" id="masaustu_arama_input" placeholder="Sitede ara..." type="search"/>
-<!-- Büyüteç İkon Butonu -->
+<!-- Arama kutusunu açıp kapatan yuvarlak büyüteç butonu (YuvarlakIkonButon 38x38 daire stilini verir) -->
 <button aria-label="Arama kutusunu aç veya kapat" class="btn btn-sm rounded-circle YuvarlakIkonButon ms-1" id="masaustu_arama_butonu" type="button">
 <i class="bi bi-search"></i>
 </button>
 </form>
-<!-- Açık / Koyu Mod Butonu -->
+<!-- Açık / koyu mod geçiş butonu (TemaDegistirBtn ve TemaIkonu sınıflarını js/main.js içindeki TemaYoneticisi dinler) -->
 <button aria-label="Temayı değiştir" class="btn btn-sm rounded-circle YuvarlakIkonButon TemaDegistirBtn" title="Açık / Koyu Mod" type="button">
 <i class="bi bi-moon-stars-fill TemaIkonu"></i>
 </button>
-<!-- Giriş Yap Butonu -->
+<!-- Giriş sayfasına yönlendiren hap şekilli (rounded-pill) buton, rengi GirisButonu sınıfından gelir -->
 <a class="btn btn-sm rounded-pill px-3 fw-semibold GirisButonu" href="giris.html">
                         GİRİŞ YAP
                     </a>
 </div>
 </div>
-<!-- 2. BÖLÜM: Ana Navbar (Logo + Sayfa Linkleri) -->
+<!-- Ana menü çubuğu: solda site adı, sağda kategoriler ve sayfa linkleri (AnaNavbar arka plan rengini style.css'den alır) -->
 <nav aria-label="Ana Menü" class="navbar navbar-expand-lg py-3 AnaNavbar">
 <div class="container">
-<!-- Logo -->
+<!-- Ana sayfaya dönen marka/logo yazısı -->
 <a class="navbar-brand fw-bold d-flex align-items-center gap-2 MarkaLogo" href="index.html">
 <span>Tekno Bilim Dünyası</span>
 </a>
-<!-- Kategoriler | Sayfa Linkleri -->
+<!-- ms-auto menüyü sağa iter, gap-2 ve geniş ekranda gap-xl-3 linkler arasına boşluk verir -->
 <ul class="navbar-nav ms-auto align-items-center gap-2 gap-xl-3">
-<!-- Kategoriler -->
+<!-- Kategori bağlantıları -->
 <li class="nav-item">
 <a class="nav-link fw-semibold" href="haber-detay.html">Yapay Zeka</a>
 </li>
@@ -70,11 +74,11 @@
 <li class="nav-item">
 <a class="nav-link fw-semibold" href="haber-detay.html">Donanım</a>
 </li>
-<!-- İki grubu ayıran dikey çizgi -->
+<!-- Kategorilerle sayfa linklerini ayıran dikey çizgi, aria-hidden="true" ile ekran okuyucuların okumasını engelliyoruz -->
 <li aria-hidden="true" class="nav-item">
 <span class="MenuAyraci">|</span>
 </li>
-<!-- Ana Sayfalar -->
+<!-- Ana sayfa ve bilgi sayfalarının linkleri -->
 <li class="nav-item">
 <a aria-current="page" class="nav-link active fw-semibold" href="index.html">Ana Sayfa</a>
 </li>
@@ -88,56 +92,48 @@
 </div>
 </nav>
 </div>
-<!-- =================================================================
-             Küçük ekran (d-lg-none)
-             - d-lg-none: Masaüstünde (992px+) gizle, sadece küçük ekranlarda göster.
-             - Gönderdiğin 1. fotoğraftaki gibi solda logo, sağda 3 yuvarlak buton.
-        ================================================================== -->
+<!-- Mobil görünüm üst çubuğu: d-lg-none ile 992px üstü masaüstünde gizlenir, sadece tablet ve telefonda görünür -->
 <div class="d-lg-none MobilHeader py-2">
 <div class="container d-flex justify-content-between align-items-center">
-<!-- Sol Taraf: Logo -->
+<!-- Mobilde yer kaplamasın diye kısa "TBD" logosunu gösteriyoruz -->
 <a class="navbar-brand fw-bold d-flex align-items-center gap-2 MarkaLogo mb-0" href="index.html">
 <span class="fs-5">TBD</span>
 </a>
-<!-- Sağ Taraf: Yuvarlak İkon Butonları -->
+<!-- Sağdaki 3 yuvarlak ikon butonu: arama, tema ve menü -->
 <div class="d-flex align-items-center gap-2">
-<!-- 1. Yuvarlak Buton: Büyüteç (Mobilde menüdeki arama kutusuna odaklanır veya üstte açılır) -->
+<!-- Büyüteç butonu: mobilde tıklandığında arama kutusunun da içinde olduğu offcanvas menüyü açar -->
 <button aria-label="Arama yap" class="btn rounded-circle YuvarlakIkonButon" data-bs-target="#mobil_menu_offcanvas" data-bs-toggle="offcanvas" type="button">
 <i class="bi bi-search"></i>
 </button>
-<!-- 2. Yuvarlak Buton: Açık / Koyu Mod (Referanstaki zil yerine tema butonu) -->
+<!-- Mobil tema değiştirme butonu (masaüstündekiyle aynı TemaDegistirBtn sınıfını kullanır) -->
 <button aria-label="Temayı değiştir" class="btn rounded-circle YuvarlakIkonButon TemaDegistirBtn" type="button">
 <i class="bi bi-moon-stars-fill TemaIkonu"></i>
 </button>
-<!-- 3. Yuvarlak Buton: Hamburger Menü (Offcanvas'ı açar) -->
+<!-- Hamburger menü ikonu: data-bs-toggle="offcanvas" ve data-bs-target ile #mobil_menu_offcanvas panelini açar -->
 <button aria-controls="mobil_menu_offcanvas" aria-label="Menüyü aç" class="btn rounded-circle YuvarlakIkonButon" data-bs-target="#mobil_menu_offcanvas" data-bs-toggle="offcanvas" type="button">
 <i class="bi bi-list fs-5"></i>
 </button>
 </div>
 </div>
 </div>
-<!-- =====================================================================
-             MOBİL AÇILIR MENÜ (BOOTSTRAP OFFCANVAS)
-             - Gönderdiğin 2. fotoğraftaki tam ekran açılan menü yapısı.
-             - offcanvas-end: Sağdan sola doğru kayarak açılır.
-        ====================================================================== -->
+<!-- Mobilde sağdan kayarak açılan Bootstrap Offcanvas menüsü (MobilOffcanvas stili style.css'dedir) -->
 <div aria-labelledby="mobil_menu_baslik" class="offcanvas offcanvas-end MobilOffcanvas" id="mobil_menu_offcanvas" tabindex="-1">
-<!-- Üst Satır: Solda GİRİŞ YAP, Sağda GERİ DÖN -->
+<!-- Menü üst başlığı: solda giriş yap, sağda kapatma butonu -->
 <div class="offcanvas-header d-flex justify-content-between align-items-center px-3 py-3 border-bottom OffcanvasKenarlik">
 <a class="btn rounded-pill px-4 fw-bold OffcanvasGirisButonu" href="giris.html">
                     GİRİŞ YAP
                 </a>
-<!-- data-bs-dismiss="offcanvas": Tıklandığında menüyü kapatır -->
+<!-- data-bs-dismiss="offcanvas" özelliği tıklandığında Bootstrap'in açılır menüyü kapatmasını sağlar -->
 <button aria-label="Menüyü Kapat" class="btn rounded-pill px-3 fw-semibold OffcanvasGeriButonu" data-bs-dismiss="offcanvas" type="button">
                     GERİ DÖN
                 </button>
 </div>
-<!-- Orta ve Alt Alan: d-flex flex-column sayesinde arama kutusu en alta itilir -->
+<!-- offcanvas-body d-flex flex-column: menü linklerini üstte tutup alttaki arama kutusunu mt-auto ile en dibe iter -->
 <div class="offcanvas-body d-flex flex-column p-0">
-<!-- Menü Linkleri (Alt alta, aralarında ince çizgi ile) -->
+<!-- Mobil menüdeki sayfa ve kategori listesi -->
 <nav aria-label="Mobil Menü Linkleri">
 <ul class="list-unstyled mb-0">
-<!-- Ana Sayfalar -->
+<!-- Ana sayfalar -->
 <li class="border-bottom OffcanvasKenarlik">
 <a class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink" href="index.html">Ana Sayfa</a>
 </li>
@@ -147,7 +143,7 @@
 <li class="border-bottom OffcanvasKenarlik">
 <a class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink" href="iletisim.html">İletişim</a>
 </li>
-<!-- Kategoriler Başlığı -->
+<!-- Kategoriler alt başlığı ve bağlantıları -->
 <li class="px-4 pt-3 pb-1 small fw-bold opacity-75">KATEGORİLER</li>
 <li class="border-bottom OffcanvasKenarlik">
 <a class="d-block px-4 py-3 text-decoration-none fw-bold OffcanvasLink" href="haber-detay.html">Yapay Zeka</a>
@@ -163,7 +159,7 @@
 </li>
 </ul>
 </nav>
-<!-- En Alt Kısım: mt-auto ile ekranın en altına sabitlenen Arama Kutusu -->
+<!-- Mobil menünün en altındaki arama kutusu (mt-auto kalan tüm dikey boşluğu üstüne alır) -->
 <div class="mt-auto p-3 border-top OffcanvasKenarlik">
 <form class="input-group" role="search">
 <input aria-label="Ara" class="form-control border-0 py-2" placeholder="Ara ..." type="search"/>
@@ -173,46 +169,60 @@
 </div>
 </div>
 </header>
-  <!-- flex-grow-1 sayesinde form, header ve footer ARASINDA kalan boşlukta ortalanır. -->
+  <!-- Ana içerik alanı: flex-grow-1 header ile footer arasındaki tüm boşluğu kaplar, d-flex ile giriş kartını hem yatayda hem dikeyde ortalar -->
   <main id="ana-icerik" class="GirisAnaAlan flex-grow-1 d-flex align-items-center justify-content-center py-5">
     <div class="container">
+      <!-- Satırı yatayda ortalayıp farklı ekran boyutlarında kart genişliğini col-* sınıflarıyla daraltıyoruz -->
       <div class="row justify-content-center">
         <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+          <!-- Giriş kartı (GirisKarti stili giris.css'den gelir, aria-labelledby başlıkla kartı erişilebilirlik için bağlar) -->
           <section class="GirisKarti p-4 p-sm-5" aria-labelledby="giris-baslik">
+            <!-- Kartın üst kısmı: kilit amblemi, site adı, ana başlık ve kısa açıklama -->
             <div class="text-center mb-4">
               <span class="GirisAmblem d-inline-flex justify-content-center align-items-center rounded-circle mb-3" aria-hidden="true"><i class="bi bi-person-lock fs-3"></i></span>
               <div class="small text-uppercase fw-bold GirisUstBaslik mb-2">Tekno Bilim Dünyası</div>
               <h1 id="giris-baslik" class="h2 fw-bold mb-2">Hesabına giriş yap</h1>
               <p class="GirisAciklama mb-0">Devam etmek için e-posta adresini ve şifreni gir.</p>
             </div>
-            <!-- Gerçek sunucu girişi yoktur. Sadece istemci tarafı doğrulama yapılır. -->
+            <!-- Giriş formu: novalidate tarayıcının varsayılan baloncuklarını kapatır, doğrulamayı js/giris.js kendisi Bootstrap sınıflarıyla yapar -->
             <form id="girisFormu" novalidate>
+              <!-- E-posta alanı -->
               <div class="mb-3">
                 <label for="girisEposta" class="form-label fw-semibold">E-posta adresi</label>
+                <!-- input-group has-validation: sol ikon, input ve altındaki invalid-feedback hata mesajının düzenli görünmesini sağlar -->
                 <div class="input-group has-validation">
                   <span class="input-group-text GirisInputIkon"><i class="bi bi-envelope" aria-hidden="true"></i></span>
+                  <!-- autocomplete="username" ve inputmode="email" tarayıcı şifre yöneticisi ve mobil klavye için kolaylık sağlar -->
                   <input id="girisEposta" name="eposta" type="email" class="form-control GirisInput" placeholder="ornek@eposta.com" autocomplete="username" inputmode="email" required aria-describedby="epostaHata">
+                  <!-- giris.js hata bulunca bu metni günceller ve inputa is-invalid ekleyince burası görünür olur -->
                   <div id="epostaHata" class="invalid-feedback">Geçerli bir e-posta adresi gir.</div>
                 </div>
               </div>
+              <!-- Şifre alanı -->
               <div class="mb-3">
                 <label for="girisSifre" class="form-label fw-semibold">Şifre</label>
                 <div class="input-group has-validation">
                   <span class="input-group-text GirisInputIkon"><i class="bi bi-lock" aria-hidden="true"></i></span>
+                  <!-- minlength="6" ve required HTML5 özelliklerini giris.js içindeki checkValidity() kontrol eder -->
                   <input id="girisSifre" name="sifre" type="password" class="form-control GirisInput" placeholder="Şifreni gir" autocomplete="current-password" minlength="6" required aria-describedby="sifreHata">
+                  <!-- Şifreyi göster/gizle butonu: js/giris.js tıklama olayını dinler, aria-pressed açık/kapalı durumunu tutar -->
                   <button id="sifreGosterButon" class="btn GirisSifreButon" type="button" aria-label="Şifreyi göster" aria-pressed="false"><i class="bi bi-eye" aria-hidden="true"></i></button>
                   <div id="sifreHata" class="invalid-feedback">Şifre en az 6 karakter olmalıdır.</div>
                 </div>
               </div>
+              <!-- "E-postamı hatırla" onay kutusu ve sağdaki küçük güvenlik notu -->
               <div class="d-flex justify-content-between align-items-center gap-3 mb-4">
                 <div class="form-check">
+                  <!-- İşaretlenirse js/giris.js sadece e-posta adresini localStorage'a kaydeder -->
                   <input class="form-check-input" type="checkbox" id="beniHatirla">
                   <label for="beniHatirla" class="form-check-label small">E-postamı hatırla</label>
                 </div>
                 <span class="GirisGuvenlikNotu small"><i class="bi bi-shield-check me-1" aria-hidden="true"></i> Güvenli arayüz</span>
               </div>
+              <!-- Form gönderme butonu -->
               <button class="btn GirisGonderButon w-100 d-flex align-items-center justify-content-center gap-2 fw-bold py-3" type="submit">Giriş Yap <i class="bi bi-arrow-right" aria-hidden="true"></i></button>
             </form>
+            <!-- Kartın altındaki ana sayfaya geri dönüş bağlantısı -->
             <div class="GirisAltBolum text-center mt-4 pt-3">
               <a href="index.html" class="GirisAnaSayfaLink d-inline-flex align-items-center gap-2 fw-semibold text-decoration-none"><i class="bi bi-arrow-left" aria-hidden="true"></i> Ana Sayfaya Dön</a>
             </div>
@@ -221,11 +231,12 @@
       </div>
     </div>
   </main>
-  <!-- Ortak footer, mevcut index.html sayfasından alınmıştır. -->
+  <!-- Tüm sayfalarda ortak olan alt bilgi (footer) bölümü (.SiteFooter rengi style.css'den gelir) -->
 <footer class="SiteFooter pt-5 pb-4 mt-4">
 <div class="container">
+<!-- Üstteki 3 sütunlu kısım: FooterKenarlik alttaki telif satırından çizgiyle ayırır -->
 <div class="row g-4 pb-4 border-bottom FooterKenarlik">
-<!-- 1. Sütun: Logo ve kısa açıklama -->
+<!-- 1. sütun: site logosu ve kısa tanıtım yazısı -->
 <div class="col-lg-5">
 <a class="d-inline-flex align-items-center gap-2 text-decoration-none fw-bold fs-5 mb-3 MarkaLogo" href="index.html">
 <span>Tekno Bilim Dünyası</span>
@@ -234,10 +245,10 @@
                         Bilim, teknoloji, uzay ve mühendislik dünyasından en güncel gelişmeleri sade ve anlaşılır bir dille aktaran dijital yayın platformu.
                     </p>
 </div>
-<!-- 2. Sütun: Sayfa Linkleri -->
+<!-- 2. sütun: site içi sayfa linkleri -->
 <div class="col-6 col-lg-3">
 <h3 class="h6 fw-bold mb-3">Sayfalar</h3>
-<!-- list-unstyled: Liste başındaki siyah noktaları kaldırır -->
+<!-- list-unstyled madde işaretlerini kaldırır, FooterLink hover animasyonunu verir -->
 <ul class="list-unstyled d-flex flex-column gap-2 small mb-0">
 <li><a class="FooterLink" href="index.html">Ana Sayfa</a></li>
 <li><a class="FooterLink" href="hakkimizda.html">Hakkımızda</a></li>
@@ -245,7 +256,7 @@
 <li><a class="FooterLink" href="giris.html">Giriş Yap</a></li>
 </ul>
 </div>
-<!-- 3. Sütun: Kategoriler -->
+<!-- 3. sütun: haber kategorileri -->
 <div class="col-6 col-lg-4">
 <h3 class="h6 fw-bold mb-3">Kategoriler</h3>
 <ul class="list-unstyled d-flex flex-column gap-2 small mb-0">
@@ -256,15 +267,16 @@
 </ul>
 </div>
 </div>
-<!-- En alt telif satırı -->
+<!-- En alttaki telif hakkı ve bölüm bilgisi satırı -->
 <div class="pt-3 d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 small">
 <span>© 2026 Tekno Bilim Dünyası. Tüm hakları saklıdır.</span>
 <span>Kırklareli Üniversitesi Yazılım Mühendisliği</span>
 </div>
 </div>
 </footer>
-  <!-- Sonuç, sadece kullanıcı etkileşiminden sonra Bootstrap Toast olarak gösterilir. -->
+  <!-- Form geçerli gönderilince js/giris.js tarafından sağ altta gösterilen Bootstrap Toast bildirim kutusu -->
   <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1090">
+    <!-- GirisToast temaya göre arka planı ayarlar; role="status" ve aria-live="polite" ekran okuyucuya bildirimi duyurur -->
     <div id="girisBildirim" class="toast GirisToast" role="status" aria-live="polite" aria-atomic="true">
       <div class="d-flex align-items-center">
         <div id="girisBildirimMetni" class="toast-body"></div>
@@ -272,6 +284,7 @@
       </div>
     </div>
   </div>
+  <!-- Sayfa aşağı kaydırılınca js/main.js tarafından .Gorunur sınıfı eklenip ortaya çıkarılan yukarı çık butonu -->
   <button type="button" id="yukari_cik_butonu" class="btn rounded-circle shadow YukariCikBtn" aria-label="Sayfanın en üstüne çık" title="Yukarı Çık"><i class="bi bi-arrow-up fs-5"></i></button>
 </body>
 </html>
